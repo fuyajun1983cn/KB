@@ -11,7 +11,7 @@ module.exports = {
   base_url: '',
 
   // Used for the "Get in touch" page footer link
-  support_email: 'fuyajun1983cn@163.com',
+  support_email: '',
 
   // Footer Text / Copyright
   copyright: 'Copyright &copy; '+ new Date().getFullYear() +' - <a href="http://raneto.com">Powered by Raneto</a>',

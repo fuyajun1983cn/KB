@@ -28,3 +28,6 @@ public/lib/
 # Misc
 *.pages
 *.pdf
+
+#backup file
+#*~
