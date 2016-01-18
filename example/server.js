@@ -7,8 +7,10 @@ var debug = require('debug')('raneto');
 
 // Here is where we load Raneto.
 // When you are in your own project repository,
-// Raneto would be installed via NPM and loaded as:
+// Raneto should be installed via NPM and loaded as:
 // var raneto = require('raneto');
+//
+// For development purposes, we load it this way in this example:
 var raneto = require('../app/index.js');
 
 // Then, we load our configuration file
