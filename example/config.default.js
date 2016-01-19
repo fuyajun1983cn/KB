@@ -5,13 +5,13 @@
 module.exports = {
 
   // Your site title (format: page_title - site_title)
-  site_title: 'Raneto Docs',
+  site_title: '个人知识库',
 
   // The base URL of your site (can use %base_url% in Markdown files)
   base_url: '',
 
   // Used for the "Get in touch" page footer link
-  support_email: '',
+  support_email: 'fuyajun1983cn@163.com',
 
   // Footer Text / Copyright
   copyright: 'Copyright &copy; '+ new Date().getFullYear() +' - <a href="http://raneto.com">Powered by Raneto</a>',
