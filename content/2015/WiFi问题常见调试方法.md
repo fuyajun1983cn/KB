@@ -2,8 +2,10 @@
  Titile: WiFi问题常见调试命令
  Sort: 2
  */
+ 
+KEYWORDS: android wifi
 
-##Android Box常见调试命令
+## Android Box常见调试命令
 * TCPDUMP    
 >tcpdump -i any -s 0 -w /data/tcpdump_log.pcap
 

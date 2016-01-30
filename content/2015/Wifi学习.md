@@ -3,17 +3,19 @@
  Sort: 2
  */
 
-##L2ConnectedState  
+KEYWORDS: android 
+
+## L2ConnectedState  
 WifiStateMachine进入该状态后，表明链接层连接已经建立，准备获取IP地址。  
 在准备建立DHCP前，需要做如下一些措施：  
 1. 如果当前没有连接蓝牙设备，则需要将蓝牙共存模式关掉，因为当关掉Wi-Fi驱动的省电模式时，会与蓝牙共存模式有冲突。  
 2. 获取IP地址的时候，需要关掉Wi-Fi驱动的省电模式,以及禁用Suspend优化，因为有些低电量模式下的路由器存在兼容性问题。
 3. 一旦成功获取到IP地址，则要恢复蓝牙的共存模式以及打开省电模式。  
 
-##获取IP地址的过程  
+## 获取IP地址的过程  
 当L2连接已经完成时，即收到WifiMonitor.NETWORK_CONNECTION_EVENT事件通知时，此时WifiStateMachine处于ConnectModeState状态中，此时会进入ObtainingIpState，这个时候会获取L3层的网络IP地址。 根据配置的情况，会选择是获取静态IP地址或动态IP地址。 当通过动态方式获取IP地址时，会通过DhcpStateMachine来获取IP地址，方法是向其发送DhcpStateMachine.CMD_START_DHCP消息。  
 
-##DhcpStateMachine  
+## DhcpStateMachine  
 默认状态是StoppedState, WifiStateMachine注册了CMD_PRE_DHCP_ACTION,所以运行DHCP前，要发一个消息给WifiStateMachine去做一些前期准备，即上面所提到的一些设置。随后进入WaitBeforeStartState等待WifiStateMachine的确认消息，当收到CMD_PRE_DHCP_ACTION_COMPLETE后，则开始调用runDhcp,代码如下：  
 ```java
    case CMD_PRE_DHCP_ACTION_COMPLETE:
@@ -24,7 +26,7 @@ WifiStateMachine进入该状态后，表明链接层连接已经建立，准备�
     }
     break;
 ```
-##DhcpAction.START  
+## DhcpAction.START  
 ```java
     if (dhcpAction == DhcpAction.START) {
         /* Stop any existing DHCP daemon before starting new */

@@ -2,9 +2,10 @@
  Title: wpa_supplicant学习贴
  Sort: 1
  */
-##wap_supplicant架构分析  
+ 
+## wpa_supplicant架构分析   
  * wpa_supplicant架构图  
- ![Architecture](%image_url%/2015070401.png)  
+ ![Architecture](%image_url%/2015/2015070401.png)  
 
 >wpa_supplicant作为一个独立的进程进行，并处理三种事件：
  * 注册的事件
@@ -28,7 +29,7 @@
   * `eloop_destroy`  此函数调用后，如果再次调用其他eloop函数，需要重新调用`eloop_init`  
   * `eloop_terminated`
 
-##wpa_cli常见命令   
+## wpa_cli常见命令   
 >**Device Discovery**  
   * p2p_find [timeout in seconds] [type=<social|progressive>] [dev_id=<addr>] [delay=<search delay in ms>]  
   >The default behavior is to run a single full scan in the beginning and
@@ -290,7 +291,7 @@ parameters, IP address, etc.).
   * all_sta  
   >Lists the currently associated stations.  
 
-##wpa_supplicant知识拓展  
+## wpa_supplicant知识拓展  
  * wpa_supplicant邮件列表  
    - <http://lists.shmoo.com/mailman/listinfo/hostap>  
    - <http://w1.fi/cgit/hostap/>

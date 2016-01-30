@@ -2,29 +2,32 @@
  Title: Linux驱动中接收数据包的过程  
  Sort: 2
  */
+
+KEYWORDS: kernel wifi
+
 原文链接：<http://beyond-syntax.com/blog/2011/03/diving-into-linux-networking-i/>  
-##Starting at the Driver
+## Starting at the Driver
 
 I've decided to take a bottom up approach and begin with software that interacts with the physical network card, the driver.
 
 In general network drivers follow a fairly typical route in processing: the kernel boots up, initializes data structures, sets up some interrupt routines, and tells the network card where to put packets when they are received. When a packet is actually received, the card signals the kernel causing it to do some processing and then cleans up some resources. I'll talk about the fairly generic routines that network devices share in common and then move to a concrete example with the igb driver.
 
-##A General View of Network Drivers
+## A General View of Network Drivers
 
 
 Network drivers are far from the simplest drivers in the kernel. They push the speed boundaries of modern multi-core processors. Almost every new system comes with a 1 Gigabit per second (Gbps) network card. Taking into account that the smallest Ethernet frame size is 64 bytes (plus 8 bytes for synchronization and a 12 byte inter-frame gap), a 1 Gbps network card should (by specification) be able to handle:
-![计算公式](%image_url%/2015070601.png)
+![计算公式](%image_url%/2015/2015070601.png)
 
 This leaves us with a processing time of about 672 nanoseconds per frame. A 2 Gigahertz processor can execute about 1,400 cycles in that time and a single instruction can take multiple cycles.
 
 Is a modern operating system able to keep up with that rate? The simple answer is: "no." The standard Linux kernel can't keep that pace for an extended period of time it relies on buffering to handle short bursts of traffic beyond what it can handle. It still does its best to get as many packets as possible using modern network card resources and the multi-core processors available on the machine.
 
-##A Quick Refresher on Driver Basics
+## A Quick Refresher on Driver Basics
 
 During the boot process the kernel discovers the network card and sets up its data structures. These data structures include multiple queues for receiving packets while the kernel trying to process them. Each receive queue is independent from the rest so a processor core can work through its backlog safely. To prevent wasteful context switching, interrupts are disabled while a core works through the packet backlog. The network card also writes packets directly to memory so no processor resources are used to move the packet from one place to another.
 
 How does this all happen so quickly? It all depends on some careful coordination between the kernel and the hardware. Since every piece of hardware is different the kernel creates a standard interface between itself (or the user) and the underlying hardware through a "driver." The driver provides the abstract kernel functions by implementing them for the actual hardware. The driver uses whatever tricks available to fufill a request. Network drivers typically give the hardware a region of memory, that describes separate memory locations it can write packets to, and carefully allocates/re-allocates resources as needed.
-![示意图](%image_url%/2015070602.png)
+![示意图](%image_url%/2015/2015070602.png)
 
 In the figure above, you can see the main components involved in the low level packet reception: main memory, the network card, and the Linux kernel.
 
@@ -34,21 +37,21 @@ On the right side, the Linux kernel maintains a pool of socket buffers. The pool
 
 Finally, the only real direct communication from the network card to the kernel happens by way of an interrupt. Once the network card finishes receiving a packet it signals the kernel, by way of an interrupt, that it has processing to do.
 
-##A Concrete Example in igb
+## A Concrete Example in igb
 
 I'm going to work through the Intel Gigabit Ethernet (drivers/net/igb/) driver. All functions that I'll discuss here are in igb_main.c, unless otherwise noted. The other files in that directory are very hardware specific functions that lets the software communicate with the hardware, the implementation of these is usually just a matter of reading the hardware specification and writing software that follows the specification.
 
-##Initialization
+## Initialization
 
 Typically during the boot process the driver is loaded into the kernel as a kernel module. When the module is registered with the kernel it executes a callback function called igb_init_module. This function registers the driver with the PCI bus and provides another callback which is executed once the PCI bus is configured. Once the PCI bus is ready, we end up at the igb_probe function.
 
 In igb_probe the driver actually enables the device on the PCI bus, gets memory for PCI device input/output, sets device specific callback functions (like open and close), calls igb_sw_init (which sets some software state and prepares the interrupt system), configures some hardware details, and ensures the device in a known state. Each step is important, but there isn't anything particular to networking devices because this is generally what any PCI device has to do before it is ready. The real networking "meat" happens when the device is opened through the igb_open callback that was registered in this stage.
 
-##Opening the Device
+## Opening the Device
 
 When the system actually brings the device up, it calls the open function which n this case is igb_open. This is where the heavy lifting starts happening. All the resources needed to send and receive packets are allocated and the interrupt handler is set up so Linux knows what to do when a packet is received. Since I'm more interested in packet reception than transmission, I'll focus on those parts.
 
-##Allocating Resources
+## Allocating Resources
 
 First, we allocate the transmit resources (igb_setup_all_tx_resources) then the receive resources (igb_setup_all_rx_resources). Modern network are able to use multiple queues (rx_rings)---called "Receive Side Scaling" (RSS) on Intel cards---allowing them to distribute the load amongst processors. Thus, the process of setting up all the receive resources will allocate the resources for each queue.
 
@@ -58,7 +61,7 @@ After the wrapper buffers have been allocated and the hardware is given the desc
 
 Now that the wrapper is associated with both a hardware descriptor and a software socket buffer we are almost ready to receive packets.
 
-##Configuring Interrupts
+## Configuring Interrupts
 
 Now that all the memory resources are allocated the only major hurdle remaining is setting up interrupts. There are two interrupt routines that the driver must set up: the hardware interrupt routine and the software interrupt routine.
 
@@ -68,7 +71,7 @@ At this point when a packet comes in it'll hit the hardware interrupt, but once 
 
 After a few more simple tidbits to make sure the hardware and software state matches, interrupts are enabled and the device is ready to send and receive packets!
 
-##Receiving a Packet
+## Receiving a Packet
 
 When a packet first arrives at the network card, the device looks at the next hardware descriptor and begins writing the packet to memory where the descriptor tells it to (this will be the location of the socket buffer data as configured during initialization). Of course, if all the descriptors the hardware knows about have been consumed it drops the packet, citing an overrun error. Once the packet has been fully received, the hardware asserts the interrupt signal and the kernel begins running through the associated interrupt routine (igb_msix_ring). This function is only four lines of actual code! However one of those lines is to napi_schedule (in include/linux/netdevice.h) which does the important stuff.
 
@@ -84,7 +87,7 @@ A hardware interrupt should be quick so the system isn't held up in interrupt ha
 `netif_receive_skb`处理RX Buffer。
 `deliver_skb`将收到的sk_buff分发给对应的Packet类型去处理。  
 
-##Conclusions
+## Conclusions
 
 I have now presented both an abstract and concrete view of lower-level network processing in a modern Linux kernel. We've gone from having no network card enabled, allocated the resources needed to receive packets in a multi-queue configuration, told the hardware about those resources through the hardware descriptors, configured the interrupt handlers, received a packet that was stored in memory, and told the kernel about the packet for further processing.
 

@@ -3,18 +3,20 @@
  Sort: 2
  */
 
-##A2dp Profile学习记录  
+KEYWORDS: bluetooth
+
+## A2dp Profile学习记录  
 A2DP主要关注的是Audio Streaming。 同时A2DP也不包含远程控制函数。  
 与其他Profile的关系如下：  
-![a2dp](%image_url%/2015071301.bmp)  
+![a2dp](%image_url%/2015/2015071301.bmp)  
 
 Protocol Model:  
-![protocol model](%image_url%/2015071302.bmp)  
+![protocol model](%image_url%/2015/2015071302.bmp)  
 
 Supported Codecs:  
-![supported Codecs](%image_url%/2015071303.bmp)  
+![supported Codecs](%image_url%/2015/2015071303.bmp)  
 
-##A2dpStateMachine  
+## A2dpStateMachine  
 此类包定义了三种BluetoothDevice成员变量：  
 mCurrentDevice: 在状态发生改变之前，已连接的设备。  
 mTargetDevice: 将要去连接的设备。  

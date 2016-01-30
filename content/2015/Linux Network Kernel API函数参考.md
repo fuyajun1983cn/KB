@@ -3,7 +3,9 @@
  Sort: 2
  */
 
-##Socket Buffer Functions
+KEYWORDS: kernel
+
+## Socket Buffer Functions
 * struct sk_buff --  socket buffer
 * skb_queue_empty --  check if a queue is empty
 * skb_get --  reference buffer
@@ -52,11 +54,11 @@
 * skb_pad --  zero pad the tail of an skb
 * __pskb_pull_tail --  advance tail of skb header
 
-##Socket Filter  
+## Socket Filter  
 * sk_run_filter --  run a filter on a socket
 * sk_chk_filter --  verify socket filter code
 
-##Network device Driver API  
+## Network device Driver API  
 * init_etherdev --  Register ethernet device
 * alloc_etherdev --  Allocates and sets up an ethernet device
 * alloc_fddidev --  Register FDDI device
@@ -101,5 +103,5 @@
 ** netif_carrier_off, netif_carrier_on,  netif_carrier_ok
 
 
-##来源  
+## 来源  
 <http://www.cs.bham.ac.uk/~exr/teaching/lectures/systems/08_09/docs/kernelAPI/c6671.html#AEN6673>
