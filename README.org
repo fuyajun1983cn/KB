@@ -1,0 +1,19 @@
+#+TITLE: 个人知识库  Personl Knowledge Base
+
+* 经典语录
+
+#+BEGIN_QUOTE
+不积跬步,无以至千里;不积小流,无以成江海   
+                    -- 荀子《劝学篇》
+#+END_QUOTE
+
+收集一切对我有价值的信息。  
+collect any information that make sense to me.
+
+* 致谢   
+  这个知识库里面除了一些原创的信息外，收集了大量网络上的资源，在此表示
+  感谢。
+
+* 引用  
+  [[./OLD_README.md][README]]
+

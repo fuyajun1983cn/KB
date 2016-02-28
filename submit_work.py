@@ -41,7 +41,7 @@ def git_push():
     '''
     git push command
     '''
-    os.system("git push origin master")
+    os.system("git push -u origin master")
     
 if __name__ == "__main__":
 
