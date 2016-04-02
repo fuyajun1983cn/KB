@@ -1,0 +1,355 @@
+// Microsoft Visual C++ generated resource script.
+//
+#include "resource.h"
+
+#define APSTUDIO_READONLY_SYMBOLS
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 2 resource.
+//
+#define APSTUDIO_HIDDEN_SYMBOLS
+#include "windows.h"
+#undef APSTUDIO_HIDDEN_SYMBOLS
+#include "resource.h"
+
+/////////////////////////////////////////////////////////////////////////////
+#undef APSTUDIO_READONLY_SYMBOLS
+
+/////////////////////////////////////////////////////////////////////////////
+// Neutral resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_NEU)
+LANGUAGE LANG_NEUTRAL, SUBLANG_NEUTRAL
+#pragma code_page(1252)
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog
+//
+
+IDD_FIND_DLG_CONF DIALOGEX 26, 41, 99, 270
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
+CAPTION "Analyse Plugin"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    COMBOBOX        IDC_CMB_SEARCH_TEXT,0,0,98,30,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_TABSTOP
+    COMBOBOX        IDC_CMB_SEARCH_TYPE,49,16,49,30,CBS_DROPDOWNLIST | WS_VSCROLL | WS_TABSTOP
+    CONTROL         "Case   ",IDC_CHK_MATCH_CASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,3,27,31,10
+    CONTROL         "Whole word",IDC_CHK_WHOLE_WORD,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,44,34,53,10
+    COMBOBOX        IDC_CMB_COMMENT,0,49,98,30,CBS_DROPDOWN | CBS_AUTOHSCROLL | WS_TABSTOP
+    CONTROL         "Do Search",IDC_CHK_DO_SEARCH,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,4,74,48,10
+    CONTROL         "Hide Text",IDC_CHK_HIDE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,53,74,42,10
+    COMBOBOX        IDC_CMB_SELECTION,55,96,41,30,CBS_DROPDOWNLIST | WS_TABSTOP
+    PUSHBUTTON      "Add",IDC_BUT_ADD,3,113,30,10
+    PUSHBUTTON      "^",IDC_BUT_MOVE_UP,35,113,30,10
+    PUSHBUTTON      "Load",IDC_BUT_LOAD,67,113,30,10
+    PUSHBUTTON      "Update",IDC_BUT_UPD,3,125,30,10
+    PUSHBUTTON      "v",IDC_BUT_MOVE_DOWN,35,125,30,10
+    PUSHBUTTON      "Save",IDC_BUT_SAVE,67,125,30,10
+    PUSHBUTTON      "Delete",IDC_BUT_DEL,3,137,30,10
+    PUSHBUTTON      "Clear",IDC_BUT_CLEAR,35,137,30,10
+    DEFPUSHBUTTON   "Search",IDC_DO_SEARCH,67,137,30,10,BS_NOTIFY
+    CONTROL         "Patterns",IDC_LIST_CONF,"SysListView32",LVS_REPORT | LVS_SINGLESEL | LVS_SHOWSELALWAYS | LVS_NOLABELWRAP | LVS_NOSORTHEADER | WS_BORDER | WS_GROUP | WS_TABSTOP,0,150,98,117,WS_EX_CLIENTEDGE
+    LTEXT           "Selection &On",IDC_STATIC,55,86,40,8
+    GROUPBOX        "Visualization",IDC_STATIC1,1,62,97,49
+    LTEXT           "Colour FG ",IDC_STATIC_COL_FG,4,88,34,8
+    LTEXT           "Search type",IDC_STATIC2,2,16,40,8
+    LTEXT           "Colour BG ",IDC_STATIC_COL_BG,4,100,34,8
+    LTEXT           "Comment",IDC_STATIC3,2,39,31,8
+    CONTROL         "",IDC_PROGRESS_SEARCH,"msctls_progress32",NOT WS_VISIBLE | WS_BORDER,9,130,82,10
+    CTEXT           "Search in progress...",IDC_STATIC_PLSWAIT,5,112,90,9,NOT WS_VISIBLE
+END
+
+IDD_FIND_DLG_RESULT DIALOGEX 26, 41, 223, 67
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+EXSTYLE WS_EX_TOOLWINDOW | WS_EX_WINDOWEDGE
+CAPTION "Analyse Result"
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+END
+
+IDD_ANALYSE_HELP_DLG DIALOGEX 0, 0, 423, 286
+STYLE DS_SETFONT | DS_3DLOOK | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+EXSTYLE WS_EX_TOOLWINDOW
+CAPTION "Analyse Plugin Help Dialog"
+FONT 8, "MS Shell Dlg", 0, 0, 0x1
+BEGIN
+    LTEXT           "Author:",IDC_STATIC4,12,32,31,9
+    LTEXT           "eMail:",IDC_STATIC5,12,42,21,9
+    LTEXT           "http://",IDC_NPP_PLUGINS_URL,49,53,367,9
+    LTEXT           "URL:",IDC_STATIC6,12,53,21,9
+    LTEXT           "e-mail",IDC_EMAIL_LINK,49,42,367,9
+    LTEXT           "name",IDC_AUTHOR_NAME,49,32,367,9
+    LTEXT           "Version:",IDC_STATIC7,12,21,31,9
+    LTEXT           "version",IDC_VERSION_STRING,49,21,367,9
+    EDITTEXT        IDC_DIALOG_DESCRIPTION,7,100,409,137,ES_MULTILINE | ES_AUTOVSCROLL | ES_READONLY | WS_VSCROLL | NOT WS_TABSTOP
+    DEFPUSHBUTTON   "Close",IDOK,354,79,62,13
+    PUSHBUTTON      "Changes",IDC_BTN_CHANGES,180,79,62,13,BS_CENTER
+    PUSHBUTTON      "Manual",IDC_BTN_MANUAL,7,79,61,13
+    CTEXT           "Analyse Plugin for Notepad++",IDC_TITLE_TEXT,7,7,409,14,SS_REALSIZECONTROL
+    LTEXT           "xx",IDC_NPP_VERSION_TEXT,88,65,328,9
+    LTEXT           "Sources synced with: ",IDC_STATIC8,12,65,74,9
+END
+
+IDD_FIND_RES_DLG_SEARCH DIALOGEX 0, 0, 300, 89
+STYLE DS_SETFONT | DS_FIXEDSYS | DS_CENTER | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Search in Result"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    COMBOBOX        IDC_CMB_SEARCH_TEXT,7,7,161,30,CBS_DROPDOWN | WS_TABSTOP
+    CONTROL         "Whole word",IDC_CHK_WHOLE_WORD,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,24,53,10
+    CONTROL         "Case",IDC_CHK_MATCH_CASE,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,7,38,34,10
+    COMBOBOX        IDC_CMB_SEARCH_TYPE,51,51,48,30,CBS_DROPDOWNLIST | WS_TABSTOP
+    CONTROL         "Wrap around",IDC_CHK_WRAP,"Button",BS_AUTOCHECKBOX | WS_TABSTOP,112,53,57,14
+    LTEXT           "Search type",IDC_STATIC8,7,54,40,8
+    CONTROL         "&Up",IDC_RADIO_DIRUP,"Button",BS_AUTORADIOBUTTON | WS_GROUP,111,29,45,12
+    CONTROL         "&Down",IDC_RADIO_DIRDOWN,"Button",BS_AUTORADIOBUTTON,111,40,45,12
+    GROUPBOX        "Search Direction",IDC_STATIC_DIRECTION,105,21,63,32,WS_GROUP
+    DEFPUSHBUTTON   "Find",IDOK,7,68,35,14
+    PUSHBUTTON      "Find First",IDC_FINDFIRST,49,68,36,14
+    PUSHBUTTON      "&Count",IDC_COUNT,91,68,36,14
+    PUSHBUTTON      "Close",IDCANCEL,134,68,36,14
+    CONTROL         "",IDC_LST_PATTERNS,"SysListView32",LVS_REPORT | LVS_ALIGNLEFT | WS_BORDER | WS_TABSTOP,174,7,119,75
+END
+
+IDD_ANALYSE_CONF_DLG DIALOGEX 0, 0, 271, 210
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU
+CAPTION "Analyse Plugin Options"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,214,189,50,14
+    COMBOBOX        IDC_CMB_SEARCH_TYPE,74,17,55,28,CBS_DROPDOWNLIST | WS_TABSTOP
+    CONTROL         "Search case sensitive   ",IDC_CHK_MATCH_CASE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,11,34,99,10
+    CONTROL         "Search whole word",IDC_CHK_WHOLE_WORD,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,11,47,99,10
+    CONTROL         "Do Search",IDC_CHK_DO_SEARCH,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,11,61,99,10
+    CONTROL         "Hide text",IDC_CHK_HIDE,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,11,75,99,10
+    COMBOBOX        IDC_CMB_SELECTION,74,117,55,32,CBS_DROPDOWNLIST | WS_TABSTOP
+    CONTROL         "Use bookmarks in text",IDC_CHK_USEBOOKMARK,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,141,14,106,10
+    CONTROL         "Auto update on modify",IDC_CHK_AUTOUPDT,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,141,27,106,10
+    CONTROL         "Synchronize view scrolling",IDC_CHK_SYNCSCROLL,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,141,40,106,10
+    CONTROL         "Dbl-Click jumps to EditView",IDC_CHK_JUMP2EDIT,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,141,54,106,10
+    COMBOBOX        IDC_CMB_ONENTERACT,203,70,54,30,CBS_DROPDOWNLIST | WS_TABSTOP
+    COMBOBOX        IDC_CMB_NUMOFCFGFILES,227,87,30,24,CBS_DROPDOWN | WS_TABSTOP
+    PUSHBUTTON      "add command",IDC_BTN_ADDCONTEXT,211,104,47,13
+    COMBOBOX        IDC_CMB_FONTNAME,164,141,95,30,CBS_DROPDOWN | CBS_SORT | WS_TABSTOP
+    COMBOBOX        IDC_CMB_FONTSIZE,211,156,48,30,CBS_DROPDOWN | WS_TABSTOP
+    CONTROL         "Show line numbers in result",IDC_CHK_DISPLINENO,"Button",BS_AUTOCHECKBOX | BS_LEFTTEXT | WS_TABSTOP,141,172,99,10
+    PUSHBUTTON      "Cancel",IDCANCEL,7,189,50,14
+    LTEXT           "Search type",IDC_STATIC10,13,20,40,8
+    LTEXT           "Color Foreground                ",IDC_STATIC_COL_FG2,12,90,89,8
+    LTEXT           "Color Background                ",IDC_STATIC_COL_BG2,12,104,89,8
+    LTEXT           "Selection on",IDC_STATIC9,12,119,40,8
+    GROUPBOX        "Default Values",IDC_STATIC11,7,4,128,131
+    GROUPBOX        "Behaviour",IDC_STATIC12,137,4,127,120
+    LTEXT           "Action on Enter",IDC_STATIC13,142,73,52,8
+    GROUPBOX        "Result Window Font",IDC_STATIC14,137,128,127,57
+    LTEXT           "Name",IDC_STATIC15,142,142,19,8
+    LTEXT           "Size",IDC_STATIC16,142,158,14,8
+    LTEXT           "Recently used config files",IDC_STATIC17,142,89,82,8
+    LTEXT           "Editor context menu",IDC_STATIC18,142,105,65,8
+END
+
+IDD_COLOUR_POPUP DIALOGEX 0, 0, 78, 81
+STYLE DS_SETFONT | DS_MODALFRAME | DS_FIXEDSYS | WS_POPUP
+FONT 8, "MS Shell Dlg", 0, 0, 0x0
+BEGIN
+    LISTBOX         IDC_COLOUR_LIST,2,2,72,75,LBS_OWNERDRAWFIXED | LBS_NOINTEGRALHEIGHT | LBS_MULTICOLUMN | NOT WS_BORDER | WS_TABSTOP
+END
+
+IDD_ADDCTX_DIALOG DIALOGEX 0, 0, 446, 57
+STYLE DS_SETFONT | DS_FIXEDSYS | WS_POPUP | WS_CAPTION | WS_SYSMENU | WS_THICKFRAME
+CAPTION "Analyse Plugin context menu commands"
+FONT 8, "MS Shell Dlg", 400, 0, 0x1
+BEGIN
+    DEFPUSHBUTTON   "OK",IDOK,389,7,50,14
+    LTEXT           "Please copy following lines into the clip board and add them into the context menu file.",-1,7,7,277,8
+    EDITTEXT        IDC_EDT_COPYTEXT,7,25,432,25,ES_MULTILINE | ES_AUTOHSCROLL | ES_READONLY
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Bitmap
+//
+
+IDB_TB_ANALYSE          BITMAP                  "..\\icons\\analyse.bmp"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// DESIGNINFO
+//
+
+#ifdef APSTUDIO_INVOKED
+GUIDELINES DESIGNINFO
+BEGIN
+    IDD_FIND_DLG_CONF, DIALOG
+    BEGIN
+        RIGHTMARGIN, 98
+        VERTGUIDE, 3
+        VERTGUIDE, 34
+        VERTGUIDE, 49
+        VERTGUIDE, 52
+        VERTGUIDE, 64
+        BOTTOMMARGIN, 268
+    END
+
+    IDD_ANALYSE_HELP_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 416
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 279
+    END
+
+    IDD_FIND_RES_DLG_SEARCH, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 293
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 82
+    END
+
+    IDD_ANALYSE_CONF_DLG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 264
+        VERTGUIDE, 11
+        VERTGUIDE, 110
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 203
+    END
+
+    IDD_COLOUR_POPUP, DIALOG
+    BEGIN
+        LEFTMARGIN, 3
+        TOPMARGIN, 3
+        BOTTOMMARGIN, 78
+    END
+
+    IDD_ADDCTX_DIALOG, DIALOG
+    BEGIN
+        LEFTMARGIN, 7
+        RIGHTMARGIN, 439
+        TOPMARGIN, 7
+        BOTTOMMARGIN, 50
+    END
+END
+#endif    // APSTUDIO_INVOKED
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Icon
+//
+
+// Icon with lowest ID value placed first to ensure application icon
+// remains consistent on all systems.
+IDI_ANALYSE             ICON                    "..\\icons\\analyse.ico"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// Dialog Info
+//
+
+IDD_FIND_DLG_CONF DLGINIT
+BEGIN
+    IDC_CMB_SELECTION, 0x403, 11, 0
+0x6573, 0x7261, 0x6863, 0x6574, 0x7478, "\000" 
+    IDC_CMB_SELECTION, 0x403, 5, 0
+0x696c, 0x656e, "\000" 
+    0
+END
+
+IDD_FIND_RES_DLG_SEARCH DLGINIT
+BEGIN
+    IDC_CMB_SEARCH_TYPE, 0x403, 5, 0
+0x6574, 0x7478, "\000" 
+    IDC_CMB_SEARCH_TYPE, 0x403, 8, 0
+0x7365, 0x6163, 0x6570, 0x0064, 
+    IDC_CMB_SEARCH_TYPE, 0x403, 6, 0
+0x6572, 0x6567, 0x0078, 
+    0
+END
+
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// HTML
+//
+
+IDR_MANUAL              HTML                    "..\\manual.txt"
+IDR_CHANGES             HTML                    "..\\changes.txt"
+
+/////////////////////////////////////////////////////////////////////////////
+//
+// String Table
+//
+
+STRINGTABLE
+BEGIN
+    IDS_SHOW_ANALYSE_DIAG   "Show Analyse Dialog"
+    IDS_SHOW_ANALYSE_HELP   "Help..."
+    IDS_SHOW_ANALYSE_CONFIG "Options..."
+END
+
+STRINGTABLE
+BEGIN
+    IDS_ADDSELTOPATT        "Add selection as patterns"
+    IDS_RUNSEARCH           "Search now"
+END
+
+#endif    // Neutral resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+/////////////////////////////////////////////////////////////////////////////
+// German (Germany) resources
+
+#if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_DEU)
+LANGUAGE LANG_GERMAN, SUBLANG_GERMAN
+#pragma code_page(1252)
+
+#ifdef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// TEXTINCLUDE
+//
+
+1 TEXTINCLUDE 
+BEGIN
+    "resource.h\0"
+END
+
+2 TEXTINCLUDE 
+BEGIN
+    "#define APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""windows.h""\r\n"
+    "#undef APSTUDIO_HIDDEN_SYMBOLS\r\n"
+    "#include ""resource.h""\r\n"
+    "\0"
+END
+
+3 TEXTINCLUDE 
+BEGIN
+    "\r\n"
+    "\0"
+END
+
+#endif    // APSTUDIO_INVOKED
+
+#endif    // German (Germany) resources
+/////////////////////////////////////////////////////////////////////////////
+
+
+
+#ifndef APSTUDIO_INVOKED
+/////////////////////////////////////////////////////////////////////////////
+//
+// Generated from the TEXTINCLUDE 3 resource.
+//
+
+
+/////////////////////////////////////////////////////////////////////////////
+#endif    // not APSTUDIO_INVOKED
+
