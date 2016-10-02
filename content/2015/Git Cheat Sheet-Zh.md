@@ -290,3 +290,23 @@ $ git reset --keep <commit>
 ```
 
 ---
+
+### 补丁
+
+一般常用命令如下：
+```
+ git diff  > patch
+ git diff  --cached > patch
+ git diff  branchname --cached > patch
+
+```
+
+应用补丁：
+` git apply patch`
+
+
+git专用补丁
+
+ 1)两个节点之间的提交： git format-patch  节点A   节点B      
+ 2)单个节点： git format-patch -1 节点A （-n就表示要生成几个节点的提交）     
+ 3)最近一次提交节点的patch ：git format-patch HEAD^ 依次类推……            
