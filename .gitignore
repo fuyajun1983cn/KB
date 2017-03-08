@@ -34,3 +34,5 @@ public/lib/
 _site/
 content/company/
 public/images/company/
+*.db
+*.db-journal
