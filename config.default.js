@@ -28,7 +28,7 @@ module.exports = {
   category_sort: true,
 
   // Which Theme to Use?
-  theme_dir  : __dirname + '/../themes/',
+  theme_dir  : __dirname + '/node_modules/raneto/themes/',
   theme_name : 'default',
 
   // Specify the path of your content folder where all your '.md' files are located
@@ -37,18 +37,18 @@ module.exports = {
   content_dir : 'content/',
 
   // Where is the public directory or document root?
-  public_dir  : __dirname + '/../public/',
+  public_dir  : __dirname + '/node_modules/raneto/public/',
 
   // The base URL of your images folder,
   // Relative to config.public_dir
   // (can use %image_url% in Markdown files)
-  image_url: '/images',
+  image_url: '../images',
 
   // Add your analytics tracking code (including script tags)
   analytics: '',
 
   // Set to true to enable the web editor
-  allow_editing : false,
+  allow_editing : true,
 
   // Set to true to enable HTTP Basic Authentication
   authentication : false,

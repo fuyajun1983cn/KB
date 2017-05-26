@@ -14,6 +14,4 @@ collect any information that make sense to me.
   这个知识库里面除了一些原创的信息外，收集了大量网络上的资源，在此表示
   感谢。
 
-* 引用  
-  [[./OLD_README.md][README]]
 
