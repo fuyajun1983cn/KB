@@ -33,6 +33,6 @@ public/lib/
 *~
 _site/
 content/company/
-public/images/company/
+images/company/
 *.db
 *.db-journal
