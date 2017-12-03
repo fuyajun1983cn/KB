@@ -15,6 +15,6 @@
   "license": "ISC",
   "dependencies": {
     "raneto": "0.7.1",
-    "debug" : "2.2.0"
+    "debug": "2.2.0"
   }
 }
