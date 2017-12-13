@@ -1,20 +1,23 @@
 {
   "name": "kb",
   "version": "1.0.0",
-  "description": "",
-  "main": "config.default.js",
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/fuyajun1983cn/KB.git"
-  },
+  "description": "my personal knowledge base",
+  "main": "app/main.js",
   "scripts": {
-    "start": "node server.js",
-    "postinstall": "ln -s ${PWD}/images ${PWD}/node_modules/raneto/public/images"
+    "start": "electron .",
+    "package-mac": "electron-packager . --overwrite --platform=darwin --arch=x64 --icon=assets/icons/mac/icon.icns --prune=true --out=release-builds",
+    "package-win": "electron-packager . KB --overwrite --asar=true --platform=win32 --arch=x64  --prune=true --out=dist --version-string.CompanyName=CE --version-string.FileDescription=CE --version-string.ProductName=\"KB App\"",    
+    "package-linux": "electron-packager . electron-tutorial-app --overwrite --asar=true --platform=linux --arch=x64 --icon=assets/icons/png/1024x1024.png --prune=true --out=release-builds",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "Yajun Fu <fuyajun1983cn@gmail.com>",
+  "keywords": [],
+  "author": "Jackson",
   "license": "ISC",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "electron-packager": "^10.1.0"
+  },
   "dependencies": {
-    "raneto": "0.7.1",
-    "debug": "2.2.0"
+    "raneto": "^0.13.0"
   }
 }
