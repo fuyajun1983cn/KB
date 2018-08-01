@@ -1,0 +1,110 @@
+#+SETUPFILE: theme-readtheorg.setup
+#+TITLE: QC平台知识库
+* Burn Image
+** Flash QRD
+
+   Steps:
+   #+BEGIN_SRC sh
+     adb root
+     adb reboot-bootloader
+     pushd \\network_path
+     python fastboot_complete.py
+     [Wait for fastboot build download finish]
+     fastboot reboot
+   #+END_SRC
+
+   download QCN:
+
+   : adb shell setprop persist.radio.multisim.config ssss
+
+   down完QCN以后，然后手机会reboot， 如果没识别的话，你就发这个命令下去 再reboot一下.
+
+** Update an Image part
+
+   command format: *fastboot.exe flash bluetooth_a abl.elf*
+
+   | part name(Android P) | file name         |
+   |----------------------+-------------------|
+   | abl_a                | abl.elf           |
+   | bluetooth_a          | BTFW.bin          |
+   | boot_a               | boot.img          |
+   | cmnlib64_a           | cmnlib64.mbn      |
+   | cmnlib_a             | cmnlib.mbn        |
+   | devcfg_a             | devcfg.mbn        |
+   | dsp_a                | dspso.bin         |
+   | hyp_a                | hyp.mbn           |
+   | keymaster_a          | km4.mbn           |
+   | logfs                | logfs_ufs_8mb.bin |
+   | logfs                | logfs_ufs_8mb.bin |
+   | mdtp_a               | mdtp.img          |
+   | modem_a              | NON-HLOS.bin      |
+   | pmic_a               | pmic.elf          |
+   | rpm_a                | rpm.mbn           |
+   | system_a             | system.img        |
+   | persist              | persist.img       |
+   | userdata             | userdata.img      |
+   | storsec              | storsec.mbn       |
+   | mdtpsecapp           | mdtpsecapp.mbn    |
+   | tz_a                 | tz_a.mbn          |
+   | vendor_a             | vendor.img        |
+   | xbl_a                | xbl.elf           |
+   |----------------------+-------------------|
+
+* Factory Test
+
+
+** BT Config 
+
+  For Android O, 先在UI上把BT关掉然后执行
+  : wdsdaemon -su
+
+  然后是btconfig。
+
+  #+BEGIN_SRC sh
+    adb root
+    adb shell setprop qcom.bluetooth.soc pronto
+    adb shell setprop ro.qualcomm.bt.hci_transport smd
+    wdsdaemon -su (no need for Pronto)
+  #+END_SRC
+
+  open another cmd window
+
+  #+BEGIN_SRC sh
+    btconfig /dev/smd3 rawcmd 0x03 0x0003 (HCI Reset) 
+    btconfig /dev/smd3 rawcmd 0x06 0x03 （Enter Test Mode进入测试模式） 
+    btconfig /dev/smd3 rawcmd 0x03 0x05 0x02 0x00 0x02 （Auto Accept All Connections自动连接） 
+    btconfig /dev/smd3 rawcmd 0x03 0x1A 0x03 （Page Inquiry Scans按页扫描） 
+    btconfig /dev/smd3 rawcmd 0x03 0x20 0x00 （Disable Authentication取消认证） 
+    btconfig /dev/smd3 rawcmd 0x03 0x22 0x00 （Disable Encryption取消加密） 
+  #+END_SRC
+
+** 工程模式下写入和读取BD  ADDR
+
+   #+BEGIN_SRC sh
+     #Write BD ADDRR
+     btconfig /dev/smd3 rawcmd 0x3f 000b 0x01 0x02 0x06 0x00 0x55 0x77 0x77 0x88 0x00
+
+     SOC is WCN
+     Done intiailizing fd = /dev/smd3
+     RAW HCI command: ogf 0x3f ocf 0xb
+     Params: 0x1 0x2 0x6 0x0 0x55 0x77 0x77 0x88 0x0
+     SEND -> dump :  0b fc 09 01 02 06 00 55 77 77 88 00
+     Other event received, Breaking
+     RECV <- dump :  ff 0a 0b 01 02 06 00 55 77 77 88 00
+
+     #Read BD ADDDR
+     btconfig /dev/smd3 rawcmd 0x04 0x0009
+
+     SOC is WCN
+     Done intiailizing fd = /dev/smd3
+     RAW HCI command: ogf 0x4 ocf 0x9
+     Params:
+     SEND -> dump :  09 10 00
+     Other event received, Breaking
+     RECV <- dump :  0e 0a 01 09 10 00 00 55 77 77 88 00
+   #+END_SRC
+
+* 高通处理器规格表
+
+  http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html
+  
