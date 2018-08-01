@@ -3,10 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-08-01 Wed 14:59 -->
+<!-- 2018-08-01 Wed 16:32 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>QC平台知识库</title>
+<title>QC平台知识库 for BT codec issue for general issue Android N Android O</title>
 <meta name="generator" content="Org mode" />
 <meta name="author" content="Fu Yajun" />
 <style type="text/css">
@@ -235,34 +235,50 @@ for the JavaScript code in this tag.
 </head>
 <body>
 <div id="content">
-<h1 class="title">QC平台知识库</h1>
+<h1 class="title">QC平台知识库 for BT codec issue for general issue Android N Android O</h1>
 <div id="table-of-contents">
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org0b907d9">1. Burn Image</a>
+<li><a href="#org2301157">1. Burn Image</a>
 <ul>
-<li><a href="#orge8ce063">1.1. Flash QRD</a></li>
-<li><a href="#org11fb327">1.2. Update an Image part</a></li>
+<li><a href="#orgec79e5e">1.1. Flash QRD</a></li>
+<li><a href="#orgcb9fc0c">1.2. Update an Image part</a></li>
 </ul>
 </li>
-<li><a href="#org296a4ed">2. Factory Test</a>
+<li><a href="#orge7ae3d2">2. Factory Test</a>
 <ul>
-<li><a href="#org768bb2b">2.1. BT Config</a></li>
-<li><a href="#org07a7457">2.2. 工程模式下写入和读取BD  ADDR</a></li>
+<li><a href="#org8ed723c">2.1. BT Config</a></li>
+<li><a href="#org1aff266">2.2. 工程模式下写入和读取BD  ADDR</a></li>
 </ul>
 </li>
-<li><a href="#org3c1178b">3. 高通处理器规格表</a></li>
+<li><a href="#orga0e4c2b">3. 高通处理器规格表</a></li>
+<li><a href="#org353f967">4. Slimbus</a>
+<ul>
+<li><a href="#orge341fbf">4.1. Architecture</a></li>
+<li><a href="#org6d8d8d3">4.2. Turn on logs</a></li>
+</ul>
+</li>
+<li><a href="#orgd1a8df9">5. Uart ipc logs</a></li>
+<li><a href="#orgd2f2e1f">6. BT</a>
+<ul>
+<li><a href="#orgb083149">6.1. Split A2DP Common feature Turn On/Off</a></li>
+<li><a href="#org9006748">6.2. Disable BT Soc Logging</a></li>
+<li><a href="#orgc66201d">6.3. QDID Listings</a></li>
+<li><a href="#org1e01d18">6.4. APQ8909</a></li>
+<li><a href="#orgc55fe14">6.5. Enable/disable Bluetooth</a></li>
+</ul>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org0b907d9" class="outline-2">
-<h2 id="org0b907d9"><span class="section-number-2">1</span> Burn Image</h2>
+<div id="outline-container-org2301157" class="outline-2">
+<h2 id="org2301157"><span class="section-number-2">1</span> Burn Image</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orge8ce063" class="outline-3">
-<h3 id="orge8ce063"><span class="section-number-3">1.1</span> Flash QRD</h3>
+<div id="outline-container-orgec79e5e" class="outline-3">
+<h3 id="orgec79e5e"><span class="section-number-3">1.1</span> Flash QRD</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Steps:
@@ -292,8 +308,8 @@ down完QCN以后，然后手机会reboot， 如果没识别的话，你就发这
 </div>
 </div>
 
-<div id="outline-container-org11fb327" class="outline-3">
-<h3 id="org11fb327"><span class="section-number-3">1.2</span> Update an Image part</h3>
+<div id="outline-container-orgcb9fc0c" class="outline-3">
+<h3 id="orgcb9fc0c"><span class="section-number-3">1.2</span> Update an Image part</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
@@ -434,12 +450,12 @@ command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
 </div>
 </div>
 
-<div id="outline-container-org296a4ed" class="outline-2">
-<h2 id="org296a4ed"><span class="section-number-2">2</span> Factory Test</h2>
+<div id="outline-container-orge7ae3d2" class="outline-2">
+<h2 id="orge7ae3d2"><span class="section-number-2">2</span> Factory Test</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org768bb2b" class="outline-3">
-<h3 id="org768bb2b"><span class="section-number-3">2.1</span> BT Config</h3>
+<div id="outline-container-org8ed723c" class="outline-3">
+<h3 id="org8ed723c"><span class="section-number-3">2.1</span> BT Config</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 For Android O, 先在UI上把BT关掉然后执行
@@ -477,8 +493,8 @@ btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style=
 </div>
 </div>
 
-<div id="outline-container-org07a7457" class="outline-3">
-<h3 id="org07a7457"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
+<div id="outline-container-org1aff266" class="outline-3">
+<h3 id="org1aff266"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Write BD ADDRR</span>
@@ -508,23 +524,319 @@ RECV &lt;- dump :&#160; <span style="color: #a45bad;">0e</span> <span style="col
 </div>
 </div>
 
-<div id="outline-container-org3c1178b" class="outline-2">
-<h2 id="org3c1178b"><span class="section-number-2">3</span> 高通处理器规格表</h2>
+<div id="outline-container-orga0e4c2b" class="outline-2">
+<h2 id="orga0e4c2b"><span class="section-number-2">3</span> 高通处理器规格表</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html">http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html</a>
 </p>
+</div>
+</div>
 
+
+
+
+<div id="outline-container-org353f967" class="outline-2">
+<h2 id="org353f967"><span class="section-number-2">4</span> Slimbus</h2>
+<div class="outline-text-2" id="text-4">
+</div>
+<div id="outline-container-orge341fbf" class="outline-3">
+<h3 id="orge341fbf"><span class="section-number-3">4.1</span> Architecture</h3>
+<div class="outline-text-3" id="text-4-1">
+
+<div class="figure">
+<p><img src="./images/2018080101.jpg" alt="2018080101.jpg" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org6d8d8d3" class="outline-3">
+<h3 id="org6d8d8d3"><span class="section-number-3">4.2</span> Turn on logs</h3>
+<div class="outline-text-3" id="text-4-2">
+<div class="org-src-container">
+<pre class="src src-sh">adb root
+adb wait-for-device remount
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_codec.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_wcn3990.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+
+<span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Important Logs for SCO issue.</span>
+<span style="color: #a45bad;">071376</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.035</span> D/btfm_slim_dai_hw_params<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: dai-&gt;name = btfm_bt_sco_a2dp_slim_rx DAI-ID <span style="color: #a45bad;">2</span> rate <span style="color: #a45bad;">16000</span> num_ch <span style="color: #a45bad;">1</span>&#160; 
+<span style="color: #a45bad;">071401</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.043</span> I/btfm_slim_enable_ch<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: slim_connect_sink<span style="color: #4f97d7;">(</span>port: <span style="color: #a45bad;">16,</span> ch: <span style="color: #a45bad;">157</span><span style="color: #4f97d7;">)</span>&#160; 
+<span style="color: #a45bad;">071567</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.102</span> D/btfm_slim_dai_prepare<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: dai-&gt;name: btfm_bt_sco_slim_tx, dai-&gt;id: <span style="color: #a45bad;">1,</span> dai-&gt;rate: <span style="color: #a45bad;">16000</span>&#160; 
+<span style="color: #a45bad;">071587</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.106</span> I/btfm_slim_chrk_enable_port<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: programming SCO Tx with reg_val <span style="color: #a45bad;">3</span> to reg <span style="color: #a45bad;">0x50</span>&#160; 
+<span style="color: #a45bad;">071593</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.107</span> I/btfm_slim_enable_ch<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: slim_connect_src<span style="color: #4f97d7;">(</span>port: <span style="color: #a45bad;">0,</span> ch: <span style="color: #a45bad;">161</span><span style="color: #4f97d7;">)</span>&#160; 
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell echo -n <span style="color: #2d9574;">"file bluetooth-power.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm_serial_hs.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm-ctrl.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm-ngd.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_codec.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_wcn3990.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6adm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6afe.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6asm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6voice.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file soc-dapm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-voip-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-routing-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-voice-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-q6-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-dai-q6-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msmcobalt.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file voice_svc.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd1a8df9" class="outline-2">
+<h2 id="orgd1a8df9"><span class="section-number-2">5</span> Uart ipc logs</h2>
+<div class="outline-text-2" id="text-5">
+<div class="org-src-container">
+<pre class="src src-sh">&lt;for SDM845 UART IPC&gt;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_misc/log_cont &gt;&gt; /sdcard/uart_misc.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_pwr/log_cont &gt;&gt; /sdcard/uart_pwr.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_tx/log_cont &gt;&gt; /sdcard/uart_tx.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_rx/log_cont &gt;&gt; /sdcard/uart_rx.ipc &amp; 
+</pre>
+</div>
 
 <p>
-F_{s}
+一般客户在sdm845上都是用898000这个uart连接BT， 所以上面路径就可以.
 </p>
+</div>
+</div>
+
+<div id="outline-container-orgd2f2e1f" class="outline-2">
+<h2 id="orgd2f2e1f"><span class="section-number-2">6</span> BT</h2>
+<div class="outline-text-2" id="text-6">
+</div>
+<div id="outline-container-orgb083149" class="outline-3">
+<h3 id="orgb083149"><span class="section-number-3">6.1</span> Split A2DP Common feature Turn On/Off</h3>
+<div class="outline-text-3" id="text-6-1">
+<ol class="org-ol">
+<li>Set “AUDIO_FEATURE_ENABLED_SPLIT_A2DP := false” in
+“hardware/qcom/audio/configs/sdmxxx/sdmxxx.mk” then build software.</li>
+
+<li>File case to Audio team to get the corresponding non-split A2DP
+&lt;audio_policy_configuration.xml&gt; file for your platform</li>
+
+<li><p>
+Run the following commands. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb push audio_policy_configuration.xml&#160; /system/etc/audio_policy_configuration.xml
+adb shell setprop persist.bt.enable.splita2dp false
+adb shell setprop persist.vendor.bt.enable.splita2dp false  <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">new add.</span>
+adb shell setprop persist.bt.a2dp_offload_cap false
+adb shell setprop persist.vendor.bt.a2dp_offload_cap false
+adb shell sync
+adb reboot
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-org9006748" class="outline-3">
+<h3 id="org9006748"><span class="section-number-3">6.2</span> Disable BT Soc Logging</h3>
+<div class="outline-text-3" id="text-6-2">
+<p>
+To disable SoC logging please make the below change @
+vendor/qcom/proprietary/bluetooth/hidl_transport/bt/1.0/default/patch_dl_manager.cpp? 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #a45bad;">PatchDLManager</span>::<span style="color: #bc6ec5; font-weight: bold;">EnableControllerLog</span><span style="color: #4f97d7;">()</span> 
+<span style="color: #4f97d7;">{</span> 
+<span style="color: #bc6ec5;">#ifdef</span> USER_DEBUG 
+  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">value at cmd[5]: 1 - to enable, 0 - to disable </span>
+  cmd<span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">5</span><span style="color: #bc6ec5;">]</span> = <span style="color: #a45bad;">0x00</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">please change it to 0 </span>
+<span style="color: #bc6ec5;">#else</span> 
+
+    ......
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgc66201d" class="outline-3">
+<h3 id="orgc66201d"><span class="section-number-3">6.3</span> QDID Listings</h3>
+<div class="outline-text-3" id="text-6-3">
+<ul class="org-ul">
+<li><p>
+Stack and Profile
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21772">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21772</a>
+</p></li>
+
+<li><p>
+MSM™ chipset
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=20783">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=20783</a>
+</p>
+
+<p>
+(for WCN3620)
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21332">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21332</a>
+</p>
+
+<p>
+(for WCN3660, WCN3680)
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=18867">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=18867</a>
+</p></li>
+
+<li>QCA chipset
+
+<ul class="org-ul">
+<li><p>
+Controller
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22591">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22591</a>
+</p></li>
+
+<li><p>
+RF
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22590">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22590</a>
+</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org1e01d18" class="outline-3">
+<h3 id="org1e01d18"><span class="section-number-3">6.4</span> APQ8909</h3>
+<div class="outline-text-3" id="text-6-4">
+<ul class="org-ul">
+<li><p>
+Bluetooth/FM HCI-SMD Interface 
+</p>
+
+
+<div class="figure">
+<p><img src="./images/2018080102.png" alt="2018080102.png" />
+</p>
+</div></li>
+
+<li>Between cCPU and aCPU
+
+<ul class="org-ul">
+<li>Two SMD channels are used for Bluetooth HCI commands and events, HCI ACL
+data transfers</li>
+
+<li>One SMD channel for FM control commands and events</li>
+
+<li>One SMD channel for the WCN-SS debug logging shared by WLAN, Bluetooth, and FM</li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc55fe14" class="outline-3">
+<h3 id="orgc55fe14"><span class="section-number-3">6.5</span> Enable/disable Bluetooth</h3>
+<div class="outline-text-3" id="text-6-5">
+<p>
+one way to enable/disable BT with adb shell. It is just same as operation from GUI.
+Details is as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call
+service: No code specified for call
+Usage: service <span style="color: #4f97d7;">[</span>-h|-?<span style="color: #4f97d7;">]</span>
+&#160;&#160;&#160;&#160;&#160;&#160; service list
+&#160;&#160;&#160;&#160;&#160;&#160; service check SERVICE
+&#160;&#160;&#160;&#160;&#160;&#160; service call SERVICE CODE <span style="color: #4f97d7;">[</span>i32 N | i64 N | f N | d N | s16 STR <span style="color: #4f97d7;">]</span> ...
+Options:
+&#160;&#160; i32: Write the <span style="color: #a45bad;">32-bit</span> integer N into the send parcel.
+&#160;&#160; i64: Write the <span style="color: #a45bad;">64-bit</span> integer N into the send parcel.
+&#160;&#160; f:&#160;&#160; Write the <span style="color: #a45bad;">32-bit</span> single-precision number N into the send parcel.
+&#160;&#160; d:&#160;&#160; Write the <span style="color: #a45bad;">64-bit</span> double-precision number N into the send parcel.
+&#160;&#160; s16: Write the UTF-16 string STR into the send parcel.
+
+</pre>
+</div>
+
+<p>
+The <code>CODE</code> means sequence number of function in the AIDL file: 
+</p>
+
+<p>
+frameworks/base/core/java/android/bluetooth/IBluetoothManager.aidl
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ce537a; font-weight: bold;">interface</span> <span style="color: #7590db;">IBluetoothManager</span>
+<span style="color: #4f97d7;">{</span>
+  &#160;&#160;&#160; IBluetooth registerAdapter<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothManagerCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unregisterAdapter<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothManagerCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> registerStateChangeCallback<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothStateChangeCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unregisterStateChangeCallback<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothStateChangeCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean isEnabled<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; boolean enable<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean enableNoAutoConnect<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean disable<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span>, <span style="color: #ce537a; font-weight: bold;">boolean</span> <span style="color: #7590db;">persist</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160;<span style="color: #ce537a; font-weight: bold;">int</span> getState<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; IBluetoothGatt getBluetoothGatt<span style="color: #bc6ec5;">()</span>;
+  &#160;
+        &#160;&#160;&#160; boolean bindBluetoothProfileService<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">profile</span>, <span style="color: #ce537a; font-weight: bold;">IBluetoothProfileServiceConnection</span> <span style="color: #7590db;">proxy</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unbindBluetoothProfileService<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">profile</span>, <span style="color: #ce537a; font-weight: bold;">IBluetoothProfileServiceConnection</span> <span style="color: #7590db;">proxy</span><span style="color: #bc6ec5;">)</span>;
+  &#160;
+        &#160;&#160;&#160; String getAddress<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; String getName<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; boolean factoryReset<span style="color: #bc6ec5;">()</span>;
+  &#160;
+        &#160;&#160;&#160; boolean isBleScanAlwaysAvailable<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">int</span> updateBleAppCount<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">IBinder</span> <span style="color: #7590db;">b</span>, <span style="color: #ce537a; font-weight: bold;">boolean</span> <span style="color: #7590db;">enable</span>, <span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean isBleAppPresent<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+
+</pre>
+</div>
+
+<p>
+Since Android N and Android O has different interface, there are difference command.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call bluetooth_manager <span style="color: #a45bad;">8</span>
+adb shell service call bluetooth_manager <span style="color: #a45bad;">10</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call bluetooth_manager <span style="color: #a45bad;">6</span> s16 <span style="color: #2d9574;">"com.android.bluetooth"</span> <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Enable</span>
+adb shell service call bluetooth_manager <span style="color: #a45bad;">8</span> s16 <span style="color: #2d9574;">"com.android.bluetooth"</span> <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Disablle</span>
+</pre>
+</div>
+</div>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-01 Wed 14:59</p>
+<p class="date">Created: 2018-08-01 Wed 16:32</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

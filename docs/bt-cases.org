@@ -1,0 +1,70 @@
+#+SETUPFILE: theme-readtheorg.setup
+#+TITLE: Bluetooth Cases
+#+OPTIONS: ^:{} 
+
+* A2DP
+
+* HFP
+
+* PBAP
+
+** 03590231
+
+   - Problem Description
+
+     Android P, 连接49号车载蓝牙，高概率出现无法同步联系人
+
+   - Facts
+
+     from the logs, carkit only query the phonebook size on the DUT, but don't
+     proceed  to download it. while testing with the reference phone, it will
+     download the phonebook contacts.  
+
+     carkit query the phonebook size with the following request:
+
+     [[./images/2018080107.png]]
+
+     for query, the =Max List Count= parameter is  0. 
+
+     to download the phonebook contents, carkit should sent another request with
+     =Max List Count= parameter not equal to 0. but it did't, that's not expected.
+
+   - Problem Analysis
+
+     for this issue, we should check PBAP version and  supported feature first,
+     and then check other differences. 
+
+     DUT logs:
+
+     [[./images/2018080105.png]]
+
+     Reference phone logs:
+
+     [[./images/2018080106.png]]
+
+     there is no differene for the **Supported Repositories** attribute. 
+     so we need to compare the other reason.  
+
+     there maybe some other factor which let the carkit don't send download
+     phonebook content from the DUT. 
+
+     here is the difference:
+
+     when query phonebook size  in SIM card, DUT respond with the value of 0
+     when  SIM card has no contacts.
+
+     [[./images/2018080108.png]]
+
+     while reference phone respond with the value of 1. 
+
+     [[./images/2018080109.png]]
+
+     after change the retun value from 0 to 1, issue is  resolved.
+
+     plus, if the carkit don't  request  phonebook content from SIM card, you
+     can check the attribute  of **Supported Repositories** from the SDP
+     response to the carkit in which bit 1 represent wether **SIM card
+     Phonebook** is supported or not. 
+
+     
+
