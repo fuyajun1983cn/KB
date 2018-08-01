@@ -1,5 +1,7 @@
 #+SETUPFILE: theme-readtheorg.setup
 #+TITLE: QC平台知识库
+#+OPTIONS: '^:{}' 
+
 * Burn Image
 ** Flash QRD
 
@@ -26,8 +28,8 @@
    | part name(Android P) | file name         |
    |----------------------+-------------------|
    | abl_a                | abl.elf           |
-   | bluetooth_a          | BTFW.bin          |
-   | boot_a               | boot.img          |
+   | *bluetooth_a*        | BTFW.bin          |
+   | *boot_a*             | boot.img          |
    | cmnlib64_a           | cmnlib64.mbn      |
    | cmnlib_a             | cmnlib.mbn        |
    | devcfg_a             | devcfg.mbn        |
@@ -40,7 +42,7 @@
    | modem_a              | NON-HLOS.bin      |
    | pmic_a               | pmic.elf          |
    | rpm_a                | rpm.mbn           |
-   | system_a             | system.img        |
+   | *system_a*           | system.img        |
    | persist              | persist.img       |
    | userdata             | userdata.img      |
    | storsec              | storsec.mbn       |
@@ -108,3 +110,4 @@
 
   http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html
   
+

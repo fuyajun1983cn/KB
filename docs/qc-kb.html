@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-08-01 Wed 14:13 -->
+<!-- 2018-08-01 Wed 14:59 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>QC平台知识库</title>
@@ -240,28 +240,29 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgfb1be42">1. Burn Image</a>
+<li><a href="#org0b907d9">1. Burn Image</a>
 <ul>
-<li><a href="#orgf3571af">1.1. Flash QRD</a></li>
-<li><a href="#orgcf770e2">1.2. Update an Image part</a></li>
+<li><a href="#orge8ce063">1.1. Flash QRD</a></li>
+<li><a href="#org11fb327">1.2. Update an Image part</a></li>
 </ul>
 </li>
-<li><a href="#org68efb7b">2. Factory Test</a>
+<li><a href="#org296a4ed">2. Factory Test</a>
 <ul>
-<li><a href="#orgd4e621b">2.1. BT Config</a></li>
-<li><a href="#org249d1f7">2.2. 工程模式下写入和读取BD  ADDR</a></li>
+<li><a href="#org768bb2b">2.1. BT Config</a></li>
+<li><a href="#org07a7457">2.2. 工程模式下写入和读取BD  ADDR</a></li>
 </ul>
 </li>
-<li><a href="#orgcec4ef7">3. 高通处理器规格表</a></li>
+<li><a href="#org3c1178b">3. 高通处理器规格表</a></li>
 </ul>
 </div>
 </div>
-<div id="outline-container-orgfb1be42" class="outline-2">
-<h2 id="orgfb1be42"><span class="section-number-2">1</span> Burn Image</h2>
+
+<div id="outline-container-org0b907d9" class="outline-2">
+<h2 id="org0b907d9"><span class="section-number-2">1</span> Burn Image</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgf3571af" class="outline-3">
-<h3 id="orgf3571af"><span class="section-number-3">1.1</span> Flash QRD</h3>
+<div id="outline-container-orge8ce063" class="outline-3">
+<h3 id="orge8ce063"><span class="section-number-3">1.1</span> Flash QRD</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Steps:
@@ -291,11 +292,11 @@ down完QCN以后，然后手机会reboot， 如果没识别的话，你就发这
 </div>
 </div>
 
-<div id="outline-container-orgcf770e2" class="outline-3">
-<h3 id="orgcf770e2"><span class="section-number-3">1.2</span> Update an Image part</h3>
+<div id="outline-container-org11fb327" class="outline-3">
+<h3 id="org11fb327"><span class="section-number-3">1.2</span> Update an Image part</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
-command format: <b>fastboot.exe flash bluetooth<sub>a</sub> abl.elf</b>
+command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
 </p>
 
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
@@ -314,82 +315,82 @@ command format: <b>fastboot.exe flash bluetooth<sub>a</sub> abl.elf</b>
 </thead>
 <tbody>
 <tr>
-<td class="org-left">abl<sub>a</sub></td>
+<td class="org-left">abl_a</td>
 <td class="org-left">abl.elf</td>
 </tr>
 
 <tr>
-<td class="org-left">bluetooth<sub>a</sub></td>
+<td class="org-left"><b>bluetooth_a</b></td>
 <td class="org-left">BTFW.bin</td>
 </tr>
 
 <tr>
-<td class="org-left">boot<sub>a</sub></td>
+<td class="org-left"><b>boot_a</b></td>
 <td class="org-left">boot.img</td>
 </tr>
 
 <tr>
-<td class="org-left">cmnlib64<sub>a</sub></td>
+<td class="org-left">cmnlib64_a</td>
 <td class="org-left">cmnlib64.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">cmnlib<sub>a</sub></td>
+<td class="org-left">cmnlib_a</td>
 <td class="org-left">cmnlib.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">devcfg<sub>a</sub></td>
+<td class="org-left">devcfg_a</td>
 <td class="org-left">devcfg.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">dsp<sub>a</sub></td>
+<td class="org-left">dsp_a</td>
 <td class="org-left">dspso.bin</td>
 </tr>
 
 <tr>
-<td class="org-left">hyp<sub>a</sub></td>
+<td class="org-left">hyp_a</td>
 <td class="org-left">hyp.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">keymaster<sub>a</sub></td>
+<td class="org-left">keymaster_a</td>
 <td class="org-left">km4.mbn</td>
 </tr>
 
 <tr>
 <td class="org-left">logfs</td>
-<td class="org-left">logfs<sub>ufs</sub><sub>8mb.bin</sub></td>
+<td class="org-left">logfs_ufs_8mb.bin</td>
 </tr>
 
 <tr>
 <td class="org-left">logfs</td>
-<td class="org-left">logfs<sub>ufs</sub><sub>8mb.bin</sub></td>
+<td class="org-left">logfs_ufs_8mb.bin</td>
 </tr>
 
 <tr>
-<td class="org-left">mdtp<sub>a</sub></td>
+<td class="org-left">mdtp_a</td>
 <td class="org-left">mdtp.img</td>
 </tr>
 
 <tr>
-<td class="org-left">modem<sub>a</sub></td>
+<td class="org-left">modem_a</td>
 <td class="org-left">NON-HLOS.bin</td>
 </tr>
 
 <tr>
-<td class="org-left">pmic<sub>a</sub></td>
+<td class="org-left">pmic_a</td>
 <td class="org-left">pmic.elf</td>
 </tr>
 
 <tr>
-<td class="org-left">rpm<sub>a</sub></td>
+<td class="org-left">rpm_a</td>
 <td class="org-left">rpm.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">system<sub>a</sub></td>
+<td class="org-left"><b>system_a</b></td>
 <td class="org-left">system.img</td>
 </tr>
 
@@ -414,17 +415,17 @@ command format: <b>fastboot.exe flash bluetooth<sub>a</sub> abl.elf</b>
 </tr>
 
 <tr>
-<td class="org-left">tz<sub>a</sub></td>
-<td class="org-left">tz<sub>a.mbn</sub></td>
+<td class="org-left">tz_a</td>
+<td class="org-left">tz_a.mbn</td>
 </tr>
 
 <tr>
-<td class="org-left">vendor<sub>a</sub></td>
+<td class="org-left">vendor_a</td>
 <td class="org-left">vendor.img</td>
 </tr>
 
 <tr>
-<td class="org-left">xbl<sub>a</sub></td>
+<td class="org-left">xbl_a</td>
 <td class="org-left">xbl.elf</td>
 </tr>
 </tbody>
@@ -433,12 +434,12 @@ command format: <b>fastboot.exe flash bluetooth<sub>a</sub> abl.elf</b>
 </div>
 </div>
 
-<div id="outline-container-org68efb7b" class="outline-2">
-<h2 id="org68efb7b"><span class="section-number-2">2</span> Factory Test</h2>
+<div id="outline-container-org296a4ed" class="outline-2">
+<h2 id="org296a4ed"><span class="section-number-2">2</span> Factory Test</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-orgd4e621b" class="outline-3">
-<h3 id="orgd4e621b"><span class="section-number-3">2.1</span> BT Config</h3>
+<div id="outline-container-org768bb2b" class="outline-3">
+<h3 id="org768bb2b"><span class="section-number-3">2.1</span> BT Config</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 For Android O, 先在UI上把BT关掉然后执行
@@ -476,8 +477,8 @@ btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style=
 </div>
 </div>
 
-<div id="outline-container-org249d1f7" class="outline-3">
-<h3 id="org249d1f7"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
+<div id="outline-container-org07a7457" class="outline-3">
+<h3 id="org07a7457"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Write BD ADDRR</span>
@@ -507,18 +508,23 @@ RECV &lt;- dump :&#160; <span style="color: #a45bad;">0e</span> <span style="col
 </div>
 </div>
 
-<div id="outline-container-orgcec4ef7" class="outline-2">
-<h2 id="orgcec4ef7"><span class="section-number-2">3</span> 高通处理器规格表</h2>
+<div id="outline-container-org3c1178b" class="outline-2">
+<h2 id="org3c1178b"><span class="section-number-2">3</span> 高通处理器规格表</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html">http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html</a>
+</p>
+
+
+<p>
+F_{s}
 </p>
 </div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-01 Wed 14:13</p>
+<p class="date">Created: 2018-08-01 Wed 14:59</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>
