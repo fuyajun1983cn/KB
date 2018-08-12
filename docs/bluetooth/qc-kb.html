@@ -1,0 +1,1065 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<!-- 2018-08-12 Sun 12:18 -->
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>QC平台知识库 for BT codec issue for general issue Android N Android O</title>
+<meta name="generator" content="Org mode" />
+<meta name="author" content="Fu Yajun" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center;
+             margin-bottom: .2em; }
+  .subtitle { text-align: center;
+              font-size: medium;
+              font-weight: bold;
+              margin-top:0; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { font-family: monospace; color: green; }
+  .priority { font-family: monospace; color: orange; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  /* Languages per Org manual */
+  pre.src-asymptote:before { content: 'Asymptote'; }
+  pre.src-awk:before { content: 'Awk'; }
+  pre.src-C:before { content: 'C'; }
+  /* pre.src-C++ doesn't work in CSS */
+  pre.src-clojure:before { content: 'Clojure'; }
+  pre.src-css:before { content: 'CSS'; }
+  pre.src-D:before { content: 'D'; }
+  pre.src-ditaa:before { content: 'ditaa'; }
+  pre.src-dot:before { content: 'Graphviz'; }
+  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-fortran:before { content: 'Fortran'; }
+  pre.src-gnuplot:before { content: 'gnuplot'; }
+  pre.src-haskell:before { content: 'Haskell'; }
+  pre.src-hledger:before { content: 'hledger'; }
+  pre.src-java:before { content: 'Java'; }
+  pre.src-js:before { content: 'Javascript'; }
+  pre.src-latex:before { content: 'LaTeX'; }
+  pre.src-ledger:before { content: 'Ledger'; }
+  pre.src-lisp:before { content: 'Lisp'; }
+  pre.src-lilypond:before { content: 'Lilypond'; }
+  pre.src-lua:before { content: 'Lua'; }
+  pre.src-matlab:before { content: 'MATLAB'; }
+  pre.src-mscgen:before { content: 'Mscgen'; }
+  pre.src-ocaml:before { content: 'Objective Caml'; }
+  pre.src-octave:before { content: 'Octave'; }
+  pre.src-org:before { content: 'Org mode'; }
+  pre.src-oz:before { content: 'OZ'; }
+  pre.src-plantuml:before { content: 'Plantuml'; }
+  pre.src-processing:before { content: 'Processing.js'; }
+  pre.src-python:before { content: 'Python'; }
+  pre.src-R:before { content: 'R'; }
+  pre.src-ruby:before { content: 'Ruby'; }
+  pre.src-sass:before { content: 'Sass'; }
+  pre.src-scheme:before { content: 'Scheme'; }
+  pre.src-screen:before { content: 'Gnu Screen'; }
+  pre.src-sed:before { content: 'Sed'; }
+  pre.src-sh:before { content: 'shell'; }
+  pre.src-sql:before { content: 'SQL'; }
+  pre.src-sqlite:before { content: 'SQLite'; }
+  /* additional languages in org.el's org-babel-load-languages alist */
+  pre.src-forth:before { content: 'Forth'; }
+  pre.src-io:before { content: 'IO'; }
+  pre.src-J:before { content: 'J'; }
+  pre.src-makefile:before { content: 'Makefile'; }
+  pre.src-maxima:before { content: 'Maxima'; }
+  pre.src-perl:before { content: 'Perl'; }
+  pre.src-picolisp:before { content: 'Pico Lisp'; }
+  pre.src-scala:before { content: 'Scala'; }
+  pre.src-shell:before { content: 'Shell Script'; }
+  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
+  /* additional language identifiers per "defun org-babel-execute"
+       in ob-*.el */
+  pre.src-cpp:before  { content: 'C++'; }
+  pre.src-abc:before  { content: 'ABC'; }
+  pre.src-coq:before  { content: 'Coq'; }
+  pre.src-groovy:before  { content: 'Groovy'; }
+  /* additional language identifiers from org-babel-shell-names in
+     ob-shell.el: ob-shell is the only babel language using a lambda to put
+     the execution function name together. */
+  pre.src-bash:before  { content: 'bash'; }
+  pre.src-csh:before  { content: 'csh'; }
+  pre.src-ash:before  { content: 'ash'; }
+  pre.src-dash:before  { content: 'dash'; }
+  pre.src-ksh:before  { content: 'ksh'; }
+  pre.src-mksh:before  { content: 'mksh'; }
+  pre.src-posh:before  { content: 'posh'; }
+  /* Additional Emacs modes also supported by the LaTeX listings package */
+  pre.src-ada:before { content: 'Ada'; }
+  pre.src-asm:before { content: 'Assembler'; }
+  pre.src-caml:before { content: 'Caml'; }
+  pre.src-delphi:before { content: 'Delphi'; }
+  pre.src-html:before { content: 'HTML'; }
+  pre.src-idl:before { content: 'IDL'; }
+  pre.src-mercury:before { content: 'Mercury'; }
+  pre.src-metapost:before { content: 'MetaPost'; }
+  pre.src-modula-2:before { content: 'Modula-2'; }
+  pre.src-pascal:before { content: 'Pascal'; }
+  pre.src-ps:before { content: 'PostScript'; }
+  pre.src-prolog:before { content: 'Prolog'; }
+  pre.src-simula:before { content: 'Simula'; }
+  pre.src-tcl:before { content: 'tcl'; }
+  pre.src-tex:before { content: 'TeX'; }
+  pre.src-plain-tex:before { content: 'Plain TeX'; }
+  pre.src-verilog:before { content: 'Verilog'; }
+  pre.src-vhdl:before { content: 'VHDL'; }
+  pre.src-xml:before { content: 'XML'; }
+  pre.src-nxml:before { content: 'XML'; }
+  /* add a generic configuration mode; LaTeX export needs an additional
+     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
+  pre.src-conf:before { content: 'Configuration File'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.org-right  { text-align: center;  }
+  th.org-left   { text-align: center;   }
+  th.org-center { text-align: center; }
+  td.org-right  { text-align: right;  }
+  td.org-left   { text-align: left;   }
+  td.org-center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara { display: inline; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  .org-svg { width: 90%; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2018 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">QC平台知识库 for BT codec issue for general issue Android N Android O</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#orgc76a4fc">1. Burn Image</a>
+<ul>
+<li><a href="#orgd09c23b">1.1. Flash QRD</a></li>
+<li><a href="#orgb512d7a">1.2. Update an Image part</a></li>
+</ul>
+</li>
+<li><a href="#org92238e4">2. Factory Test</a>
+<ul>
+<li><a href="#org5870410">2.1. BT Config</a></li>
+<li><a href="#org9fd6a77">2.2. 工程模式下写入和读取BD  ADDR</a></li>
+</ul>
+</li>
+<li><a href="#org17b6bc6">3. 高通处理器规格表</a></li>
+<li><a href="#org736bd3d">4. Snapdragon Naming Update</a></li>
+<li><a href="#orgd04b401">5. Slimbus</a>
+<ul>
+<li><a href="#orge3755a2">5.1. Architecture</a></li>
+<li><a href="#org47f6926">5.2. Turn on logs</a></li>
+</ul>
+</li>
+<li><a href="#org7372db9">6. Uart ipc logs</a></li>
+<li><a href="#org56e09fb">7. BT</a>
+<ul>
+<li><a href="#org3a31500">7.1. Split A2DP Common feature Turn On/Off</a></li>
+<li><a href="#orgc85290e">7.2. Disable BT Soc Logging</a></li>
+<li><a href="#org93b09b8">7.3. QDID Listings</a></li>
+<li><a href="#org2b0c9ef">7.4. APQ8909(WCN36XX)</a></li>
+<li><a href="#orgefe82bc">7.5. Enable/disable Bluetooth</a></li>
+<li><a href="#org9f660c8">7.6. Power Class Adjustment</a></li>
+</ul>
+</li>
+<li><a href="#orgaff5a38">8. Pronto(WCN36XX)</a>
+<ul>
+<li><a href="#orga77dbf1">8.1. WCN36x0 Architecture</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgc76a4fc" class="outline-2">
+<h2 id="orgc76a4fc"><span class="section-number-2">1</span> Burn Image</h2>
+<div class="outline-text-2" id="text-1">
+</div>
+<div id="outline-container-orgd09c23b" class="outline-3">
+<h3 id="orgd09c23b"><span class="section-number-3">1.1</span> Flash QRD</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Steps:
+</p>
+<div class="org-src-container">
+<pre class="src src-sh">adb root
+adb reboot-bootloader
+pushd <span style="color: #2d9574;">\\</span>network_path
+python fastboot_complete.py
+<span style="color: #4f97d7;">[</span>Wait for fastboot build download finish<span style="color: #4f97d7;">]</span>
+fastboot reboot
+</pre>
+</div>
+
+<p>
+download QCN:
+</p>
+
+<pre class="example">
+adb shell setprop persist.radio.multisim.config ssss
+
+</pre>
+
+<p>
+down完QCN以后，然后手机会reboot， 如果没识别的话，你就发这个命令下去 再reboot一下.
+</p>
+</div>
+</div>
+
+<div id="outline-container-orgb512d7a" class="outline-3">
+<h3 id="orgb512d7a"><span class="section-number-3">1.2</span> Update an Image part</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
+</p>
+
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+
+
+<colgroup>
+<col  class="org-left" />
+
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">part name(Android P)</th>
+<th scope="col" class="org-left">file name</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">abl_a</td>
+<td class="org-left">abl.elf</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>bluetooth_a</b></td>
+<td class="org-left">BTFW.bin</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>boot_a</b></td>
+<td class="org-left">boot.img</td>
+</tr>
+
+<tr>
+<td class="org-left">cmnlib64_a</td>
+<td class="org-left">cmnlib64.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">cmnlib_a</td>
+<td class="org-left">cmnlib.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">devcfg_a</td>
+<td class="org-left">devcfg.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">dsp_a</td>
+<td class="org-left">dspso.bin</td>
+</tr>
+
+<tr>
+<td class="org-left">hyp_a</td>
+<td class="org-left">hyp.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">keymaster_a</td>
+<td class="org-left">km4.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">logfs</td>
+<td class="org-left">logfs_ufs_8mb.bin</td>
+</tr>
+
+<tr>
+<td class="org-left">logfs</td>
+<td class="org-left">logfs_ufs_8mb.bin</td>
+</tr>
+
+<tr>
+<td class="org-left">mdtp_a</td>
+<td class="org-left">mdtp.img</td>
+</tr>
+
+<tr>
+<td class="org-left">modem_a</td>
+<td class="org-left">NON-HLOS.bin</td>
+</tr>
+
+<tr>
+<td class="org-left">pmic_a</td>
+<td class="org-left">pmic.elf</td>
+</tr>
+
+<tr>
+<td class="org-left">rpm_a</td>
+<td class="org-left">rpm.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left"><b>system_a</b></td>
+<td class="org-left">system.img</td>
+</tr>
+
+<tr>
+<td class="org-left">persist</td>
+<td class="org-left">persist.img</td>
+</tr>
+
+<tr>
+<td class="org-left">userdata</td>
+<td class="org-left">userdata.img</td>
+</tr>
+
+<tr>
+<td class="org-left">storsec</td>
+<td class="org-left">storsec.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">mdtpsecapp</td>
+<td class="org-left">mdtpsecapp.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">tz_a</td>
+<td class="org-left">tz_a.mbn</td>
+</tr>
+
+<tr>
+<td class="org-left">vendor_a</td>
+<td class="org-left">vendor.img</td>
+</tr>
+
+<tr>
+<td class="org-left">xbl_a</td>
+<td class="org-left">xbl.elf</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org92238e4" class="outline-2">
+<h2 id="org92238e4"><span class="section-number-2">2</span> Factory Test</h2>
+<div class="outline-text-2" id="text-2">
+</div>
+<div id="outline-container-org5870410" class="outline-3">
+<h3 id="org5870410"><span class="section-number-3">2.1</span> BT Config</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+For Android O, 先在UI上把BT关掉然后执行
+</p>
+<pre class="example">
+wdsdaemon -su
+
+</pre>
+
+<p>
+然后是btconfig。
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb root
+adb shell setprop qcom.bluetooth.soc pronto
+adb shell setprop ro.qualcomm.bt.hci_transport smd
+wdsdaemon -su <span style="color: #4f97d7;">(</span>no need for Pronto<span style="color: #4f97d7;">)</span>
+</pre>
+</div>
+
+<p>
+open another cmd window
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style="color: #a45bad;">0x0003</span> <span style="color: #4f97d7;">(</span>HCI Reset<span style="color: #4f97d7;">)</span> 
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x06</span> <span style="color: #a45bad;">0x03</span> <span style="color: #4f97d7;">&#65288;</span>Enter Test Mode&#36827;&#20837;&#27979;&#35797;&#27169;&#24335;<span style="color: #4f97d7;">&#65289;</span> 
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style="color: #a45bad;">0x05</span> <span style="color: #a45bad;">0x02</span> <span style="color: #a45bad;">0x00</span> <span style="color: #a45bad;">0x02</span> <span style="color: #4f97d7;">&#65288;</span>Auto Accept All Connections&#33258;&#21160;&#36830;&#25509;<span style="color: #4f97d7;">&#65289;</span> 
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style="color: #a45bad;">0x1A</span> <span style="color: #a45bad;">0x03</span> <span style="color: #4f97d7;">&#65288;</span>Page Inquiry Scans&#25353;&#39029;&#25195;&#25551;<span style="color: #4f97d7;">&#65289;</span> 
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style="color: #a45bad;">0x20</span> <span style="color: #a45bad;">0x00</span> <span style="color: #4f97d7;">&#65288;</span>Disable Authentication&#21462;&#28040;&#35748;&#35777;<span style="color: #4f97d7;">&#65289;</span> 
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style="color: #a45bad;">0x22</span> <span style="color: #a45bad;">0x00</span> <span style="color: #4f97d7;">&#65288;</span>Disable Encryption&#21462;&#28040;&#21152;&#23494;<span style="color: #4f97d7;">&#65289;</span> 
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9fd6a77" class="outline-3">
+<h3 id="org9fd6a77"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
+<div class="outline-text-3" id="text-2-2">
+<div class="org-src-container">
+<pre class="src src-sh"><span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Write BD ADDRR</span>
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x3f</span> <span style="color: #a45bad;">000b</span> <span style="color: #a45bad;">0x01</span> <span style="color: #a45bad;">0x02</span> <span style="color: #a45bad;">0x06</span> <span style="color: #a45bad;">0x00</span> <span style="color: #a45bad;">0x55</span> <span style="color: #a45bad;">0x77</span> <span style="color: #a45bad;">0x77</span> <span style="color: #a45bad;">0x88</span> <span style="color: #a45bad;">0x00</span>
+
+SOC is WCN
+Done intiailizing fd = /dev/smd3
+RAW HCI command: ogf <span style="color: #a45bad;">0x3f</span> ocf <span style="color: #a45bad;">0xb</span>
+Params: <span style="color: #a45bad;">0x1</span> <span style="color: #a45bad;">0x2</span> <span style="color: #a45bad;">0x6</span> <span style="color: #a45bad;">0x0</span> <span style="color: #a45bad;">0x55</span> <span style="color: #a45bad;">0x77</span> <span style="color: #a45bad;">0x77</span> <span style="color: #a45bad;">0x88</span> <span style="color: #a45bad;">0x0</span>
+SEND -&gt; dump :&#160; <span style="color: #a45bad;">0b</span> fc <span style="color: #a45bad;">09</span> <span style="color: #a45bad;">01</span> <span style="color: #a45bad;">02</span> <span style="color: #a45bad;">06</span> <span style="color: #a45bad;">00</span> <span style="color: #a45bad;">55</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">88</span> <span style="color: #a45bad;">00</span>
+Other event received, Breaking
+RECV &lt;- dump :&#160; ff <span style="color: #a45bad;">0a</span> <span style="color: #a45bad;">0b</span> <span style="color: #a45bad;">01</span> <span style="color: #a45bad;">02</span> <span style="color: #a45bad;">06</span> <span style="color: #a45bad;">00</span> <span style="color: #a45bad;">55</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">88</span> <span style="color: #a45bad;">00</span>
+
+<span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Read BD ADDDR</span>
+btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x04</span> <span style="color: #a45bad;">0x0009</span>
+
+SOC is WCN
+Done intiailizing fd = /dev/smd3
+RAW HCI command: ogf <span style="color: #a45bad;">0x4</span> ocf <span style="color: #a45bad;">0x9</span>
+Params:
+SEND -&gt; dump :&#160; <span style="color: #a45bad;">09</span> <span style="color: #a45bad;">10</span> <span style="color: #a45bad;">00</span>
+Other event received, Breaking
+RECV &lt;- dump :&#160; <span style="color: #a45bad;">0e</span> <span style="color: #a45bad;">0a</span> <span style="color: #a45bad;">01</span> <span style="color: #a45bad;">09</span> <span style="color: #a45bad;">10</span> <span style="color: #a45bad;">00</span> <span style="color: #a45bad;">00</span> <span style="color: #a45bad;">55</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">77</span> <span style="color: #a45bad;">88</span> <span style="color: #a45bad;">00</span>
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org17b6bc6" class="outline-2">
+<h2 id="org17b6bc6"><span class="section-number-2">3</span> 高通处理器规格表</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+<a href="http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html">http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html</a>
+</p>
+</div>
+</div>
+
+<div id="outline-container-org736bd3d" class="outline-2">
+<h2 id="org736bd3d"><span class="section-number-2">4</span> Snapdragon Naming Update</h2>
+<div class="outline-text-2" id="text-4">
+
+<div class="figure">
+<p><img src="./images/2018/2018080201.png" alt="2018080201.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgd04b401" class="outline-2">
+<h2 id="orgd04b401"><span class="section-number-2">5</span> Slimbus</h2>
+<div class="outline-text-2" id="text-5">
+</div>
+<div id="outline-container-orge3755a2" class="outline-3">
+<h3 id="orge3755a2"><span class="section-number-3">5.1</span> Architecture</h3>
+<div class="outline-text-3" id="text-5-1">
+
+<div class="figure">
+<p><img src="./images/2018/2018080101.jpg" alt="2018080101.jpg" />
+</p>
+</div>
+</div>
+</div>
+
+
+<div id="outline-container-org47f6926" class="outline-3">
+<h3 id="org47f6926"><span class="section-number-3">5.2</span> Turn on logs</h3>
+<div class="outline-text-3" id="text-5-2">
+<div class="org-src-container">
+<pre class="src src-sh">adb root
+adb wait-for-device remount
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_codec.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_wcn3990.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+
+<span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Important Logs for SCO issue.</span>
+<span style="color: #a45bad;">071376</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.035</span> D/btfm_slim_dai_hw_params<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: dai-&gt;name = btfm_bt_sco_a2dp_slim_rx DAI-ID <span style="color: #a45bad;">2</span> rate <span style="color: #a45bad;">16000</span> num_ch <span style="color: #a45bad;">1</span>&#160; 
+<span style="color: #a45bad;">071401</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.043</span> I/btfm_slim_enable_ch<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: slim_connect_sink<span style="color: #4f97d7;">(</span>port: <span style="color: #a45bad;">16,</span> ch: <span style="color: #a45bad;">157</span><span style="color: #4f97d7;">)</span>&#160; 
+<span style="color: #a45bad;">071567</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.102</span> D/btfm_slim_dai_prepare<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: dai-&gt;name: btfm_bt_sco_slim_tx, dai-&gt;id: <span style="color: #a45bad;">1,</span> dai-&gt;rate: <span style="color: #a45bad;">16000</span>&#160; 
+<span style="color: #a45bad;">071587</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.106</span> I/btfm_slim_chrk_enable_port<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: programming SCO Tx with reg_val <span style="color: #a45bad;">3</span> to reg <span style="color: #a45bad;">0x50</span>&#160; 
+<span style="color: #a45bad;">071593</span> <span style="color: #a45bad;">07-06</span> <span style="color: #a45bad;">20:51:13.107</span> I/btfm_slim_enable_ch<span style="color: #4f97d7;">(</span> <span style="color: #a45bad;">0</span><span style="color: #4f97d7;">)</span>: slim_connect_src<span style="color: #4f97d7;">(</span>port: <span style="color: #a45bad;">0,</span> ch: <span style="color: #a45bad;">161</span><span style="color: #4f97d7;">)</span>&#160; 
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell echo -n <span style="color: #2d9574;">"file bluetooth-power.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm_serial_hs.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm-ctrl.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm-ngd.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file slim-msm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_codec.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file btfm_slim_wcn3990.c +pf"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6adm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6afe.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6asm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file q6voice.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file soc-dapm.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-voip-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-routing-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-voice-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control 
+adb shell echo -n <span style="color: #2d9574;">"file msm-pcm-q6-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msm-dai-q6-v2.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file msmcobalt.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+adb shell echo -n <span style="color: #2d9574;">"file voice_svc.c +p"</span> <span style="color: #2d9574;">"&gt;"</span> /sys/kernel/debug/dynamic_debug/control
+</pre>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org7372db9" class="outline-2">
+<h2 id="org7372db9"><span class="section-number-2">6</span> Uart ipc logs</h2>
+<div class="outline-text-2" id="text-6">
+<div class="org-src-container">
+<pre class="src src-sh">&lt;for SDM845 UART IPC&gt;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_misc/log_cont &gt;&gt; /sdcard/uart_misc.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_pwr/log_cont &gt;&gt; /sdcard/uart_pwr.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_tx/log_cont &gt;&gt; /sdcard/uart_tx.ipc &amp;&#160;
+&gt; cat /d/ipc_logging/898000.qcom,qup_uart_rx/log_cont &gt;&gt; /sdcard/uart_rx.ipc &amp; 
+</pre>
+</div>
+
+<p>
+一般客户在sdm845上都是用898000这个uart连接BT， 所以上面路径就可以.
+</p>
+</div>
+</div>
+
+<div id="outline-container-org56e09fb" class="outline-2">
+<h2 id="org56e09fb"><span class="section-number-2">7</span> BT</h2>
+<div class="outline-text-2" id="text-7">
+</div>
+<div id="outline-container-org3a31500" class="outline-3">
+<h3 id="org3a31500"><span class="section-number-3">7.1</span> Split A2DP Common feature Turn On/Off</h3>
+<div class="outline-text-3" id="text-7-1">
+<ol class="org-ol">
+<li>Set “AUDIO_FEATURE_ENABLED_SPLIT_A2DP := false” in
+“hardware/qcom/audio/configs/sdmxxx/sdmxxx.mk” then build software.</li>
+
+<li>File case to Audio team to get the corresponding non-split A2DP
+&lt;audio_policy_configuration.xml&gt; file for your platform</li>
+
+<li><p>
+Run the following commands. 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb push audio_policy_configuration.xml&#160; /system/etc/audio_policy_configuration.xml
+adb shell setprop persist.bt.enable.splita2dp false
+adb shell setprop persist.vendor.bt.enable.splita2dp false  <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">new add.</span>
+adb shell setprop persist.bt.a2dp_offload_cap false
+adb shell setprop persist.vendor.bt.a2dp_offload_cap false
+adb shell sync
+adb reboot
+</pre>
+</div></li>
+</ol>
+</div>
+</div>
+
+
+
+<div id="outline-container-orgc85290e" class="outline-3">
+<h3 id="orgc85290e"><span class="section-number-3">7.2</span> Disable BT Soc Logging</h3>
+<div class="outline-text-3" id="text-7-2">
+<p>
+To disable SoC logging please make the below change @
+vendor/qcom/proprietary/bluetooth/hidl_transport/bt/1.0/default/patch_dl_manager.cpp? 
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ce537a; font-weight: bold;">void</span> <span style="color: #a45bad;">PatchDLManager</span>::<span style="color: #bc6ec5; font-weight: bold;">EnableControllerLog</span><span style="color: #4f97d7;">()</span> 
+<span style="color: #4f97d7;">{</span> 
+<span style="color: #bc6ec5;">#ifdef</span> USER_DEBUG 
+  <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">value at cmd[5]: 1 - to enable, 0 - to disable </span>
+  cmd<span style="color: #bc6ec5;">[</span><span style="color: #a45bad;">5</span><span style="color: #bc6ec5;">]</span> = <span style="color: #a45bad;">0x00</span>; <span style="color: #2aa1ae; background-color: #292e34;">// </span><span style="color: #2aa1ae; background-color: #292e34;">please change it to 0 </span>
+<span style="color: #bc6ec5;">#else</span> 
+
+    ......
+<span style="color: #4f97d7;">}</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org93b09b8" class="outline-3">
+<h3 id="org93b09b8"><span class="section-number-3">7.3</span> QDID Listings</h3>
+<div class="outline-text-3" id="text-7-3">
+<ul class="org-ul">
+<li><p>
+Stack and Profile
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21772">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21772</a>
+</p></li>
+
+<li><p>
+MSM™ chipset
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=20783">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=20783</a>
+</p>
+
+<p>
+(for WCN3620)
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21332">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21332</a>
+</p>
+
+<p>
+(for WCN3660, WCN3680)
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=18867">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=18867</a>
+</p></li>
+
+<li>QCA chipset
+
+<ul class="org-ul">
+<li><p>
+Controller
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22591">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22591</a>
+</p></li>
+
+<li><p>
+RF
+</p>
+
+<p>
+<a href="https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22590">https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22590</a>
+</p></li>
+</ul></li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-org2b0c9ef" class="outline-3">
+<h3 id="org2b0c9ef"><span class="section-number-3">7.4</span> APQ8909(WCN36XX)</h3>
+<div class="outline-text-3" id="text-7-4">
+<ul class="org-ul">
+<li><p>
+Bluetooth/FM HCI-SMD Interface 
+</p>
+
+
+<div class="figure">
+<p><img src="./images/2018/2018080102.png" alt="2018080102.png" />
+</p>
+</div></li>
+
+<li>Between cCPU and aCPU
+
+<ul class="org-ul">
+<li>Two SMD channels are used for Bluetooth HCI commands and events, HCI ACL
+data transfers</li>
+
+<li>One SMD channel for FM control commands and events</li>
+
+<li>One SMD channel for the WCN-SS debug logging shared by WLAN, Bluetooth,
+and FM</li>
+</ul></li>
+
+<li>Property <code>ro.qualcomm.bt.hci_transport: smd</code> is set only for PRONTO.</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-orgefe82bc" class="outline-3">
+<h3 id="orgefe82bc"><span class="section-number-3">7.5</span> Enable/disable Bluetooth</h3>
+<div class="outline-text-3" id="text-7-5">
+<p>
+one way to enable/disable BT with adb shell. It is just same as operation from GUI.
+Details is as follows:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call
+service: No code specified for call
+Usage: service <span style="color: #4f97d7;">[</span>-h|-?<span style="color: #4f97d7;">]</span>
+&#160;&#160;&#160;&#160;&#160;&#160; service list
+&#160;&#160;&#160;&#160;&#160;&#160; service check SERVICE
+&#160;&#160;&#160;&#160;&#160;&#160; service call SERVICE CODE <span style="color: #4f97d7;">[</span>i32 N | i64 N | f N | d N | s16 STR <span style="color: #4f97d7;">]</span> ...
+Options:
+&#160;&#160; i32: Write the <span style="color: #a45bad;">32-bit</span> integer N into the send parcel.
+&#160;&#160; i64: Write the <span style="color: #a45bad;">64-bit</span> integer N into the send parcel.
+&#160;&#160; f:&#160;&#160; Write the <span style="color: #a45bad;">32-bit</span> single-precision number N into the send parcel.
+&#160;&#160; d:&#160;&#160; Write the <span style="color: #a45bad;">64-bit</span> double-precision number N into the send parcel.
+&#160;&#160; s16: Write the UTF-16 string STR into the send parcel.
+
+</pre>
+</div>
+
+<p>
+The <code>CODE</code> means sequence number of function in the AIDL file: 
+</p>
+
+<p>
+frameworks/base/core/java/android/bluetooth/IBluetoothManager.aidl
+</p>
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #ce537a; font-weight: bold;">interface</span> <span style="color: #7590db;">IBluetoothManager</span>
+<span style="color: #4f97d7;">{</span>
+  &#160;&#160;&#160; IBluetooth registerAdapter<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothManagerCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unregisterAdapter<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothManagerCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> registerStateChangeCallback<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothStateChangeCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unregisterStateChangeCallback<span style="color: #bc6ec5;">(</span>in <span style="color: #ce537a; font-weight: bold;">IBluetoothStateChangeCallback</span> <span style="color: #7590db;">callback</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean isEnabled<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; boolean enable<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean enableNoAutoConnect<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean disable<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span>, <span style="color: #ce537a; font-weight: bold;">boolean</span> <span style="color: #7590db;">persist</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160;<span style="color: #ce537a; font-weight: bold;">int</span> getState<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; IBluetoothGatt getBluetoothGatt<span style="color: #bc6ec5;">()</span>;
+  &#160;
+        &#160;&#160;&#160; boolean bindBluetoothProfileService<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">profile</span>, <span style="color: #ce537a; font-weight: bold;">IBluetoothProfileServiceConnection</span> <span style="color: #7590db;">proxy</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">void</span> unbindBluetoothProfileService<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">int</span> <span style="color: #7590db;">profile</span>, <span style="color: #ce537a; font-weight: bold;">IBluetoothProfileServiceConnection</span> <span style="color: #7590db;">proxy</span><span style="color: #bc6ec5;">)</span>;
+  &#160;
+        &#160;&#160;&#160; String getAddress<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; String getName<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; boolean factoryReset<span style="color: #bc6ec5;">()</span>;
+  &#160;
+        &#160;&#160;&#160; boolean isBleScanAlwaysAvailable<span style="color: #bc6ec5;">()</span>;
+  &#160;&#160;&#160; <span style="color: #ce537a; font-weight: bold;">int</span> updateBleAppCount<span style="color: #bc6ec5;">(</span><span style="color: #ce537a; font-weight: bold;">IBinder</span> <span style="color: #7590db;">b</span>, <span style="color: #ce537a; font-weight: bold;">boolean</span> <span style="color: #7590db;">enable</span>, <span style="color: #ce537a; font-weight: bold;">String</span> <span style="color: #7590db;">packageName</span><span style="color: #bc6ec5;">)</span>;
+  &#160;&#160;&#160; boolean isBleAppPresent<span style="color: #bc6ec5;">()</span>;
+<span style="color: #4f97d7;">}</span>
+
+</pre>
+</div>
+
+<p>
+Since Android N and Android O has different interface, there are difference command.
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call bluetooth_manager <span style="color: #a45bad;">8</span>
+adb shell service call bluetooth_manager <span style="color: #a45bad;">10</span>
+</pre>
+</div>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell service call bluetooth_manager <span style="color: #a45bad;">6</span> s16 <span style="color: #2d9574;">"com.android.bluetooth"</span> <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Enable</span>
+adb shell service call bluetooth_manager <span style="color: #a45bad;">8</span> s16 <span style="color: #2d9574;">"com.android.bluetooth"</span> <span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Disablle</span>
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-org9f660c8" class="outline-3">
+<h3 id="org9f660c8"><span class="section-number-3">7.6</span> Power Class Adjustment</h3>
+<div class="outline-text-3" id="text-7-6">
+<p>
+for pronto, power class can  be changed in the source code. 
+</p>
+
+<p>
+@vendor/qcom/proprietary/bluetooth/hidl_transport/bt/1.0/default/nvm_tags_manager.cpp
+</p>
+
+<div class="org-src-container">
+<pre class="src src-c++"><span style="color: #a45bad;">98</span>&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Tag 36 */</span>&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">External Power Configuration */</span>
+<span style="color: #a45bad;">99</span>&#160;&#160;&#160;&#160;<span style="color: #4f97d7;">{</span>&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Opcode */</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0x0b</span>,<span style="color: #a45bad;">0xfc</span>,
+<span style="color: #a45bad;">100</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Total Len */</span>&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0x0F</span>,
+<span style="color: #a45bad;">101</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">NVM CMD */</span>&#160;&#160;&#160;&#160;&#160;&#160;NVM_ACCESS_SET,
+<span style="color: #a45bad;">102</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Tag Num */</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0x24</span>,
+<span style="color: #a45bad;">103</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Tag Len */</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0x0C</span>,
+<span style="color: #a45bad;">104</span>&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #2aa1ae; background-color: #292e34;">/* </span><span style="color: #2aa1ae; background-color: #292e34;">Tag Value */</span>&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0xFF</span>,&#160;<span style="color: #a45bad;">0x03</span>,&#160;<span style="color: #a45bad;">0x07</span>,&#160;<span style="color: #a45bad;">0x09</span>,&#160;<span style="color: #a45bad;">0x09</span>,&#160;<span style="color: #a45bad;">0x09</span>,&#160;<span style="color: #a45bad;">0x00</span>,&#160;<span style="color: #a45bad;">0x00</span>,
+<span style="color: #a45bad;">105</span>&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;&#160;<span style="color: #a45bad;">0x09</span>,&#160;<span style="color: #a45bad;">0x09</span>,&#160;<span style="color: #a45bad;">0x04</span>,&#160;<span style="color: #a45bad;">0x00</span>
+<span style="color: #a45bad;">106</span>&#160;&#160;&#160;&#160;<span style="color: #4f97d7;">}</span>, 
+</pre>
+</div>
+
+<p>
+for Cheroke, we should change the value in the crnv21.bin file. 
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-orgaff5a38" class="outline-2">
+<h2 id="orgaff5a38"><span class="section-number-2">8</span> Pronto(WCN36XX)</h2>
+<div class="outline-text-2" id="text-8">
+</div>
+<div id="outline-container-orga77dbf1" class="outline-3">
+<h3 id="orga77dbf1"><span class="section-number-3">8.1</span> WCN36x0 Architecture</h3>
+<div class="outline-text-3" id="text-8-1">
+
+<div class="figure">
+<p><img src="./images/2018/2018080103.png" alt="2018080103.png" />
+</p>
+</div>
+
+<p>
+To update WCNSS firmware images during debugging/development stage
+</p>
+
+<div class="org-src-container">
+<pre class="src src-sh">adb shell mount &#8211;o remount &#8211;w /firmware
+adb push <span style="color: #4f97d7;">{</span>firmware images<span style="color: #4f97d7;">}</span> /firmware/image
+adb shell sync;reboot
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="./images/2018/2018080104.png" alt="2018080104.png" />
+</p>
+<p><span class="figure-number">Figure 5: </span>WCN-SS High-Level Software Diagram</p>
+</div>
+
+<ul class="org-ul">
+<li>Device Adaptation Layer (DAL)
+
+<ul class="org-ul">
+<li>DAL is a SW framework to provide the common API for the platform agnostic</li>
+
+<li>A common shim layer that provides DALs access to the OS services in a way
+that is OS neutral</li>
+
+<li>The implementation of the DALSysis OS dependent however that is
+transparent to the DALSysusers</li>
+
+<li>Simple and efficient, scalable to the environment</li>
+
+<li>It decouples the stacks from the low level microkernel running on WCNSS
+cCPU</li>
+
+<li>DALSys provides the basic necessary OS services that the connectivity
+software need: DAL interrupt controller, DAL Timer, and DAL timetick</li>
+</ul></li>
+
+<li>CoreBSP –DALSys / REX
+
+<ul class="org-ul">
+<li>DALSys
+
+<ul class="org-ul">
+<li>A common shim layer that provides DAL access to the OS services in a
+way that is OS-neutral</li>
+
+<li>The implementation of the DALSys is OS-dependent; however, that is
+transparent to DALSysusers.</li>
+
+<li>Decoupling the stacks from the low-level microkernel running on the
+cCPU can help maximize portability of WLAN, Bluetooth, and FM modules.</li>
+</ul></li>
+
+<li>Kernel Services provided by DALSys
+
+<ul class="org-ul">
+<li>Synchronization (interrupt, mutexor critical sections)</li>
+
+<li>Events and callbacks</li>
+
+<li>Memory and cache operations</li>
+
+<li>Physical memory manipulation</li>
+
+<li>Shared execution contexts Workloops(shared threads)</li>
+</ul></li>
+
+<li>The underlying RTOS for DALSysis REX
+
+<ul class="org-ul">
+<li>REX is small (~4K), highly predictable (executed code is well defined),
+low latency in interrupt processing and can bring all the services that
+WCNSS needs.</li>
+</ul></li>
+
+<li>The core BT SOC software functionalities are divided in below major
+Software modules.
+
+<ul class="org-ul">
+<li><p>
+HIF TASK
+</p>
+
+<p>
+This task is responsible for providing the HCI interface between BT
+Host software and BT Firmware. It implements the HCI driver for the
+various transports like UART and or SMD and provides a complete
+abstract HCI Statemachine (using Platform Abstraction Layer -PFAL)
+which can handle the HOST/BTSOC HCI commands/events and ACL data over
+the HCI transport driver.
+</p></li>
+
+<li><p>
+LLM TASK
+</p>
+
+<p>
+This is the core of the Bluetooth Firmware which is responsible for
+maintaining the Bluetooth Link and its control. This task is
+responsible for creating and maintaining all logical links like ACL-C,
+SCO/eSCO and implements Link Manager Protocol of BR/EDR and Link Layer
+Protocol for LE physical links. It interfaces mainly with HIF using
+message queues to exchange data and operate on the commands and
+responses.
+</p></li>
+
+<li><p>
+Audio Codec Subsystem
+</p>
+
+<p>
+This module runs under ISR context and handles LPASS, LC and Timer
+interrupts to provide the encoding/decoding the voice PCM data to be
+RX/TX over the SCO/eSCO logical transports. It supports of CVSD/MSBC
+(voice) and SBC (music) decoder. At present, this module mainly targets
+the Voice and FM data transfer to and from LPASS using CMEM memory
+controller.
+</p></li>
+
+<li><p>
+BT Scheduler/Dispatcher
+</p>
+
+<p>
+The core module to dispatch and schedule BT Baseband packets delivered
+from LLM or HIF task. This module runs in ISR context and mainly
+handles the LC hardware interrupts to process and schedule next packet
+to transmit. For this scheduling, it manages various priority queues
+for all Bluetooth Physical Channels (PAGE, INQUIRY, BR, EDR etc.). The
+scheduling is always driven based on Bluetooth Native clock and with
+slot intervals (half or full) of 625us. The packets to be transmitted
+can be queued by various modules along with their priority. On every
+slot based interrupts, the scheduler de queues them and readies it for
+TX operation.
+</p></li>
+
+<li><p>
+LC State Machine
+</p>
+
+<p>
+This interface is mainly responsible to drive and control the BT LC
+hardware block or we can say that it is software Link Controller. It
+tries to mimic the LC hardware states and allows the BT firmware to
+program and access the LC registers required for any BT RF TX and TX
+and to know the current Hardware LC states. It runs under real time
+bound interrupts like Pre-slot, LC Done, CLK Comparator to provide the
+LC functionality to the BT firmware. The LC hardware block provides
+various memory addressable LC registers which can be configured to get
+the Baseband Data transfer. The LC block directly connects to Bluetooth
+Baseband Modem and radio interface. 
+</p></li>
+</ul></li>
+</ul></li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Fu Yajun</p>
+<p class="date">Created: 2018-08-12 Sun 12:18</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

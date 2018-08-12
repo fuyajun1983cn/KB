@@ -1,5 +1,15 @@
-#+TITLE:文章索引
+#+TITLE: 文档索引
+#+OPTIONS: toc:nil
 
-- [[./qc-kb.html][QC平台知识库]]
+#+BEGIN_EXAMPLE
+ 不积跬步,无以至千里;不积小流,无以成江海
+                                                      —— 荀子《劝学篇》.
+#+END_EXAMPLE
+* 2018
+** TODO [[./bluetooth/bt-cases.html][高通平台蓝牙问题集锦]]                                      :Bluetooth:
 
-- [[./bt-cases.html][Bluetooth Case Lists]]
+** TODO [[./bluetooth/qc-kb.html][高通平台相关信息]]                                          :Bluetooth:
+
+** TODO [[./software/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Android学习笔记]]                                             :Android:
+* 2017
+

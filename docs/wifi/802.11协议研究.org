@@ -1,0 +1,119 @@
+#+STARTUP: overview
+#+STARTUP: hidestars
+#+TITLE: 802.11协议研究
+#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
+#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
+
+
+
+* 802.11协议概况
+
+** 各种协议标准对比
+
+    [[./images/2016/2016072901.jpg]]
+
+
+http://www.theruckusroom.net/2015/05/all-other-factors-of-which-there-are-many-being-equal-stronger-signal-strength-is-correlated-with-higher-data-transfer-sp.html
+
+*** 802.11z
+        Tunneled Direct Link Setup (TDLS), which enables direct device
+        to device communication but requires stations to be associated
+        with the same AP. 
+
+** 聚合帧
+    http://support.huawei.com/ecommunity/bbs/10216793.html
+
+* 常见帧格式深入研究
+
+** 管理帧
+*** Beacon帧
+    
+** 控制帧
+
+*** EOSP
+         uapsd,  end of Service Period to tell STA it can go to sleep.
+         trigger frame: QoS data or QoS Null frame associated with an
+         AC the STA has configured to be trigger-enabled.
+** 数据帧
+* 理论基础
+** QAM
+    http://community.arubanetworks.com/t5/Technology-Blog/What-is-QAM/ba-p/114747
+** 802.11 State Machine
+   It consists of the four states of client connectivity during a
+   session.
+   - State 1
+    In State 1 the client is Unauthenticated and
+    Unassociated. Clients in this state are passing Class 1 frames
+    and contain the following frames:
+     * Control frames
+     * Management frames
+     * Data frames
+       + Data frames between STAs and IBSS
+       + Data frames between peers using DLS
+   要想离开状态1,需要执行一次成功的论证。
+
+   - State 2
+     In State 2 the client is Authenticated but Unassociated. 802.11
+     Authentication是指Open or Shared Key， 而不是执行802.1X or PSK
+     authentication。
+     如果论证成功，则进入State 3,否则退回到State 1. 这阶段论证通过只代
+     表双方同意进一步交流。
+   - State 3
+     In State 3 the client is Authenticated and Associated.  我们已经
+     成功关联到AP，但是RSN论证还会进行（802.1X）。此时，允许如下帧通过：
+     + Data frames (all)
+     + Management frames
+     + Control frames
+       在此状态中，有三种方式离开：disassociation, deauthentication,
+       and 802.1X port control unblocked. 
+       If the client disassociates they will drop to State 2,
+       deauthentication will drop to State 1. Having a successful
+       802.1X authorization moves to State 4.
+   - State 4
+     在此状态，完成了4步握手，所有的数据都能够通过。
+
+    [[./images/2016/2016093001.png]]
+** 一些扫描行为
+    1. Active scan
+       - Directed probe
+         The client sends a probe request with a specific destination
+         SSID; only APs with a matching SSID will reply with a probe
+         response
+       - Broadcast probe
+         The client sends a broadcast SSID (actually a null SSID) in
+         the probe request; all APs receiving the probe-request will
+         respond, with a probe-response for each SSID they support.
+
+    2. Passive scan
+       Passive scanning is performed by simply changing the clients
+       IEEE 802.11 radio tothe channel being scanned and waiting for a
+       periodic beacon from any APs on that channel. 
+
+
+    During a channel scan, the client is unable to transmit or receive
+    client data traffic.There are a number of approaches clients take
+    to minimize this impact to client data traffic:
+    1. Background scanning
+       Clients may scan available channels before they need to
+       roam. This allows them to build-up knowledge of the RF
+       environment and available APs so they may roam faster if it
+       becomes necessary. Impact to client traffic can be minimized by
+       only scanning when the client is not actively transmitting
+       data, or by periodically scanning only a single alternate
+       channel at a time (scanning a single channel incurs minimal
+       data loss)
+
+       The term "background" is quite misleading and many people
+       thought that the hardware will somehow scan without having an
+       effect on the transfer rate. This is certainly not true. In
+       cases where scanning causes problems a second radio is needed
+
+    2. On-roam scanning
+       In contrast with background, on-roam scanning occurs after a
+       roam has been determined necessary. Each vendor/device may
+       implement its own algorithms to minimize the roam latency and
+       the impact to data traffic. For example, some clients might
+       only scan the non-overlapping channels.
+
+
+   
