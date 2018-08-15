@@ -1,12 +1,10 @@
-#+STARTUP: overview
-#+STARTUP: hidestars
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
-
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: CWNA学习笔记
+#+OPTIONS: ^:{} 
 
 * 内容导读
 
-  [[./images/2016/CWNA内容导图.svg]]
+  [[../images/2016/CWNA内容导图.svg]]
 
 * 第一章 无线标准、组织和基础概述  
 ** 要点记录
@@ -1015,7 +1013,7 @@
    Transmitter --> Antenna Cable --> Intentional radiator(IR) --> EIRP
 
    #+CAPTION: RF components
-   [[./images/2015/2015120202.png]]
+   [[../images/2015/2015120202.png]]
       
 *** Transmitter(发射机)
 
@@ -3511,7 +3509,7 @@
    帧，就会假设发送失败，之后会对该帧进行重传。 
 
    #+CAPTION: Unicast acknowledgment
-   [[./images/2015/2015113049.png]]
+   [[../images/2015/2015113049.png]]
 
 ** Distributed Coordination Function
 
@@ -3542,7 +3540,7 @@
     上述的帧间间隔实际的时间大小取决于网络的传输速度。 
 
     #+CAPTION: SIFS and DIFS
-    [[./images/2015/2015113050.png]]
+    [[../images/2015/2015113050.png]]
 
 *** Duration/ID Field
 
@@ -3572,7 +3570,7 @@
        问权。 
 
        #+CAPTION: Virtual carrier sense
-       [[./images/2015/2015113051.png]]
+       [[../images/2015/2015113051.png]]
 
     2. 物理载波侦听。
 
@@ -3613,7 +3611,7 @@
     6. The station transmits if the medium is clear.
 
     #+CAPTION: Contention window length
-    [[./images/2015/2015113052.png]]
+    [[../images/2015/2015113052.png]]
     
 ** Point Coordination Function
 
@@ -4110,7 +4108,7 @@
        组成部分如下图所示 ，其中Frame Body可能被加密。
 
        #+CAPTION: 802.11 MPDU
-       [[./images/2015/2015120101.png]]
+       [[../images/2015/2015120101.png]]
        
 ** Physical Layer
 
@@ -4137,7 +4135,7 @@
        数据链路层到物理层流通的过程：
 
        #+CAPTION: Data-Link and Physical layers
-       [[./images/2015/2015120102.png]]
+       [[../images/2015/2015120102.png]]
        
 ** 802.11 and 802.3 Interoperability
 
@@ -4224,21 +4222,21 @@
      可用于STA与AP之间的同步， Beacon帧的主要信息如下图所示：
 
      #+CAPTION: Beacon frame contents
-     [[./images/2015/2015120103.png]]
+     [[../images/2015/2015120103.png]]
 
 **** Passive Scanning
      
         在被动扫描中，STA监听从AP发送过来的Beacon帧。
         
         #+CAPTION: Passive scanning
-        [[./images/2015/2015120104.png]]
+        [[../images/2015/2015120104.png]]
 
 **** Active Scanning
 
         STA主动发送Probe Request请求，然后监控AP的Probe Response帧。
 
         #+CAPTION: Active scanning
-        [[./images/2015/2015120105.png]]
+        [[../images/2015/2015120105.png]]
 
 ** Authentication
 
@@ -4288,7 +4286,7 @@
 *** Authentication and Association States
 
       #+CAPTION: Authentication and association states
-      [[./images/2015/2015120201.png]]
+      [[../images/2015/2015120201.png]]
       
 *** Basic and Supported Rates
 
@@ -4320,7 +4318,7 @@
       个AP。
 
       #+CAPTION: Reassociation process
-      [[./images/2015/2015120203.png]]
+      [[../images/2015/2015120203.png]]
 
 *** Disassociation
 
@@ -4348,7 +4346,7 @@
      数据传输错误率较高的情况下，数据帧分片则会改善网络吞吐量。
 
      #+CAPTION: Frame fragmentation
-     [[./images/2015/2015120204.png]]
+     [[../images/2015/2015120204.png]]
 
 ** Protection Mechanism
 
@@ -4454,14 +4452,14 @@
 *** WMM Power Save and U-APSD
 
        #+CAPTION: Legacy power management
-       [[./images/2015/2015120801.png]]
+       [[../images/2015/2015120801.png]]
 
 
        WMM-PS uses a trigger mechanism to receive buffered unicast
        traffic based on WMM access categories.
 
        #+CAPTION: WMM-PS
-       [[./images/2015/2015120802.png]]
+       [[../images/2015/2015120802.png]]
 
        The advantages of this enhanced power-management method include
        the following:
@@ -5838,12 +5836,12 @@
       128-位WEP加密使用104-位静态密钥加上一个24-位的IV。
 
       #+CAPTION: Static WEP encryption key and initialization vector
-      [[./images/2015/2015121001.png]]
+      [[../images/2015/2015121001.png]]
 
       =WEP的工作过程=
       
       #+CAPTION: WEP encryption process
-      [[./images/2015/2015121002.png]]
+      [[../images/2015/2015121002.png]]
 
       1. WEP runs a cyclic redundancy check (CRC) on the plaintext
          data that is to be encrypted and then appends the integrity
@@ -5890,7 +5888,7 @@
      CCMP/AES是默认的加密方法，TKIP/RC4是可选的加密方法。
 
      #+CAPTION: Security standards and certifications comparison
-     [[./images/2015/2015121003.png]]
+     [[../images/2015/2015121003.png]]
         
 *** Robust security network (RSN)
 
@@ -5947,7 +5945,7 @@
        个设备拥有唯一的PSK。
 
        #+CAPTION: Proprietary PSK
-       [[./images/2015/2015121004.png]]
+       [[../images/2015/2015121004.png]]
      
 *** 802.1X/EAP framework
 
@@ -5962,7 +5960,7 @@
       encryption.
 
       #+CAPTION: 802.1X/EAP authentication
-      [[./images/2015/2015121005.png]]
+      [[../images/2015/2015121005.png]]
 
 *** Dynamic encryption-key generation
 
@@ -6016,7 +6014,7 @@
       while communicating through a single access point.
 
       #+CAPTION: Wireless VLANs
-      [[./images/2015/2015121006.png]]
+      [[../images/2015/2015121006.png]]
 
 *** RBAC
 
@@ -6053,10 +6051,10 @@
 *** VPN deployment
 
        #+CAPTION: VPN established from a public hotspot
-       [[./images/2016/2016082401.png]]
+       [[../images/2016/2016082401.png]]
 
        #+CAPTION: Site-to-site VPN
-       [[./images/2016/2016082402.png]]
+       [[../images/2016/2016082402.png]]
     
 
 *** Guest WLAN security
@@ -6644,7 +6642,7 @@
      空间利用和差异化技术是利用多径的重要技术。
 
      #+CAPTION: MIMO operation and multipath
-     [[./images/2015/2015121101.png]]
+     [[../images/2015/2015121101.png]]
 
 *** Radio chains
 
@@ -6657,7 +6655,7 @@
       2X3MIMO系统代表有三个Radio Chain由2个发送端和3个接收端使用。
 
       #+CAPTION: 2×3 and 3×3 MIMO
-      [[./images/2015/2015121102.png]]
+      [[../images/2015/2015121102.png]]
 
 *** Spatial multiplexing (SM)
 
@@ -6681,7 +6679,7 @@
       接收唯一的数据流数量。
 
       #+CAPTION: Multiple spatial streams
-      [[./images/2015/2015121103.png]]
+      [[../images/2015/2015121103.png]]
 
       当一个STA加入一个BSS时，STA会将MIMO能力信息告知给AP。
 
@@ -6730,15 +6728,15 @@
         non-HT OFDM channel.
 
         #+CAPTION: 20 MHz non-HT (802.11a/g) channel
-        [[./images/2015/2015121104.png]]
+        [[../images/2015/2015121104.png]]
 
         #+CAPTION: 20 MHz HT (802.11n) channel
-        [[./images/2015/2015121105.png]]
+        [[../images/2015/2015121105.png]]
 
 *** 40 MHz channels
 
         #+CAPTION: 40 MHz HT (802.11n) channel
-        [[./images/2015/2015121106.png]]
+        [[../images/2015/2015121106.png]]
 
         40MHz的信道是由两个相邻的20MHz信道合并的，其中一个为主信道，另
         一个为辅信道。
@@ -6774,7 +6772,7 @@
        多不超过200 ns. Guard interval通常是2到4倍delay spread的大小。
 
        #+CAPTION: Guard interval
-       [[./images/2015/2015121107.png]]
+       [[../images/2015/2015121107.png]]
        
        GI的主要作用是防止 =Inter symbol inerference=.
     
@@ -6793,7 +6791,7 @@
        （MPDU），并通知接收方当前传输MPDU使用的MCS（速率）。 
 
        #+CAPTION: 802.11n PPDU formats
-       [[./images/2015/2015121108.png]]
+       [[../images/2015/2015121108.png]]
 
 *** Non-HT legacy
 
@@ -6830,7 +6828,7 @@
        第一种方法是： /Aggregate MAC Service Data Unit(A-MSDU)/ 。 
 
        #+CAPTION: A-MSDU
-       [[./images/2015/2015121109.png]]
+       [[../images/2015/2015121109.png]]
      
 *** A-MPDU
 
@@ -6838,7 +6836,7 @@
       MAC Protocol Data Unit (A-MPDU)/.
 
       #+CAPTION: A-MPDU
-      [[./images/2015/2015121110.png]]
+      [[../images/2015/2015121110.png]]
 
 *** Block Acknowledgment
 
@@ -7395,7 +7393,7 @@
 
    与802.11n对比情况如下：
 
-   [[./images/2016/2016042601.png]]
+   [[../images/2016/2016042601.png]]
 
 ** 5 GHz only
    802.11ac由于支持更高的带宽，所以只能工作在5G频段上。
@@ -7406,7 +7404,7 @@
    由两个相邻的20MHz信道组合而成，80MHz带宽信道是由两个相邻的40MHz信
    道组合而成，160MHz是由两个相邻或独立的两个80MHz信道构成。
 
-   [[./images/2016/2016042602.png]]
+   [[../images/2016/2016042602.png]]
 
    对于11n设备，当他们使用40MHz带宽传输数据时，必须等待Primary Channel
    和Secondary Channel都空闲的情况下，才能进行数据传输。显然会影响11n
@@ -7426,7 +7424,7 @@
    
    11ac只定义了10个MCS选项，前8个是必须实现的。
    
-   [[./images/2016/2016042603.png]]
+   [[../images/2016/2016042603.png]]
 
    The last column represents the maximum achievable data rate for
    each MCS. The data rate is based on a 20 MHz wide channel, a single 
@@ -7485,7 +7483,7 @@
        matrix that is used to direct the data transmission to the
        beamformee.
 
-    [[./images/2016/2016042604.png]]
+    [[../images/2016/2016042604.png]]
 
 *** Multiuser MIMO
     The goal of MU-MIMO is to use as many spatial streams as possible,

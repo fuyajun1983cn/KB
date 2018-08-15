@@ -3,7 +3,7 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-08-12 Sun 12:18 -->
+<!-- 2018-08-12 Sun 13:02 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>QC平台知识库 for BT codec issue for general issue Android N Android O</title>
@@ -240,52 +240,52 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#orgc76a4fc">1. Burn Image</a>
+<li><a href="#orgc848cc1">1. Burn Image</a>
 <ul>
-<li><a href="#orgd09c23b">1.1. Flash QRD</a></li>
-<li><a href="#orgb512d7a">1.2. Update an Image part</a></li>
+<li><a href="#orgdb8ce72">1.1. Flash QRD</a></li>
+<li><a href="#orgaf09b6b">1.2. Update an Image part</a></li>
 </ul>
 </li>
-<li><a href="#org92238e4">2. Factory Test</a>
+<li><a href="#orgc908295">2. Factory Test</a>
 <ul>
-<li><a href="#org5870410">2.1. BT Config</a></li>
-<li><a href="#org9fd6a77">2.2. 工程模式下写入和读取BD  ADDR</a></li>
+<li><a href="#orge91a0a0">2.1. BT Config</a></li>
+<li><a href="#orgc2d8680">2.2. 工程模式下写入和读取BD  ADDR</a></li>
 </ul>
 </li>
-<li><a href="#org17b6bc6">3. 高通处理器规格表</a></li>
-<li><a href="#org736bd3d">4. Snapdragon Naming Update</a></li>
-<li><a href="#orgd04b401">5. Slimbus</a>
+<li><a href="#orga1985a7">3. 高通处理器规格表</a></li>
+<li><a href="#orga1e5b1b">4. Snapdragon Naming Update</a></li>
+<li><a href="#org95e4e8c">5. Slimbus</a>
 <ul>
-<li><a href="#orge3755a2">5.1. Architecture</a></li>
-<li><a href="#org47f6926">5.2. Turn on logs</a></li>
+<li><a href="#orgbbd00e0">5.1. Architecture</a></li>
+<li><a href="#org824055f">5.2. Turn on logs</a></li>
 </ul>
 </li>
-<li><a href="#org7372db9">6. Uart ipc logs</a></li>
-<li><a href="#org56e09fb">7. BT</a>
+<li><a href="#org28a93a2">6. Uart ipc logs</a></li>
+<li><a href="#org9cf127b">7. BT</a>
 <ul>
-<li><a href="#org3a31500">7.1. Split A2DP Common feature Turn On/Off</a></li>
-<li><a href="#orgc85290e">7.2. Disable BT Soc Logging</a></li>
-<li><a href="#org93b09b8">7.3. QDID Listings</a></li>
-<li><a href="#org2b0c9ef">7.4. APQ8909(WCN36XX)</a></li>
-<li><a href="#orgefe82bc">7.5. Enable/disable Bluetooth</a></li>
-<li><a href="#org9f660c8">7.6. Power Class Adjustment</a></li>
+<li><a href="#org7f1c4c0">7.1. Split A2DP Common feature Turn On/Off</a></li>
+<li><a href="#orge740653">7.2. Disable BT Soc Logging</a></li>
+<li><a href="#org784aabc">7.3. QDID Listings</a></li>
+<li><a href="#orga2229be">7.4. APQ8909(WCN36XX)</a></li>
+<li><a href="#org20be143">7.5. Enable/disable Bluetooth</a></li>
+<li><a href="#org6723206">7.6. Power Class Adjustment</a></li>
 </ul>
 </li>
-<li><a href="#orgaff5a38">8. Pronto(WCN36XX)</a>
+<li><a href="#org0b0deea">8. Pronto(WCN36XX)</a>
 <ul>
-<li><a href="#orga77dbf1">8.1. WCN36x0 Architecture</a></li>
+<li><a href="#orgdc41aba">8.1. WCN36x0 Architecture</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-orgc76a4fc" class="outline-2">
-<h2 id="orgc76a4fc"><span class="section-number-2">1</span> Burn Image</h2>
+<div id="outline-container-orgc848cc1" class="outline-2">
+<h2 id="orgc848cc1"><span class="section-number-2">1</span> Burn Image</h2>
 <div class="outline-text-2" id="text-1">
 </div>
-<div id="outline-container-orgd09c23b" class="outline-3">
-<h3 id="orgd09c23b"><span class="section-number-3">1.1</span> Flash QRD</h3>
+<div id="outline-container-orgdb8ce72" class="outline-3">
+<h3 id="orgdb8ce72"><span class="section-number-3">1.1</span> Flash QRD</h3>
 <div class="outline-text-3" id="text-1-1">
 <p>
 Steps:
@@ -315,8 +315,8 @@ down完QCN以后，然后手机会reboot， 如果没识别的话，你就发这
 </div>
 </div>
 
-<div id="outline-container-orgb512d7a" class="outline-3">
-<h3 id="orgb512d7a"><span class="section-number-3">1.2</span> Update an Image part</h3>
+<div id="outline-container-orgaf09b6b" class="outline-3">
+<h3 id="orgaf09b6b"><span class="section-number-3">1.2</span> Update an Image part</h3>
 <div class="outline-text-3" id="text-1-2">
 <p>
 command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
@@ -457,12 +457,12 @@ command format: <b>fastboot.exe flash bluetooth_a abl.elf</b>
 </div>
 </div>
 
-<div id="outline-container-org92238e4" class="outline-2">
-<h2 id="org92238e4"><span class="section-number-2">2</span> Factory Test</h2>
+<div id="outline-container-orgc908295" class="outline-2">
+<h2 id="orgc908295"><span class="section-number-2">2</span> Factory Test</h2>
 <div class="outline-text-2" id="text-2">
 </div>
-<div id="outline-container-org5870410" class="outline-3">
-<h3 id="org5870410"><span class="section-number-3">2.1</span> BT Config</h3>
+<div id="outline-container-orge91a0a0" class="outline-3">
+<h3 id="orge91a0a0"><span class="section-number-3">2.1</span> BT Config</h3>
 <div class="outline-text-3" id="text-2-1">
 <p>
 For Android O, 先在UI上把BT关掉然后执行
@@ -500,8 +500,8 @@ btconfig /dev/smd3 rawcmd <span style="color: #a45bad;">0x03</span> <span style=
 </div>
 </div>
 
-<div id="outline-container-org9fd6a77" class="outline-3">
-<h3 id="org9fd6a77"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
+<div id="outline-container-orgc2d8680" class="outline-3">
+<h3 id="orgc2d8680"><span class="section-number-3">2.2</span> 工程模式下写入和读取BD  ADDR</h3>
 <div class="outline-text-3" id="text-2-2">
 <div class="org-src-container">
 <pre class="src src-sh"><span style="color: #2aa1ae; background-color: #292e34;">#</span><span style="color: #2aa1ae; background-color: #292e34;">Write BD ADDRR</span>
@@ -531,8 +531,8 @@ RECV &lt;- dump :&#160; <span style="color: #a45bad;">0e</span> <span style="col
 </div>
 </div>
 
-<div id="outline-container-org17b6bc6" class="outline-2">
-<h2 id="org17b6bc6"><span class="section-number-2">3</span> 高通处理器规格表</h2>
+<div id="outline-container-orga1985a7" class="outline-2">
+<h2 id="orga1985a7"><span class="section-number-2">3</span> 高通处理器规格表</h2>
 <div class="outline-text-2" id="text-3">
 <p>
 <a href="http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html">http://www.mydrivers.com/zhuanti/tianti/01/index_gaotong.html</a>
@@ -540,35 +540,35 @@ RECV &lt;- dump :&#160; <span style="color: #a45bad;">0e</span> <span style="col
 </div>
 </div>
 
-<div id="outline-container-org736bd3d" class="outline-2">
-<h2 id="org736bd3d"><span class="section-number-2">4</span> Snapdragon Naming Update</h2>
+<div id="outline-container-orga1e5b1b" class="outline-2">
+<h2 id="orga1e5b1b"><span class="section-number-2">4</span> Snapdragon Naming Update</h2>
 <div class="outline-text-2" id="text-4">
 
 <div class="figure">
-<p><img src="./images/2018/2018080201.png" alt="2018080201.png" />
+<p><img src="../images/2018/2018080201.png" alt="2018080201.png" />
 </p>
 </div>
 </div>
 </div>
 
-<div id="outline-container-orgd04b401" class="outline-2">
-<h2 id="orgd04b401"><span class="section-number-2">5</span> Slimbus</h2>
+<div id="outline-container-org95e4e8c" class="outline-2">
+<h2 id="org95e4e8c"><span class="section-number-2">5</span> Slimbus</h2>
 <div class="outline-text-2" id="text-5">
 </div>
-<div id="outline-container-orge3755a2" class="outline-3">
-<h3 id="orge3755a2"><span class="section-number-3">5.1</span> Architecture</h3>
+<div id="outline-container-orgbbd00e0" class="outline-3">
+<h3 id="orgbbd00e0"><span class="section-number-3">5.1</span> Architecture</h3>
 <div class="outline-text-3" id="text-5-1">
 
 <div class="figure">
-<p><img src="./images/2018/2018080101.jpg" alt="2018080101.jpg" />
+<p><img src="../images/2018/2018080101.jpg" alt="2018080101.jpg" />
 </p>
 </div>
 </div>
 </div>
 
 
-<div id="outline-container-org47f6926" class="outline-3">
-<h3 id="org47f6926"><span class="section-number-3">5.2</span> Turn on logs</h3>
+<div id="outline-container-org824055f" class="outline-3">
+<h3 id="org824055f"><span class="section-number-3">5.2</span> Turn on logs</h3>
 <div class="outline-text-3" id="text-5-2">
 <div class="org-src-container">
 <pre class="src src-sh">adb root
@@ -613,8 +613,8 @@ adb shell echo -n <span style="color: #2d9574;">"file voice_svc.c +p"</span> <sp
 </div>
 </div>
 
-<div id="outline-container-org7372db9" class="outline-2">
-<h2 id="org7372db9"><span class="section-number-2">6</span> Uart ipc logs</h2>
+<div id="outline-container-org28a93a2" class="outline-2">
+<h2 id="org28a93a2"><span class="section-number-2">6</span> Uart ipc logs</h2>
 <div class="outline-text-2" id="text-6">
 <div class="org-src-container">
 <pre class="src src-sh">&lt;for SDM845 UART IPC&gt;&#160;
@@ -631,12 +631,12 @@ adb shell echo -n <span style="color: #2d9574;">"file voice_svc.c +p"</span> <sp
 </div>
 </div>
 
-<div id="outline-container-org56e09fb" class="outline-2">
-<h2 id="org56e09fb"><span class="section-number-2">7</span> BT</h2>
+<div id="outline-container-org9cf127b" class="outline-2">
+<h2 id="org9cf127b"><span class="section-number-2">7</span> BT</h2>
 <div class="outline-text-2" id="text-7">
 </div>
-<div id="outline-container-org3a31500" class="outline-3">
-<h3 id="org3a31500"><span class="section-number-3">7.1</span> Split A2DP Common feature Turn On/Off</h3>
+<div id="outline-container-org7f1c4c0" class="outline-3">
+<h3 id="org7f1c4c0"><span class="section-number-3">7.1</span> Split A2DP Common feature Turn On/Off</h3>
 <div class="outline-text-3" id="text-7-1">
 <ol class="org-ol">
 <li>Set “AUDIO_FEATURE_ENABLED_SPLIT_A2DP := false” in
@@ -665,8 +665,8 @@ adb reboot
 
 
 
-<div id="outline-container-orgc85290e" class="outline-3">
-<h3 id="orgc85290e"><span class="section-number-3">7.2</span> Disable BT Soc Logging</h3>
+<div id="outline-container-orge740653" class="outline-3">
+<h3 id="orge740653"><span class="section-number-3">7.2</span> Disable BT Soc Logging</h3>
 <div class="outline-text-3" id="text-7-2">
 <p>
 To disable SoC logging please make the below change @
@@ -688,8 +688,8 @@ vendor/qcom/proprietary/bluetooth/hidl_transport/bt/1.0/default/patch_dl_manager
 </div>
 </div>
 
-<div id="outline-container-org93b09b8" class="outline-3">
-<h3 id="org93b09b8"><span class="section-number-3">7.3</span> QDID Listings</h3>
+<div id="outline-container-org784aabc" class="outline-3">
+<h3 id="org784aabc"><span class="section-number-3">7.3</span> QDID Listings</h3>
 <div class="outline-text-3" id="text-7-3">
 <ul class="org-ul">
 <li><p>
@@ -741,8 +741,8 @@ RF
 </div>
 </div>
 
-<div id="outline-container-org2b0c9ef" class="outline-3">
-<h3 id="org2b0c9ef"><span class="section-number-3">7.4</span> APQ8909(WCN36XX)</h3>
+<div id="outline-container-orga2229be" class="outline-3">
+<h3 id="orga2229be"><span class="section-number-3">7.4</span> APQ8909(WCN36XX)</h3>
 <div class="outline-text-3" id="text-7-4">
 <ul class="org-ul">
 <li><p>
@@ -751,7 +751,7 @@ Bluetooth/FM HCI-SMD Interface
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080102.png" alt="2018080102.png" />
+<p><img src="../images/2018/2018080102.png" alt="2018080102.png" />
 </p>
 </div></li>
 
@@ -772,8 +772,8 @@ and FM</li>
 </div>
 </div>
 
-<div id="outline-container-orgefe82bc" class="outline-3">
-<h3 id="orgefe82bc"><span class="section-number-3">7.5</span> Enable/disable Bluetooth</h3>
+<div id="outline-container-org20be143" class="outline-3">
+<h3 id="org20be143"><span class="section-number-3">7.5</span> Enable/disable Bluetooth</h3>
 <div class="outline-text-3" id="text-7-5">
 <p>
 one way to enable/disable BT with adb shell. It is just same as operation from GUI.
@@ -851,8 +851,8 @@ adb shell service call bluetooth_manager <span style="color: #a45bad;">8</span> 
 </div>
 </div>
 
-<div id="outline-container-org9f660c8" class="outline-3">
-<h3 id="org9f660c8"><span class="section-number-3">7.6</span> Power Class Adjustment</h3>
+<div id="outline-container-org6723206" class="outline-3">
+<h3 id="org6723206"><span class="section-number-3">7.6</span> Power Class Adjustment</h3>
 <div class="outline-text-3" id="text-7-6">
 <p>
 for pronto, power class can  be changed in the source code. 
@@ -882,16 +882,16 @@ for Cheroke, we should change the value in the crnv21.bin file.
 </div>
 </div>
 
-<div id="outline-container-orgaff5a38" class="outline-2">
-<h2 id="orgaff5a38"><span class="section-number-2">8</span> Pronto(WCN36XX)</h2>
+<div id="outline-container-org0b0deea" class="outline-2">
+<h2 id="org0b0deea"><span class="section-number-2">8</span> Pronto(WCN36XX)</h2>
 <div class="outline-text-2" id="text-8">
 </div>
-<div id="outline-container-orga77dbf1" class="outline-3">
-<h3 id="orga77dbf1"><span class="section-number-3">8.1</span> WCN36x0 Architecture</h3>
+<div id="outline-container-orgdc41aba" class="outline-3">
+<h3 id="orgdc41aba"><span class="section-number-3">8.1</span> WCN36x0 Architecture</h3>
 <div class="outline-text-3" id="text-8-1">
 
 <div class="figure">
-<p><img src="./images/2018/2018080103.png" alt="2018080103.png" />
+<p><img src="../images/2018/2018080103.png" alt="2018080103.png" />
 </p>
 </div>
 
@@ -908,7 +908,7 @@ adb shell sync;reboot
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080104.png" alt="2018080104.png" />
+<p><img src="../images/2018/2018080104.png" alt="2018080104.png" />
 </p>
 <p><span class="figure-number">Figure 5: </span>WCN-SS High-Level Software Diagram</p>
 </div>
@@ -1058,7 +1058,7 @@ Baseband Modem and radio interface.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-12 Sun 12:18</p>
+<p class="date">Created: 2018-08-12 Sun 13:02</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

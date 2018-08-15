@@ -41,7 +41,7 @@
        97 * playing, it will stop.
      #+END_EXAMPLE
    
-     [[./images/2018/2018080601.png]]
+     [[../images/2018/2018080601.png]]
 
 ** 03609416 
 
@@ -191,8 +191,85 @@
        Sink latency in AVDTP Delay reporting is calculated with 1/10 ms. For
        non-split a2dp path, A2dp hal will convert 1/10 ms to ns via delay_ns = delay_report * 100000. But for split-a2dp path, 1/10 ms is treated as ms
        incorrectly. So that this 2.358s sink latency send to audio HAL, the real
-       sink latency value should be 0.2358s. 
-   
+       sink latency value should be 0.2358s.
+
+** 03553837 
+
+   - Problem Description
+
+     连接车载蓝牙，手机显示“无手机”或自动断开重连
+
+     steps:
+
+     1. 连接车载蓝牙，显示“无手机”
+
+     2. 连接上车载后，又会断开重连.
+
+     实际输出结果：手机显示“无手机”或自动断开重连
+
+   - Facts
+
+     this device seems want to connect to us proactively, I see
+     connect confilction happened during connection, and we re-try
+     connection several times. 
+
+     as for disconnection, I seems the carkit didn't poll us as
+     master, so connection timeout. 
+
+     #+BEGIN_SRC sh
+       2,342 Event VS_Host_Report_Event 18 21 00:00:05.093716 7/1/2018 12:15:25.214170 PM
+       2,359 Event VS_Host_Report_Event 18 21 00:00:00.723688 7/1/2018 12:15:32.698388 PM
+       2,367 Event Disconnection Complete Success 0x000a 4 7 00:00:00.000057 7/1/2018 12:15:32.705241 PM     
+     #+END_SRC
+
+   - Problem Analysis
+
+     there are three errors in current logs:
+     1) after dut starts to connect rfcomm for hfp, remote will
+        disconnect it immediately. this should be remote issue. please
+        let vivo try to add this device to the
+        =BlacklistDeviceAddrForNotRetrying= blacklist
+        
+        : 271 Not Extended remote disconnect rfcomm Initiator Started C/R Sequence Master 2 0x06 3 DM 1 13 00:00:00.007939 7/1/2018 12:14:02.474383 PM
+
+        #+BEGIN_SRC java
+          @HeadsetStatemachine
+          173 // Blacklist remote device addresses going into bad state if we retry
+          174 private static final String [] BlacklistDeviceAddrForNotRetrying =
+          175         
+        #+END_SRC
+
+     2) after hfp is connected, connection timeout happened. this may be caused by error 3)
+
+        : Disconnection Complete connection timeout 1,087 Event Disconnection Complete Disconnection Complete Success 7/1/2018 12:14:27.559153 PM 0x0003 4 7 00:00:00.000097
+
+     3) dut respond supporting cover art to remote even though the
+        avrcp version of dut is avrcp 1.4. it cause that the l2cap
+        status of remote goes to bad state.
+
+        [[../images/2018/2018081501.png]]
+
+     4) *Notes*
+
+        In our OMR1(and P as well) implementation, DUT’s default
+        version is 1.4 + Browsing. This is the default value selected
+        in DEV UI as well.  But during SDP registration the DUT’s
+        record created is 1.6 + Browsing + CA.
+
+        Now, when first time remote is paired and connected, conf file
+        is updated with min(DUT’s default v1.4, remote ver). For
+        sending SDP records to remote, the registered version(v1.6) is
+        then overwritten by this version saved in conf file and also
+        BR and CA bits are modified if needed.  After sending the
+        records to remote, DUT’s registered version is again made
+        v1.6+BR+CA and saved locally. This is the logic which is
+        followed in OMR1 and P. 
+
+        Registered version of DUT is always = v1.6+BR+CA.
+        Default version of DUT = v1.4 + BR
+        Saved entry of remote in conf file = minimum of DUT’s default (v1.4) and remote’s version.
+        DUT’s SDP record shown to remote = 1.3 if no conf entry OR conf file entry value.
+        
 * HFP
 
 * PBAP
@@ -211,7 +288,7 @@
 
      carkit query the phonebook size with the following request:
 
-     [[./images/2018/2018080107.png]]
+     [[../images/2018/2018080107.png]]
 
      for query, the =Max List Count= parameter is  0. 
 
@@ -225,11 +302,11 @@
 
      DUT logs:
 
-     [[./images/2018/2018080105.png]]
+     [[../images/2018/2018080105.png]]
 
      Reference phone logs:
 
-     [[./images/2018/2018080106.png]]
+     [[../images/2018/2018080106.png]]
 
      there is no differene for the **Supported Repositories** attribute. 
      so we need to compare the other reason.  
@@ -242,11 +319,11 @@
      when query phonebook size  in SIM card, DUT respond with the value of 0
      when  SIM card has no contacts.
 
-     [[./images/2018/2018080108.png]]
+     [[../images/2018/2018080108.png]]
 
      while reference phone respond with the value of 1. 
 
-     [[./images/2018/2018080109.png]]
+     [[../images/2018/2018080109.png]]
 
      after change the retun value from 0 to 1, issue is  resolved.
 
@@ -271,7 +348,7 @@
 
    - Problem Analysis
 
-     [[./images/2018/2018080202.png]]
+     [[../images/2018/2018080202.png]]
 
      the format of the LE Advertising Data is  invalid, so the data is  dropped
      at  the stack level.  

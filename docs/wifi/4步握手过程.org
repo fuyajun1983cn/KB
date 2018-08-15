@@ -1,8 +1,6 @@
-#+STARTUP: overview
-#+STARTUP: hidestars
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
-
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: 4步握手过程研究
+#+OPTIONS: ^:{} 
 
 * 基础理论
 
@@ -72,9 +70,9 @@
 
     RSN key hierarchy
 
-    [[./images/2016/2016042505.png]]
+    [[../images/2016/2016042505.png]]
     
-    [[./images/2016/2016042504.png]]
+    [[../images/2016/2016042504.png]]
 
     对于PTK来说，每个STA与AP之间独立共享一个唯一的PTK，而对于GTK，所有
     STA与AP之间共享同一个GTK。
@@ -83,21 +81,21 @@
 
      - Pairwise Key Hierarchy
 
-       [[./images/2016/2016042506.png]]
+       [[../images/2016/2016042506.png]]
 
      - Group Key Hierarchy
 
-       [[./images/2016/2016042509.png]]
+       [[../images/2016/2016042509.png]]
 
 **** TKIP
      
      - Pairwise Key Hierarchy
        
-       [[./images/2016/2016042507.png]]
+       [[../images/2016/2016042507.png]]
 
      - Group Key Hierarchy
 
-       [[./images/2016/2016042508.png]]
+       [[../images/2016/2016042508.png]]
 
 *** PMKSA（PMK Security Association）
     认证者与申请者都有可能缓存PMKSA， 它包含了一些相关状态信息，如AP的
@@ -139,7 +137,7 @@
    这些Key称为临时Key，因为每次设备与AP关联时，都会重新产生。这些Key一
    起统称为PTK(pairwise transient key)。
 
-    [[./images/2016/2016042502.png]]
+    [[../images/2016/2016042502.png]]
 
 
    PMK利用认证过程中产生的生成Key的原料来产生的。对于Pre-Shared Key，
@@ -152,7 +150,7 @@
 ** 基本步骤
 
      #+CAPTION: 802.11i四次握手过程
-     [[./images/2015/2015121401.png]]
+     [[../images/2015/2015121401.png]]
 
      四次握手是802.11i标准中用来在AP和客户端之间生成并管理PTK临时密钥的
      交互过程，在整个过程中，AP和STA均确认对方是否持有与自己一致的PMK，
@@ -174,7 +172,7 @@
         完成，PTK产生并完成装载， 同时也会将收到的GTK装载。
 
      整个步骤用如下图表示所示：
-     [[./images/2016/2016042501.png]]
+     [[../images/2016/2016042501.png]]
 
      用简单的言语解释一下，基本意思就是：
       PTK是两边都要对上的，而GTK是在PTK成功后，AP直接将加密过的GTK发给STA，
@@ -204,7 +202,7 @@
        a)发送GTK给移动设备
        b)检测接收到GTK的确认消息。
 
-    [[./images/2016/2016042503.png]]
+    [[../images/2016/2016042503.png]]
 
 ** 如何产生GMK？
    

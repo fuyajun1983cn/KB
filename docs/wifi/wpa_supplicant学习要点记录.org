@@ -1,15 +1,14 @@
-#+STARTUP: overview
-#+STARTUP: hidestars
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: wpa_supplicant学习笔记
+#+OPTIONS: ^:{} 
 
 * 基本架构分析[fn:1] [fn:2]
 ** 模块结构图
      #+CAPTION:  =wpa_supplicant modules=
-     [[./images/2015/2015121506.png]]
+     [[../images/2015/2015121506.png]]
 ** 全局数据结构  
 *** =struct wpa_supplicant= 
-        #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016081220.png :cmdline -charset UTF-8
+        #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016081220.png :cmdline -charset UTF-8
           @startuml
           object wpa_supplicant {
           ...
@@ -31,9 +30,9 @@
         #+END_SRC
 
         #+RESULTS:
-        [[file:./images/2016/2016081220.png]]
+        [[file:../images/2016/2016081220.png]]
 *** =struct wpa_config=
-         #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016080921.png :cmdline -charset UTF-8
+         #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016080921.png :cmdline -charset UTF-8
            @startuml
            object wpa_config {
            ...
@@ -53,7 +52,7 @@
          #+END_SRC
 
          #+RESULTS:
-         [[file:./images/2016/2016080921.png]]
+         [[file:../images/2016/2016080921.png]]
 
 *** =struct wpa_global=
 *** =struct wpa_radio=
@@ -170,7 +169,7 @@
 ** =wpa_supplicant= 初始化分析
 *** =wpa_supplicant= 初始化执行过程
 
-     #+BEGIN_SRC plantuml :file ./images/2015/2015123004.png :cmdline -charset UTF-8
+     #+BEGIN_SRC plantuml :file ../images/2015/2015123004.png :cmdline -charset UTF-8
        title wpa_supplicant初始化流程
        @startuml
        start
@@ -194,11 +193,11 @@
      #+END_SRC
 
      #+RESULTS:
-     [[file:./images/2015/2015123004.png]]
+     [[file:../images/2015/2015123004.png]]
 
 *** =wpa_supplicant_init= 函数执行过程
 
-    #+BEGIN_SRC plantuml :file ./images/2016/2016011410.png :cmdline -charset UTF-8
+    #+BEGIN_SRC plantuml :file ../images/2016/2016011410.png :cmdline -charset UTF-8
       title wpa_supplicant_init函数执行过程
       start
       :wpa_debug_open_file;
@@ -222,11 +221,11 @@
     #+END_SRC
 
     #+RESULTS:
-    [[file:./images/2016/2016011410.png]]
+    [[file:../images/2016/2016011410.png]]
 
     接下来看 =wpa_supplicant_global_ctrl_iface_init= 的执行过程。
     
-     #+BEGIN_SRC plantuml :file ./images/2015/2015123002.png :cmdline -charset UTF-8
+     #+BEGIN_SRC plantuml :file ../images/2015/2015123002.png :cmdline -charset UTF-8
        title: wpa_supplicant_global_ctrl_iface_init执行过程
        :wpa_supplicant_init;
        note right: global->ctrl_iface = wpa_supplicant_global_ctrl_iface_init(global)
@@ -258,11 +257,11 @@
      #+END_SRC 
 
      #+RESULTS:
-     [[file:./images/2015/2015123002.png]]
+     [[file:../images/2015/2015123002.png]]
 
 *** =wpa_supplicant_add_iface= 函数执行过程 
      
-     #+BEGIN_SRC plantuml :file ./images/2015/2015123003.png :cmdline -charset UTF-8
+     #+BEGIN_SRC plantuml :file ../images/2015/2015123003.png :cmdline -charset UTF-8
        title: 添加一个新的网络接口, 返回一个 wpa_supplicant 结构的数据对象
        : wpa_supplicant_add_iface;
        note right
@@ -284,14 +283,14 @@
      #+END_SRC
 
      #+RESULTS:
-     [[file:./images/2015/2015123003.png]]
+     [[file:../images/2015/2015123003.png]]
 
 **** =wpa_supplicant_init_iface= 
 
         初始化网络接口， 读取配置文件，初始化EAPOL状态机，初始化Driver，
         初始化 wpa状态机等等。
 
-        #+BEGIN_SRC plantuml :file ./images/2016/2016010501.png :cmdline -charset UTF-8
+        #+BEGIN_SRC plantuml :file ../images/2016/2016010501.png :cmdline -charset UTF-8
           title wpa_supplicant_init_iface初始化代码分析
           
           @startuml
@@ -342,7 +341,7 @@
         #+END_SRC
 
         #+RESULTS:
-        [[file:./images/2016/2016010501.png]]
+        [[file:../images/2016/2016010501.png]]
 
 ** event loop
 *** eloop data structure
@@ -352,7 +351,7 @@
 
 **** eloop相关数据结构的关系
         #+CAPTION:  =struct eloop_data=
-        [[./images/2015/2015122901.png]]
+        [[../images/2015/2015122901.png]]
 
         socket主要有读、写和异常等三种。 =struct eloop_sock_table= 是
         一个表结构，维护了当前所有的socket，针对读、写和异常分别对应一个
@@ -467,7 +466,7 @@
 
 *** start event loop
     
-       #+BEGIN_SRC plantuml :file ./images/2015/2015123001.png :cmdline -charset UTF-8 
+       #+BEGIN_SRC plantuml :file ../images/2015/2015123001.png :cmdline -charset UTF-8 
          @startuml
          start
          :eloop_init;
@@ -499,7 +498,7 @@
        #+END_SRC
 
        #+RESULTS:
-       [[file:./images/2015/2015123001.png]]
+       [[file:../images/2015/2015123001.png]]
 
 *** 其他一些 =eloop_*= 函数速览
        #+BEGIN_SRC c
@@ -985,7 +984,7 @@
 
 **** =wpa_supplicant= 如休接收到底层Driver发送过来的事件   
 
-     #+BEGIN_SRC plantuml :file ./images/2016/2016012001.png :cmdline -charset UTF-8
+     #+BEGIN_SRC plantuml :file ../images/2016/2016012001.png :cmdline -charset UTF-8
         title wpa_supplicant接收Driver上报事件的流程
         @startuml
         start
@@ -1001,7 +1000,7 @@
      #+END_SRC
 
      #+RESULTS:
-     [[file:./images/2016/2016012001.png]]
+     [[file:../images/2016/2016012001.png]]
 
 *** 配置加密方法（TKIP/CCMP）
     如果是在Driver中实现的，必须提供一种配置的手段。
@@ -1094,7 +1093,7 @@
 
 ** =hostapd_setup_bss=
    Initialize Per-BSS data structures.
-   #+BEGIN_SRC plantuml :file ./images/2016/2016031501.png :cmdline -charset UTF-8
+   #+BEGIN_SRC plantuml :file ../images/2016/2016031501.png :cmdline -charset UTF-8
      @startuml
      start
      :hostapd_setup_interface;
@@ -1114,7 +1113,7 @@
    #+END_SRC
 
    #+RESULTS:
-   [[file:./images/2016/2016031501.png]]
+   [[file:../images/2016/2016031501.png]]
 
 ** State Machine
 *** 状态机的定义 
@@ -1349,7 +1348,7 @@
       #+END_SRC
 
       处理流程：
-       #+BEGIN_SRC plantuml :file ./images/2016/2016011801.png :cmdline -charset UTF-8
+       #+BEGIN_SRC plantuml :file ../images/2016/2016011801.png :cmdline -charset UTF-8
          @startuml
          start
          :nl802.11驱动初始化;
@@ -1367,7 +1366,7 @@
        #+END_SRC
 
        #+RESULTS:
-       [[file:./images/2016/2016011801.png]]
+       [[file:../images/2016/2016011801.png]]
 
       1. evnets.c  
          =EVENT_EAPOL_RX=
@@ -1662,7 +1661,7 @@
      先做 =wpa_drv_if_add= ，然后进行 =wpa_supplicant_add_iface= 。
      否则，则从 =wpa_supplicant_add_iface= 开始执行。
 
-     #+BEGIN_SRC plantuml :file ./images/2016/2016020101.png :cmdline -charset UTF-8
+     #+BEGIN_SRC plantuml :file ../images/2016/2016020101.png :cmdline -charset UTF-8
        @startuml
        :wpa_supplicant_add_iface;
        :wpa_supplicant_init_iface;
@@ -1677,7 +1676,7 @@
      #+END_SRC
 
      #+RESULTS:
-     [[file:./images/2016/2016020101.png]]
+     [[file:../images/2016/2016020101.png]]
 
      在 =p2p_init= 函数中，同时也注册了一个 循环超时检测函数
      =p2p_expiration_timeout= ，这个函数会周期性检查当前P2P Peers端是
@@ -1689,7 +1688,7 @@
 **** 一般连接过程
 
      #+CAPTION: P2P Standard Group Formation
-     [[./images/2016/2016071202.png]]
+     [[../images/2016/2016071202.png]]
      
       1. 首先，P2P设备要能发现对方，会通过扫描来进行：要么在1，6，11信道
          上主动发送Probe Request来侦测P2P设备，要么停留在某个信息侦测
@@ -1722,7 +1721,7 @@
          http://processors.wiki.ti.com/index.php/OMAP_Wireless_Connectivity_NLCP_WiFi_Direct_Configuration_Scripts
 
        #+CAPTION: 两个P2P设备A，B执行P2P连接时，帧交换的过程
-       #+BEGIN_SRC plantuml :file ./images/2016/2016012501.png :cmdline -charset UTF-8
+       #+BEGIN_SRC plantuml :file ../images/2016/2016012501.png :cmdline -charset UTF-8
          @startuml
          A -> B : (1)Probe requests with P2P IE on all channels.
          note right
@@ -1805,12 +1804,12 @@
        #+END_SRC
 
        #+RESULTS:
-       [[file:./images/2016/2016012501.png]]
+       [[file:../images/2016/2016012501.png]]
 
 **** 收到Invitation Request的交互过程
      
      #+CAPTION: P2P Persisten Group Formation
-     [[./images/2016/2016071203.png]]
+     [[../images/2016/2016071203.png]]
 
      1. 当前设置处于 =P2P_Find= 阶段时，如果收到 =Invitation Request=
         Action帧，即 =P2P: Received Invitation Request from
@@ -2200,7 +2199,7 @@
 **** Action帧的接收
          
          #+CAPTION: 接收Action帧的流程
-         #+BEGIN_SRC plantuml :file ./images/2016/2016012901.png :cmdline -charset UTF-8
+         #+BEGIN_SRC plantuml :file ../images/2016/2016012901.png :cmdline -charset UTF-8
            title  wpa_supplican处理公共Action帧的流程
            @startuml
            start
@@ -2235,7 +2234,7 @@
          #+END_SRC
 
          #+RESULTS:
-         [[file:./images/2016/2016012901.png]]
+         [[file:../images/2016/2016012901.png]]
 
 **** Action帧的发送
 
@@ -2249,7 +2248,7 @@
         的结果反馈上来。底层是通过  =EVENT_TX_STATUS= 消息来通知的，通
         过调用 =offchannel_send_action_tx_status= 来回调注册的函数。
         
-        #+BEGIN_SRC plantuml :file ./images/2016/2016012902.png :cmdline -charset UTF-8
+        #+BEGIN_SRC plantuml :file ../images/2016/2016012902.png :cmdline -charset UTF-8
           @startuml
           start
           :wpa_supplicant_event;
@@ -2264,7 +2263,7 @@
         #+END_SRC
 
         #+RESULTS:
-        [[file:./images/2016/2016012902.png]]
+        [[file:../images/2016/2016012902.png]]
 
 **** p2p协商时信道的选择
         1. 在获取peer信息前，选择oper Channel
@@ -2388,7 +2387,7 @@
       =p2p_listen= 流程分析：
       应用程序进入Miracast后，一般会调用 =p2p_listen= 命令，监听附近的
       WFD Source设备， 大致流程如下：
-      #+BEGIN_SRC plantuml :file ./images/2016/2016061001.png :cmdline -charset UTF-8
+      #+BEGIN_SRC plantuml :file ../images/2016/2016061001.png :cmdline -charset UTF-8
         title =p2p_listen= 流程
         @startuml
         start
@@ -2434,12 +2433,12 @@
       #+END_SRC
 
       #+RESULTS:
-      [[file:./images/2016/2016061001.png]]
+      [[file:../images/2016/2016061001.png]]
 
       在监听的过程，当驱动收到Probe Request请求后，会通过
       =cfg80211_rx_mgmt= 上报给内核，并最终通知给 =wpa_supplicant= ，
       调用路径为：
-      #+BEGIN_SRC plantuml :file ./images/2016/2016061201.png :cmdline -charset UTF-8
+      #+BEGIN_SRC plantuml :file ../images/2016/2016061201.png :cmdline -charset UTF-8
         :mlme_event NL80211_CMD_FRAME
         :mlme_event_mgmt;
         :wpa_supplicant_event  EVENT_RX_MGMT
@@ -2665,7 +2664,7 @@
    配置项 =wps_strict_check= 选项开启后，会严格按照WPS规范检查WPS数据
    格式。
 
-   #+BEGIN_SRC plantuml :file ./images/2016/2016031007.png :cmdline -charset UTF-8
+   #+BEGIN_SRC plantuml :file ../images/2016/2016031007.png :cmdline -charset UTF-8
      @startuml
      :wpas_go_neg_completed;
      if (当前设备协商的角色是GO？) then (是)
@@ -2677,13 +2676,13 @@
    #+END_SRC
 
    #+RESULTS:
-   [[file:./images/2016/2016031007.png]]
+   [[file:../images/2016/2016031007.png]]
 
 *** Enrollee
     此时双方会通过 P2P 接口地址进行交互。WPS具体使用的方式有PBC或者PIN
     的方式。
 
-    #+BEGIN_SRC plantuml :file ./images/2016/2016031008.png :cmdline -charset UTF-8
+    #+BEGIN_SRC plantuml :file ../images/2016/2016031008.png :cmdline -charset UTF-8
       :wpas_start_wps_enrollee;
       if (use WPS ?) then (yes)
       :wpas_wps_start_pbc;
@@ -2693,7 +2692,7 @@
     #+END_SRC
 
     #+RESULTS:
-    [[file:./images/2016/2016031008.png]]
+    [[file:../images/2016/2016031008.png]]
 
     下面我们主要看下WPS的交互过程：
     1. =wpas_wps_add_network=
@@ -2732,7 +2731,7 @@
        设置回调接口： =p2p_go_configured=
     5. =wpa_supplicant_req_scan=
        该函数并不是要进行一次扫描，而是通过如下调用流程启动AP/GO
-       #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016090210.png :cmdline -charset UTF-8
+       #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016090210.png :cmdline -charset UTF-8
          @startuml
          start
          : wpa_supplicant_scan;
@@ -2744,7 +2743,7 @@
        #+END_SRC
 
        #+RESULTS:
-       [[file:./images/2016/2016090210.png]]
+       [[file:../images/2016/2016090210.png]]
 
 ** SME
    SME was designed to be used when the driver does provide the
@@ -2766,7 +2765,7 @@
 
 *** 软件构架图
 
-      [[./images/2016/2016090206.png]]
+      [[../images/2016/2016090206.png]]
 
     #+CAPTION: hostapd配置文件示例
     #+BEGIN_SRC sh
@@ -3607,7 +3606,7 @@
     
 *** 数据结构
 
-    [[./images/2016/2016080901.jpg]]
+    [[../images/2016/2016080901.jpg]]
 
     - A =hostapd_interfaces= has at least one =hostapd_iface=.
 
@@ -4328,7 +4327,7 @@
 
 *** 主要流程分析
 **** hostapd初始化过程
-          #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016072902.png :cmdline -charset UTF-8
+          #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016072902.png :cmdline -charset UTF-8
             @startuml
             autonumber 
             actor User
@@ -4386,10 +4385,10 @@
           #+END_SRC
 
           #+RESULTS:
-          [[file:./images/2016/2016072902.png]]
+          [[file:../images/2016/2016072902.png]]
 
 ***** =hostapd_global_init=
-            #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016080901.png :cmdline -charset UTF-8
+            #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016080901.png :cmdline -charset UTF-8
               @startuml
               start
               : hostapd_logger_register_cb;
@@ -4429,7 +4428,7 @@
             #+END_SRC
 
             #+RESULTS:
-            [[file:./images/2016/2016080901.png]]
+            [[file:../images/2016/2016080901.png]]
 
            
 
@@ -4447,7 +4446,7 @@
             of all BSSes for a radio. 
             
 ***** =hostapd_driver_init=
-            #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016081601.png :cmdline -charset UTF-8
+            #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016081601.png :cmdline -charset UTF-8
               @startuml
               [--> "main.c": hostapd_driver_init
               activate "main.c"
@@ -4479,7 +4478,7 @@
             #+END_SRC
 
             #+RESULTS:
-            [[file:./images/2016/2016081601.png]]
+            [[file:../images/2016/2016081601.png]]
 
             1. 注册bss事件处理函数 。
             2. 设置接口模式为AP模式，并将接口启动。
@@ -4488,7 +4487,7 @@
           
 ***** =hostapd_setup_interface=
               函数调用流程
-              #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016081501.png :cmdline -charset UTF-8
+              #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016081501.png :cmdline -charset UTF-8
                  @startuml
                  : hostapd_setup_interface;
                  : setup_interface;
@@ -4511,7 +4510,7 @@
               #+END_SRC
 
               #+RESULTS:
-              [[file:./images/2016/2016081501.png]]
+              [[file:../images/2016/2016081501.png]]
 
               在 =hostapd_setup_bss= 函数中， 比较重要的初始化过程有：
               1. =hostapd_setup_wpa_psk=
@@ -4539,7 +4538,7 @@
            hostapd接口初始化时，通过 =nl80211_register_frame= 函数向内
            核注册需要自己处理的管理帧：
            具体的调用流程如下：
-           #+BEGIN_SRC plantuml :exports results  :file ./images/2016/2016081902.png :cmdline -charset UTF-8
+           #+BEGIN_SRC plantuml :exports results  :file ../images/2016/2016081902.png :cmdline -charset UTF-8
              @startuml
              start
              #BLUE:hostapd_setup_bss;
@@ -4554,13 +4553,13 @@
            #+END_SRC
 
            #+RESULTS:
-           [[file:./images/2016/2016081902.png]]
+           [[file:../images/2016/2016081902.png]]
 
 **** 管理帧的处理
           
           当driver将注册的管理帧送上来时，hostapd会进行相应的处理
 
-          #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016082201.png :cmdline -charset UTF-8
+          #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016082201.png :cmdline -charset UTF-8
             @startuml
             start
             fork
@@ -4601,12 +4600,12 @@
           #+END_SRC
 
           #+RESULTS:
-          [[file:./images/2016/2016082201.png]]
+          [[file:../images/2016/2016082201.png]]
      
           响应的Action帧通过 =NL80211_CMD_FRAME= 命令传递给driver去处理。
           
 ***** TX
-           #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016090701.png :cmdline -charset UTF-8
+           #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016090701.png :cmdline -charset UTF-8
              @startuml
              participant "driver" as A
              participant "cfg80211/nl80211" as B
@@ -4626,10 +4625,10 @@
            #+END_SRC
 
            #+RESULTS:
-           [[file:./images/2016/2016090701.png]]
+           [[file:../images/2016/2016090701.png]]
 
 ***** RX
-           #+BEGIN_SRC plantuml :exports results :file ./images/2016/2016090702.png :cmdline -charset UTF-8
+           #+BEGIN_SRC plantuml :exports results :file ../images/2016/2016090702.png :cmdline -charset UTF-8
              @startuml
              @startuml
              participant "driver" as A
@@ -4649,7 +4648,7 @@
            #+END_SRC
 
            #+RESULTS:
-           [[file:./images/2016/2016090702.png]]
+           [[file:../images/2016/2016090702.png]]
 
          
 ***** 处理Auth Req
@@ -4724,13 +4723,13 @@
 ** WDS
     Wireless Distribution System. 
     
-    [[./images/2017/2017040701.png]]
+    [[../images/2017/2017040701.png]]
 
     NOTES:Same channel, Encryption KEY of WDS link
 
     帧格式：
 
-    [[./images/2017/2017040702.png]]
+    [[../images/2017/2017040702.png]]
 
     WDS Modes:
     - Bridge (Ap without beacon sending)
@@ -4738,7 +4737,7 @@
 
     No Loop Topology:
     
-    [[./images/2017/2017040703.png]]
+    [[../images/2017/2017040703.png]]
     
 *** Setting up a WDS peer
     WDS是IEEE 802.11的一个非标准扩展。 由于它是一个非标准扩展，各家芯

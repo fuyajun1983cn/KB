@@ -1,7 +1,5 @@
-#+STARTUP: overview
-#+STARTUP: hidestars
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: 802.11n的BA机制研究
 
 * 概述
 
@@ -15,21 +13,21 @@
 ** BA Procedure
 
    #+CAPTION: BA Session Procedure
-   [[./images/2016/2016050401.png]]
+   [[../images/2016/2016050401.png]]
 
 ** BA setup & tear down
 
      #+CAPTION: Block Ack setup
-     [[./images/2015/2015121504.png]]
+     [[../images/2015/2015121504.png]]
 
      #+CAPTION: Block Ack deletion
-     [[./images/2015/2015121505.png]]
+     [[../images/2015/2015121505.png]]
 
 ** BA的类型
 
      BA分为 =Immediate BA= 和 =Delayed BA= , 区别如下图所示：
 
-     [[./images/2015/2015121501.png]]
+     [[../images/2015/2015121501.png]]
 
      ADDBA会指定使用何种类型的BA。 
 
@@ -38,7 +36,7 @@
      有时，在抓取的802.11n的sniffer log中，只看到BA事件，没有看到BAR，
      这是因为BAR是隐式的，即"Immediate BA with implicit BA request"。 
 
-     [[./images/2015/2015121502.png]]
+     [[../images/2015/2015121502.png]]
 
 ** BA Bitmap
 
@@ -46,7 +44,7 @@
      个包，且该包的序列号等于起始序列号加上比特号，如下图显示的BA是确
      认package 3, 4。 
 
-     [[./images/2015/2015121503.png]]
+     [[../images/2015/2015121503.png]]
 
 ** Compressed BA
 
@@ -106,7 +104,7 @@
 
 *** HT-immediate Block Ack architecture
     #+CAPTION HT-immediate Block Ack architecture
-    [[./images/2016/2016070401.png]]
+    [[../images/2016/2016070401.png]]
 
     originator包含一个传输Buffer控制，它使用一个传输窗口，
     /WinStart_o/代表传输窗口的起始帧序号， /WinSize_o/ 代表Block Ack协
@@ -136,7 +134,7 @@
     Each received MPDU is analyzed by the scoreboard context control
     as well as by the receive reordering buffer control.
 
-    [[./images/2016/2016070801.png]]
+    [[../images/2016/2016070801.png]]
     
 **** Scoreboard context control during full-state operation
      a recipient shall maintain a block acknowledgment record.

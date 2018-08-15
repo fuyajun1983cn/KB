@@ -1,0 +1,53 @@
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: Bluetooth Management in Florida Stack
+#+OPTIONS: ^:{} 
+
+* Device configuration
+* ACL Management
+** data structure
+
+   #+BEGIN_SRC c
+     typedef struct {
+
+       ...
+
+     /****************************************************
+      ,**      ACL Management
+      ,****************************************************/
+       tACL_CONN acl_db[MAX_L2CAP_LINKS];
+       uint8_t btm_scn[BTM_MAX_SCN]; /* current SCNs: true if SCN is in use */
+       uint16_t btm_def_link_policy;
+       uint16_t btm_def_link_super_tout;
+
+       tBTM_BL_EVENT_MASK bl_evt_mask;
+       tBTM_BL_CHANGE_CB* p_bl_changed_cb; /* Callback for when Busy Level changed */
+
+       ...
+     }tBTM_CB;
+   #+END_SRC
+   
+* Power Management
+** data structure
+
+   #+BEGIN_SRC c
+     typedef struct {
+
+       ...
+
+     /****************************************************
+      ,**      Power Management
+      ,****************************************************/
+       tBTM_PM_MCB pm_mode_db[MAX_L2CAP_LINKS];       /* per ACL link */
+       tBTM_PM_RCB pm_reg_db[BTM_MAX_PM_RECORDS + 1]; /* per application/module */
+       uint8_t pm_pend_link; /* the index of acl_db, which has a pending PM cmd */
+       uint8_t pm_pend_id;   /* the id pf the module, which has a pending PM cmd */
+
+       ...
+     }tBTM_CB;
+   #+END_SRC
+   
+* Device control
+* BLE Device controllers
+* Inquiry
+* SCO Management
+* Security Management

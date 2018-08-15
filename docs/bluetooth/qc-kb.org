@@ -112,13 +112,13 @@
 
 * Snapdragon Naming Update
   
-  [[./images/2018/2018080201.png]]
+  [[../images/2018/2018080201.png]]
   
 * Slimbus
 
 ** Architecture
 
-   [[./images/2018/2018080101.jpg]]
+   [[../images/2018/2018080101.jpg]]
 
 
 ** Turn on logs
@@ -247,7 +247,7 @@
 
    - Bluetooth/FM HCI-SMD Interface 
 
-     [[./images/2018/2018080102.png]]
+     [[../images/2018/2018080102.png]]
 
    - Between cCPU and aCPU
 
@@ -352,7 +352,7 @@
   
 ** WCN36x0 Architecture
 
-   [[./images/2018/2018080103.png]]
+   [[../images/2018/2018080103.png]]
 
    To update WCNSS firmware images during debugging/development stage
    
@@ -363,7 +363,7 @@
    #+END_SRC
 
    #+CAPTION: WCN-SS High-Level Software Diagram
-   [[./images/2018/2018080104.png]]
+   [[../images/2018/2018080104.png]]
 
    - Device Adaptation Layer (DAL)
 

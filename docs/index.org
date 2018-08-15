@@ -1,15 +1,34 @@
 #+TITLE: 文档索引
 #+OPTIONS: toc:nil
+#+OPTIONS: ^:nil
 
 #+BEGIN_EXAMPLE
  不积跬步,无以至千里;不积小流,无以成江海
                                                       —— 荀子《劝学篇》.
 #+END_EXAMPLE
 * 2018
-** TODO [[./bluetooth/bt-cases.html][高通平台蓝牙问题集锦]]                                      :Bluetooth:
+** ☛ TODO [[./bluetooth/bt-cases.html][高通平台蓝牙问题集锦]]                                     :Bluetooth:
 
-** TODO [[./bluetooth/qc-kb.html][高通平台相关信息]]                                          :Bluetooth:
+** ☛ TODO [[./bluetooth/qc-kb.html][高通平台相关信息]]                                         :Bluetooth:
 
-** TODO [[./software/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Android学习笔记]]                                             :Android:
+** ☛ TODO [[./software/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Android学习笔记]]                                            :Android:
+** ☛ TODO [[%20http://bt.ifjy.me/][ Bluetooth Learning Notes]]                                :Bluetooth:
 * 2017
-
+** ✔ DONE [[./wifi/%E6%97%A0%E7%BA%BF%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.html][无线权威指南]]                                                  :WIFI:
+** ✔ DONE [[./wifi/wpa_supplicant%E5%AD%A6%E4%B9%A0%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95.html][wpa_supplicant学习笔记]]
+** ✔ DONE [[./wifi/11n%20Block%20Acknowledgement.html][802.11n BA机制研究]]                                            :WIFI:
+** ✔ DONE [[./wifi/4%E6%AD%A5%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.html][4步握手过程研究]]                                               :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/001/802.11e.html][802.11e 学习笔记]]                                              :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/003/bluetooth.html][蓝牙学习总结]]                                             :Bluetooth:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/004/802.1X.html][802.1X协议学习笔记]]
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/005/802.11ac.html][802.11ac学习笔记]]                                              :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/006/802.11i%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][802.11i学习笔记]]                                               :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/007/802.11n.html][802.11n学习笔记]]                                               :WIFI:
+** ✔ DONE [[./wifi/CWAP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][CWAP学习笔记]]                                                  :WIFI:
+** ✔ DONE [[./wifi/CWNA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][CWNA学习笔记]]                                                  :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/020/WPS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][WPS学习笔记]]                                                   :WIFI:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/022/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E6%A6%82%E8%BF%B0.html][通信原理概述]]                                                  :基础理论:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/023/README.html][BLE链接管理]]                                              :Bluetooth:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/035/README.html][Masters and Slaves: Roles in a Bluetooth Piconet]]         :Bluetooth:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/025/README.html][L2CAP学习笔记]]                                            :Bluetooth:
+** ✔ DONE [[http://docs.ifjy.me/contents/wireless/030/README.html][BLE Protocol Basics]]                                      :Bluetooth:

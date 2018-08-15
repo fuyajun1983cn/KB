@@ -1,11 +1,8 @@
-#+STARTUP: overview
+#+SETUPFILE: ../theme-readtheorg.setup
 #+TITLE: CWAP学习笔记
-#+AUTHOR: 山庄来客
-#+EMAIL: fuyajun1983cn@163.com
-#+STARTUP: hidestars
-#+OPTIONS:    H:3 num:nil toc:t \n:nil ::t |:t ^:t -:t f:t *:t tex:t d:(HIDE) tags:not-in-toc
-#+HTML_HEAD: <link rel="stylesheet" title="Standard" href="css/worg.css" type="text/css" />
+#+OPTIONS: ^:{} 
  
+
 * CH01 802.11 Overview
 ** OSI model
     OSI模型是数据通信的基石，它包含如下几层：

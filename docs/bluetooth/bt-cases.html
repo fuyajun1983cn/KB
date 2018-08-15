@@ -3,30 +3,23 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2018-08-12 Sun 12:18 -->
-<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Bluetooth Cases</title>
-<meta name="generator" content="Org mode" />
-<meta name="author" content="Fu Yajun" />
+<!-- 2018-08-15 Wed 18:46 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Fu Yajun" />
 <style type="text/css">
  <!--/*--><![CDATA[/*><!--*/
-  .title  { text-align: center;
-             margin-bottom: .2em; }
-  .subtitle { text-align: center;
-              font-size: medium;
-              font-weight: bold;
-              margin-top:0; }
+  .title  { text-align: center; }
   .todo   { font-family: monospace; color: red; }
-  .done   { font-family: monospace; color: green; }
-  .priority { font-family: monospace; color: orange; }
+  .done   { color: green; }
   .tag    { background-color: #eee; font-family: monospace;
             padding: 2px; font-size: 80%; font-weight: normal; }
   .timestamp { color: #bebebe; }
   .timestamp-kwd { color: #5f9ea0; }
-  .org-right  { margin-left: auto; margin-right: 0px;  text-align: right; }
-  .org-left   { margin-left: 0px;  margin-right: auto; text-align: left; }
-  .org-center { margin-left: auto; margin-right: auto; text-align: center; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
   .underline { text-decoration: underline; }
   #postamble p, #preamble p { font-size: 90%; margin: .2em; }
   p.verse { margin-left: 3%; }
@@ -53,111 +46,27 @@
     border: 1px solid black;
   }
   pre.src:hover:before { display: inline;}
-  /* Languages per Org manual */
-  pre.src-asymptote:before { content: 'Asymptote'; }
-  pre.src-awk:before { content: 'Awk'; }
-  pre.src-C:before { content: 'C'; }
-  /* pre.src-C++ doesn't work in CSS */
-  pre.src-clojure:before { content: 'Clojure'; }
-  pre.src-css:before { content: 'CSS'; }
-  pre.src-D:before { content: 'D'; }
-  pre.src-ditaa:before { content: 'ditaa'; }
-  pre.src-dot:before { content: 'Graphviz'; }
-  pre.src-calc:before { content: 'Emacs Calc'; }
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
   pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
-  pre.src-fortran:before { content: 'Fortran'; }
-  pre.src-gnuplot:before { content: 'gnuplot'; }
-  pre.src-haskell:before { content: 'Haskell'; }
-  pre.src-hledger:before { content: 'hledger'; }
-  pre.src-java:before { content: 'Java'; }
-  pre.src-js:before { content: 'Javascript'; }
-  pre.src-latex:before { content: 'LaTeX'; }
-  pre.src-ledger:before { content: 'Ledger'; }
-  pre.src-lisp:before { content: 'Lisp'; }
-  pre.src-lilypond:before { content: 'Lilypond'; }
-  pre.src-lua:before { content: 'Lua'; }
-  pre.src-matlab:before { content: 'MATLAB'; }
-  pre.src-mscgen:before { content: 'Mscgen'; }
-  pre.src-ocaml:before { content: 'Objective Caml'; }
-  pre.src-octave:before { content: 'Octave'; }
-  pre.src-org:before { content: 'Org mode'; }
-  pre.src-oz:before { content: 'OZ'; }
-  pre.src-plantuml:before { content: 'Plantuml'; }
-  pre.src-processing:before { content: 'Processing.js'; }
-  pre.src-python:before { content: 'Python'; }
-  pre.src-R:before { content: 'R'; }
-  pre.src-ruby:before { content: 'Ruby'; }
-  pre.src-sass:before { content: 'Sass'; }
-  pre.src-scheme:before { content: 'Scheme'; }
-  pre.src-screen:before { content: 'Gnu Screen'; }
-  pre.src-sed:before { content: 'Sed'; }
-  pre.src-sh:before { content: 'shell'; }
-  pre.src-sql:before { content: 'SQL'; }
-  pre.src-sqlite:before { content: 'SQLite'; }
-  /* additional languages in org.el's org-babel-load-languages alist */
-  pre.src-forth:before { content: 'Forth'; }
-  pre.src-io:before { content: 'IO'; }
-  pre.src-J:before { content: 'J'; }
-  pre.src-makefile:before { content: 'Makefile'; }
-  pre.src-maxima:before { content: 'Maxima'; }
-  pre.src-perl:before { content: 'Perl'; }
-  pre.src-picolisp:before { content: 'Pico Lisp'; }
-  pre.src-scala:before { content: 'Scala'; }
-  pre.src-shell:before { content: 'Shell Script'; }
-  pre.src-ebnf2ps:before { content: 'ebfn2ps'; }
-  /* additional language identifiers per "defun org-babel-execute"
-       in ob-*.el */
-  pre.src-cpp:before  { content: 'C++'; }
-  pre.src-abc:before  { content: 'ABC'; }
-  pre.src-coq:before  { content: 'Coq'; }
-  pre.src-groovy:before  { content: 'Groovy'; }
-  /* additional language identifiers from org-babel-shell-names in
-     ob-shell.el: ob-shell is the only babel language using a lambda to put
-     the execution function name together. */
-  pre.src-bash:before  { content: 'bash'; }
-  pre.src-csh:before  { content: 'csh'; }
-  pre.src-ash:before  { content: 'ash'; }
-  pre.src-dash:before  { content: 'dash'; }
-  pre.src-ksh:before  { content: 'ksh'; }
-  pre.src-mksh:before  { content: 'mksh'; }
-  pre.src-posh:before  { content: 'posh'; }
-  /* Additional Emacs modes also supported by the LaTeX listings package */
-  pre.src-ada:before { content: 'Ada'; }
-  pre.src-asm:before { content: 'Assembler'; }
-  pre.src-caml:before { content: 'Caml'; }
-  pre.src-delphi:before { content: 'Delphi'; }
-  pre.src-html:before { content: 'HTML'; }
-  pre.src-idl:before { content: 'IDL'; }
-  pre.src-mercury:before { content: 'Mercury'; }
-  pre.src-metapost:before { content: 'MetaPost'; }
-  pre.src-modula-2:before { content: 'Modula-2'; }
-  pre.src-pascal:before { content: 'Pascal'; }
-  pre.src-ps:before { content: 'PostScript'; }
-  pre.src-prolog:before { content: 'Prolog'; }
-  pre.src-simula:before { content: 'Simula'; }
-  pre.src-tcl:before { content: 'tcl'; }
-  pre.src-tex:before { content: 'TeX'; }
-  pre.src-plain-tex:before { content: 'Plain TeX'; }
-  pre.src-verilog:before { content: 'Verilog'; }
-  pre.src-vhdl:before { content: 'VHDL'; }
-  pre.src-xml:before { content: 'XML'; }
-  pre.src-nxml:before { content: 'XML'; }
-  /* add a generic configuration mode; LaTeX export needs an additional
-     (add-to-list 'org-latex-listings-langs '(conf " ")) in .emacs */
-  pre.src-conf:before { content: 'Configuration File'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
 
   table { border-collapse:collapse; }
   caption.t-above { caption-side: top; }
   caption.t-bottom { caption-side: bottom; }
   td, th { vertical-align:top;  }
-  th.org-right  { text-align: center;  }
-  th.org-left   { text-align: center;   }
-  th.org-center { text-align: center; }
-  td.org-right  { text-align: right;  }
-  td.org-left   { text-align: left;   }
-  td.org-center { text-align: center; }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
   dt { font-weight: bold; }
-  .footpara { display: inline; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
   .footdef  { margin-bottom: 1em; }
   .figure { padding: 1em; }
   .figure p { text-align: center; }
@@ -177,7 +86,6 @@
     { font-size: 10px; font-weight: bold; white-space: nowrap; }
   .org-info-js_search-highlight
     { background-color: #ffff00; color: #000000; font-weight: bold; }
-  .org-svg { width: 90%; }
   /*]]>*/-->
 </style>
 <link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
@@ -191,7 +99,7 @@
 @licstart  The following is the entire license notice for the
 JavaScript code in this tag.
 
-Copyright (C) 2012-2018 Free Software Foundation, Inc.
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
 
 The JavaScript code in this tag is free software: you can
 redistribute it and/or modify it under the terms of the GNU
@@ -240,39 +148,37 @@ for the JavaScript code in this tag.
 <h2>Table of Contents</h2>
 <div id="text-table-of-contents">
 <ul>
-<li><a href="#org9e32d95">1. A2DP</a>
+<li><a href="#sec-1">1. A2DP</a>
 <ul>
-<li><a href="#org15c393a">1.1. 03587152</a></li>
-<li><a href="#org59e0eb3">1.2. 03609416</a></li>
+<li><a href="#sec-1-1">1.1. 03587152</a></li>
+<li><a href="#sec-1-2">1.2. 03609416</a></li>
+<li><a href="#sec-1-3">1.3. 03553837</a></li>
 </ul>
 </li>
-<li><a href="#org7362852">2. HFP</a></li>
-<li><a href="#org22f4d17">3. PBAP</a>
+<li><a href="#sec-2">2. HFP</a></li>
+<li><a href="#sec-3">3. PBAP</a>
 <ul>
-<li><a href="#org88458a1">3.1. 03590231</a></li>
+<li><a href="#sec-3-1">3.1. 03590231</a></li>
 </ul>
 </li>
-<li><a href="#orgf2a64f8">4. BLE</a>
+<li><a href="#sec-4">4. BLE</a>
 <ul>
-<li><a href="#orgfd37960">4.1. 03451122</a></li>
-<li><a href="#org21cb353">4.2. 03565631</a></li>
+<li><a href="#sec-4-1">4.1. 03451122</a></li>
+<li><a href="#sec-4-2">4.2. 03565631</a></li>
 </ul>
 </li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org9e32d95" class="outline-2">
-<h2 id="org9e32d95"><span class="section-number-2">1</span> A2DP</h2>
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> A2DP</h2>
 <div class="outline-text-2" id="text-1">
-</div>
-<div id="outline-container-org15c393a" class="outline-3">
-<h3 id="org15c393a"><span class="section-number-3">1.1</span> 03587152</h3>
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 03587152</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 手机连接蓝牙耳机播放音乐，再插入线控耳机，然后拔出线控耳机，手机音乐从扬声
@@ -285,11 +191,10 @@ Problem Description
 
 <p>
 实际输出结果：拔出线控耳机后，声音从扬声器输出（蓝牙耳机还是为连接状态）
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 when plugging in the wired earbuds, AudioService called
@@ -298,19 +203,19 @@ disconnectA2dp() and call makeA2dpDeviceUnavailableNow() at last.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a45bad;">07-11</span> <span style="color: #a45bad;">16:42:15.636</span> <span style="color: #a45bad;">1299</span> <span style="color: #a45bad;">1817</span> D AudioService: onSetA2dpSinkConnectionState <span style="color: #7590db;">btDevice</span>=<span style="color: #a45bad;">22:22:22:33:53:D3state</span>=<span style="color: #a45bad;">0</span>
-<span style="color: #a45bad;">07-11</span> <span style="color: #a45bad;">16:42:15.636</span> <span style="color: #a45bad;">1299</span> <span style="color: #a45bad;">1817</span> W AudioService: makeA2dpDeviceUnavailableNow:entry
+
+<pre class="src src-sh">07-11 16:42:15.636 1299 1817 D AudioService: onSetA2dpSinkConnectionState btDevice=22:22:22:33:53:D3state=0
+07-11 16:42:15.636 1299 1817 W AudioService: makeA2dpDeviceUnavailableNow:entry
 </pre>
 </div>
 
 <p>
 but at the same time, Bluetooth UI's status show that the a2dp profile is
 connected.
-</p></li>
-
-<li><p>
-Problem Analysis
 </p>
+</li>
+
+<li>Problem Analysis
 
 <p>
 This issue is expected behavior according to current policy, please refer
@@ -326,28 +231,26 @@ explanation in <code>ActiveDeviceManager.java</code>.
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080601.png" alt="2018080601.png" />
+<p><img src="../images/2018/2018080601.png" alt="2018080601.png" />
 </p>
-</div></li>
+</div>
+</li>
 </ul>
 </div>
 </div>
 
-<div id="outline-container-org59e0eb3" class="outline-3">
-<h3 id="org59e0eb3"><span class="section-number-3">1.2</span> 03609416</h3>
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 03609416</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 Android P, 连接A耳机播放视频时，连接B耳机，有一瞬间声音手机外放
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 This is 2nd a2dp connection issue. Audio leaking on DUT spkr in
@@ -355,7 +258,6 @@ ActiveDevice switch.
 </p>
 
 <pre class="example">
-
 //setActiveDevice
 07-31 18:06:48.781  5054  5068 W A2dpService: setActiveDevice(1C:48:F9:52:97:C9): previous is B8:AD:3E:BC:BA:A2
 
@@ -409,11 +311,10 @@ ActiveDevice switch.
 
 //re-select to bt-a2dp again
 07-31 18:06:50.427   708   708 D audio_hw_primary: select_devices: out_snd_device(32: bt-a2dp) in_snd_device(0: )
-</pre></li>
+</pre>
+</li>
 
-<li><p>
-Problem Analysis
-</p>
+<li>Problem Analysis
 
 <p>
 between the active switch, audio route  to speaker after a short time
@@ -421,82 +322,83 @@ period.  we'd better mute it during this short time.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #dddddd;">Subject:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">[PATCH]</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Explicitly</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">mute</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">output</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">while</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">switching</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">A2DP</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Active</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Device</span>
 
-<span style="color: #dddddd;">The</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">mute/unmute</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">of</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">output</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">needed</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">during</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">A2DP</span>
-<span style="color: #dddddd;">ActiveDevice</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">switch</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">avoid</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">glitches.</span>
+<pre class="src src-diff">Subject: [PATCH] Explicitly mute the audio output while switching the A2DP Active Device
 
-<span style="color: #dddddd;">Bug:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">78152025</span>
-<span style="color: #dddddd;">Bug:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">110441865</span>
-<span style="color: #dddddd;">Test:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Manual</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">-</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">stream</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">with</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Pandora/Spotify</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">and</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">switch</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">A2DP</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Active</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Device</span>
-<span style="color: #dddddd;">Change-Id:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">I5a233460a07e0d4fffcb4e6cb208d846517f0c1e</span>
-<span style="color: #bc6ec5; background-color: #373040;">---</span>
+The mute/unmute of the audio output is needed during the A2DP
+ActiveDevice switch to avoid audio glitches.
 
-<span style="color: #dddddd;">diff</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">--git</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">a/src/com/android/bluetooth/a2dp/A2dpService.java</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">b/src/com/android/bluetooth/a2dp/A2dpService.java</span>
-<span style="color: #dddddd;">index</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">0641c9f..e883227</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">100644</span>
-<span style="color: #bc6ec5; background-color: #373040;">---</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">a/src/com/android/bluetooth/a2dp/A2dpService.java</span>
-<span style="color: #bc6ec5; background-color: #373040;">+++</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">b/src/com/android/bluetooth/a2dp/A2dpService.java</span>
-<span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">-507,7</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">+507,14</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">@@</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">}</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Make</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">sure</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Manager</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">knows</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">previous</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Active</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">device</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">disconnected,</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">and</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">new</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Active</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">device</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">connected.</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                </span><span style="color: #67b11d;">//</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">Also,</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">mute</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">and</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">unmute</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">the</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">output</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">during</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">the</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">switch</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">to</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">avoid</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">audio</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">glitches.</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                </span><span style="color: #67b11d;">boolean</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">wasMuted</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">=</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">false;</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">if</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">(previousActiveDevice</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">!=</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">null)</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">{</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                    </span><span style="color: #67b11d;">if</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">(!mAudioManager.isStreamMute(AudioManager.STREAM_MUSIC))</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">{</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                        </span><span style="color: #67b11d;">mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                                                         </span><span style="color: #67b11d;">AudioManager.ADJUST_MUTE,</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">0);</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                        </span><span style="color: #67b11d;">wasMuted</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">=</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">true;</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                    </span><span style="color: #67b11d;">}</span>
-<span style="color: #dc752f;">                    </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">mAudioManager.setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent(</span>
-<span style="color: #dc752f;">                            </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">previousActiveDevice,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">BluetoothProfile.STATE_DISCONNECTED,</span>
-<span style="color: #dc752f;">                            </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">BluetoothProfile.A2DP,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">true,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">-1);</span>
-<span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">-529,6</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">+536,10</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">@@</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">change,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">so</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Service</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">can</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">reset</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">accordingly</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">audio</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">feeding</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">parameters</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">in</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Audio</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">HAL</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Bluetooth</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">stack.</span>
-<span style="color: #dc752f;">                </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">mAudioManager.handleBluetoothA2dpDeviceConfigChange(mActiveDevice);</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                </span><span style="color: #67b11d;">if</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">(wasMuted)</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">{</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                    </span><span style="color: #67b11d;">mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                                                     </span><span style="color: #67b11d;">AudioManager.ADJUST_UNMUTE,</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">0);</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">                </span><span style="color: #67b11d;">}</span>
-<span style="color: #dc752f;">            </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">}</span>
-<span style="color: #dc752f;">        </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">}</span>
-<span style="color: #dc752f;">        </span><span style="color: #dc752f;"> </span>return<span style="color: #dc752f;"> </span>true;
+Bug: 78152025
+Bug: 110441865
+Test: Manual - stream with Pandora/Spotify and switch A2DP Active Device
+Change-Id: I5a233460a07e0d4fffcb4e6cb208d846517f0c1e
+---
+
+diff --git a/src/com/android/bluetooth/a2dp/A2dpService.java b/src/com/android/bluetooth/a2dp/A2dpService.java
+index 0641c9f..e883227 100644
+--- a/src/com/android/bluetooth/a2dp/A2dpService.java
++++ b/src/com/android/bluetooth/a2dp/A2dpService.java
+@@ -507,7 +507,14 @@
+                 }
+                 // Make sure the Audio Manager knows the previous Active device is disconnected,
+                 // and the new Active device is connected.
++                // Also, mute and unmute the output during the switch to avoid audio glitches.
++                boolean wasMuted = false;
+                 if (previousActiveDevice != null) {
++                    if (!mAudioManager.isStreamMute(AudioManager.STREAM_MUSIC)) {
++                        mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
++                                                         AudioManager.ADJUST_MUTE, 0);
++                        wasMuted = true;
++                    }
+                     mAudioManager.setBluetoothA2dpDeviceConnectionStateSuppressNoisyIntent(
+                             previousActiveDevice, BluetoothProfile.STATE_DISCONNECTED,
+                             BluetoothProfile.A2DP, true, -1);
+@@ -529,6 +536,10 @@
+                 // change, so the Audio Service can reset accordingly the audio
+                 // feeding parameters in the Audio HAL to the Bluetooth stack.
+                 mAudioManager.handleBluetoothA2dpDeviceConfigChange(mActiveDevice);
++                if (wasMuted) {
++                    mAudioManager.adjustStreamVolume(AudioManager.STREAM_MUSIC,
++                                                     AudioManager.ADJUST_UNMUTE, 0);
++                }
+             }
+         }
+         return true;
 </pre>
-</div></li>
+</div>
+</li>
 
 <li>2284854
 
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 It takes extra 6 to 10 seconds to switch active and inactive devices on
 UI setting
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 Repro Steps:
 </p>
 <ol class="org-ol">
 <li>Pair with the remote Carkit device 1 (Addr 19), which support delay
-reporting,</li>
+reporting,
+</li>
 
 <li>Pair with the remote headset device 2 (Addr 21), which not support
-delay reporting. Play a song on DUT</li>
+delay reporting. Play a song on DUT
+</li>
 
-<li>Switch active device and inactive device on UI</li>
-</ol></li>
+<li>Switch active device and inactive device on UI
+</li>
+</ol>
+</li>
 
-<li><p>
-Problem Analysis
-</p>
+<li>Problem Analysis
 
 <p>
 When switch active device, current device is disconnected first and then
@@ -512,37 +414,159 @@ Issue not seen on non-split mode, maybe we should check if there’s any differe
 Sink latency in AVDTP Delay reporting is calculated with 1/10 ms. For
 non-split a2dp path, A2dp hal will convert 1/10 ms to ns via delay_ns = delay_report * 100000. But for split-a2dp path, 1/10 ms is treated as ms
 incorrectly. So that this 2.358s sink latency send to audio HAL, the real
-sink latency value should be 0.2358s. 
-</p></li>
-</ul></li>
+sink latency value should be 0.2358s.
+</p>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 03553837</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Problem Description
+
+<p>
+连接车载蓝牙，手机显示“无手机”或自动断开重连
+</p>
+
+<p>
+steps:
+</p>
+
+<ol class="org-ol">
+<li>连接车载蓝牙，显示“无手机”
+</li>
+
+<li>连接上车载后，又会断开重连.
+</li>
+</ol>
+<p>
+实际输出结果：手机显示“无手机”或自动断开重连
+</p>
+</li>
+
+<li>Facts
+
+<p>
+this device seems want to connect to us proactively, I see
+connect confilction happened during connection, and we re-try
+connection several times. 
+</p>
+
+<p>
+as for disconnection, I seems the carkit didn't poll us as
+master, so connection timeout. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">2,342 Event VS_Host_Report_Event 18 21 00:00:05.093716 7/1/2018 12:15:25.214170 PM
+2,359 Event VS_Host_Report_Event 18 21 00:00:00.723688 7/1/2018 12:15:32.698388 PM
+2,367 Event Disconnection Complete Success 0x000a 4 7 00:00:00.000057 7/1/2018 12:15:32.705241 PM
+</pre>
+</div>
+</li>
+
+<li>Problem Analysis
+
+<p>
+there are three errors in current logs:
+</p>
+<ol class="org-ol">
+<li>after dut starts to connect rfcomm for hfp, remote will
+disconnect it immediately. this should be remote issue. please
+let vivo try to add this device to the
+<code>BlacklistDeviceAddrForNotRetrying</code> blacklist
+
+<pre class="example">
+271 Not Extended remote disconnect rfcomm Initiator Started C/R Sequence Master 2 0x06 3 DM 1 13 00:00:00.007939 7/1/2018 12:14:02.474383 PM
+</pre>
+
+<div class="org-src-container">
+
+<pre class="src src-java">@HeadsetStatemachine
+173 // Blacklist remote device addresses going into bad state if we retry
+174 private static final String [] BlacklistDeviceAddrForNotRetrying =
+175
+</pre>
+</div>
+</li>
+
+<li>after hfp is connected, connection timeout happened. this may be caused by error 3)
+
+<pre class="example">
+Disconnection Complete connection timeout 1,087 Event Disconnection Complete Disconnection Complete Success 7/1/2018 12:14:27.559153 PM 0x0003 4 7 00:00:00.000097
+</pre>
+</li>
+
+<li>dut respond supporting cover art to remote even though the
+avrcp version of dut is avrcp 1.4. it cause that the l2cap
+status of remote goes to bad state.
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081501.png" alt="2018081501.png" />
+</p>
+</div>
+</li>
+
+<li><b>Notes</b>
+
+<p>
+In our OMR1(and P as well) implementation, DUT’s default
+version is 1.4 + Browsing. This is the default value selected
+in DEV UI as well.  But during SDP registration the DUT’s
+record created is 1.6 + Browsing + CA.
+</p>
+
+<p>
+Now, when first time remote is paired and connected, conf file
+is updated with min(DUT’s default v1.4, remote ver). For
+sending SDP records to remote, the registered version(v1.6) is
+then overwritten by this version saved in conf file and also
+BR and CA bits are modified if needed.  After sending the
+records to remote, DUT’s registered version is again made
+v1.6+BR+CA and saved locally. This is the logic which is
+followed in OMR1 and P. 
+</p>
+
+<p>
+Registered version of DUT is always = v1.6+BR+CA.
+Default version of DUT = v1.4 + BR
+Saved entry of remote in conf file = minimum of DUT’s default (v1.4) and remote’s version.
+DUT’s SDP record shown to remote = 1.3 if no conf entry OR conf file entry value.
+</p>
+</li>
+</ol>
+</li>
 </ul>
 </div>
 </div>
 </div>
 
-<div id="outline-container-org7362852" class="outline-2">
-<h2 id="org7362852"><span class="section-number-2">2</span> HFP</h2>
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> HFP</h2>
 </div>
 
-<div id="outline-container-org22f4d17" class="outline-2">
-<h2 id="org22f4d17"><span class="section-number-2">3</span> PBAP</h2>
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> PBAP</h2>
 <div class="outline-text-2" id="text-3">
-</div>
-<div id="outline-container-org88458a1" class="outline-3">
-<h3 id="org88458a1"><span class="section-number-3">3.1</span> 03590231</h3>
+</div><div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 03590231</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 Android P, 连接49号车载蓝牙，高概率出现无法同步联系人
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 from the logs, carkit only query the phonebook size on the DUT, but don't
@@ -556,7 +580,7 @@ carkit query the phonebook size with the following request:
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080107.png" alt="2018080107.png" />
+<p><img src="../images/2018/2018080107.png" alt="2018080107.png" />
 </p>
 </div>
 
@@ -567,11 +591,10 @@ for query, the <code>Max List Count</code> parameter is  0.
 <p>
 to download the phonebook contents, carkit should sent another request with
 <code>Max List Count</code> parameter not equal to 0. but it did't, that's not expected.
-</p></li>
-
-<li><p>
-Problem Analysis
 </p>
+</li>
+
+<li>Problem Analysis
 
 <p>
 for this issue, we should check PBAP version and  supported feature first,
@@ -584,7 +607,7 @@ DUT logs:
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080105.png" alt="2018080105.png" />
+<p><img src="../images/2018/2018080105.png" alt="2018080105.png" />
 </p>
 </div>
 
@@ -594,7 +617,7 @@ Reference phone logs:
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080106.png" alt="2018080106.png" />
+<p><img src="../images/2018/2018080106.png" alt="2018080106.png" />
 </p>
 </div>
 
@@ -619,7 +642,7 @@ when  SIM card has no contacts.
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080108.png" alt="2018080108.png" />
+<p><img src="../images/2018/2018080108.png" alt="2018080108.png" />
 </p>
 </div>
 
@@ -629,7 +652,7 @@ while reference phone respond with the value of 1.
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080109.png" alt="2018080109.png" />
+<p><img src="../images/2018/2018080109.png" alt="2018080109.png" />
 </p>
 </div>
 
@@ -642,7 +665,8 @@ plus, if the carkit don't  request  phonebook content from SIM card, you
 can check the attribute  of <b><b>Supported Repositories</b></b> from the SDP
 response to the carkit in which bit 1 represent wether <b><b>SIM card
 Phonebook</b></b> is supported or not. 
-</p></li>
+</p>
+</li>
 </ul>
 </div>
 </div>
@@ -650,37 +674,32 @@ Phonebook</b></b> is supported or not.
 
 
 
-<div id="outline-container-orgf2a64f8" class="outline-2">
-<h2 id="orgf2a64f8"><span class="section-number-2">4</span> BLE</h2>
+<div id="outline-container-sec-4" class="outline-2">
+<h2 id="sec-4"><span class="section-number-2">4</span> BLE</h2>
 <div class="outline-text-2" id="text-4">
-</div>
-<div id="outline-container-orgfd37960" class="outline-3">
-<h3 id="orgfd37960"><span class="section-number-3">4.1</span> 03451122</h3>
+</div><div id="outline-container-sec-4-1" class="outline-3">
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 03451122</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 使用美居APP无法连接蓝牙电子秤
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 DUT can't search the BLE device.
-</p></li>
-
-<li><p>
-Problem Analysis
 </p>
+</li>
+
+<li>Problem Analysis
 
 
 <div class="figure">
-<p><img src="./images/2018/2018080202.png" alt="2018080202.png" />
+<p><img src="../images/2018/2018080202.png" alt="2018080202.png" />
 </p>
 </div>
 
@@ -695,56 +714,58 @@ check.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-diff"><span style="color: #dddddd;">Subject:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">[PATCH]</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Remove</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">bytes</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">after</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">first</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">zero</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">length</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">field</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">in</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">legacy</span>
-<span style="color: #dc752f;"> </span><span style="color: #dddddd;">advertisements</span>
 
-<span style="color: #dddddd;">This</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">for</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">compatibility</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">with</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">many</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">existing</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">old</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">devices,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">that</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">have</span>
-<span style="color: #dddddd;">non-zero</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">bytes</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">after</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">zero</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">length</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">field.</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">This</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">currently</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">causing</span>
-<span style="color: #dddddd;">advertisements</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">be</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">dropped,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">rendering</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">those</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">devices</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">invisible.</span>
+<pre class="src src-diff">Subject: [PATCH] Remove bytes after first zero length field in legacy
+ advertisements
 
-<span style="color: #dddddd;">Bug:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">68907583</span>
-<span style="color: #dddddd;">Test:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">AdvertiseDataParserTest.RemoveTrailingZerosMalformed</span>
-<span style="color: #dddddd;">Change-Id:</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Ib51950f7e0c6a2771f56c6f69108fa10f2517f38</span>
-<span style="color: #dddddd;">(cherry</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">picked</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">from</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">commit</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">5a290f877f5acb29e78533ad45351510cff87497)</span>
-<span style="color: #bc6ec5; background-color: #373040;">---</span>
-<span style="color: #dc752f;"> </span><span style="color: #dddddd;">stack/btm/btm_ble_gap.cc</span><span style="color: #dc752f;">              </span><span style="color: #dddddd;">|</span><span style="color: #dc752f;">  </span><span style="color: #dddddd;">3</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">++-</span>
-<span style="color: #dc752f;"> </span><span style="color: #dddddd;">stack/include/advertise_data_parser.h</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">|</span><span style="color: #dc752f;">  </span><span style="color: #dddddd;">7</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">+------</span>
-<span style="color: #dc752f;"> </span><span style="color: #dddddd;">stack/test/ad_parser_unittest.cc</span><span style="color: #dc752f;">      </span><span style="color: #dddddd;">|</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">30</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">++++++++++++++++++++++++++++--</span>
-<span style="color: #dc752f;"> </span><span style="color: #dddddd;">3</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">files</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">changed,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">31</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">insertions(+),</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">9</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">deletions(-)</span>
+This is for compatibility with many existing old devices, that have
+non-zero bytes after zero length field. This is currently causing
+advertisements to be dropped, rendering those devices invisible.
 
-<span style="color: #dddddd;">diff</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">--git</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">a/stack/btm/btm_ble_gap.cc</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">b/stack/btm/btm_ble_gap.cc</span>
-<span style="color: #dddddd;">index</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">8037976..845c8c4</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">100644</span>
-<span style="color: #bc6ec5; background-color: #373040;">---</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">a/stack/btm/btm_ble_gap.cc</span>
-<span style="color: #bc6ec5; background-color: #373040;">+++</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">b/stack/btm/btm_ble_gap.cc</span>
-<span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">-2014,7</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">+2014,8</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">static</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">void</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">btm_ble_process_adv_pkt_cont(</span>
-<span style="color: #dc752f;">   </span><span style="color: #dddddd;">bool</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is_start</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">=</span>
-<span style="color: #dc752f;">    </span><span style="color: #dc752f;">   </span><span style="color: #dddddd;">ble_evt_type_is_legacy(evt_type)</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">&amp;&amp;</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is_scannable</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">&amp;&amp;</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">!is_scan_resp;</span>
+Bug: 68907583
+Test: AdvertiseDataParserTest.RemoveTrailingZerosMalformed
+Change-Id: Ib51950f7e0c6a2771f56c6f69108fa10f2517f38
+(cherry picked from commit 5a290f877f5acb29e78533ad45351510cff87497)
+---
+ stack/btm/btm_ble_gap.cc              |  3 ++-
+ stack/include/advertise_data_parser.h |  7 +------
+ stack/test/ad_parser_unittest.cc      | 30 ++++++++++++++++++++++++++++--
+ 3 files changed, 31 insertions(+), 9 deletions(-)
 
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">  </span><span style="color: #f2241f;">if</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">(is_start)</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">AdvertiseDataParser::RemoveTrailingZeros(tmp);</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">  </span><span style="color: #67b11d;">if</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">(ble_evt_type_is_legacy(evt_type))</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">    </span><span style="color: #67b11d;">AdvertiseDataParser::RemoveTrailingZeros(tmp);</span>
+diff --git a/stack/btm/btm_ble_gap.cc b/stack/btm/btm_ble_gap.cc
+index 8037976..845c8c4 100644
+--- a/stack/btm/btm_ble_gap.cc
++++ b/stack/btm/btm_ble_gap.cc
+@@ -2014,7 +2014,8 @@ static void btm_ble_process_adv_pkt_cont(
+   bool is_start =
+       ble_evt_type_is_legacy(evt_type) &amp;&amp; is_scannable &amp;&amp; !is_scan_resp;
 
-<span style="color: #dc752f;">   </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">We</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">might</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">have</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">send</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">scan</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">request</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">this</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">device</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">before,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">but</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">didn't</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">get</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span>
-<span style="color: #dc752f;">   </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">response.</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">In</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">such</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">case</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">make</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">sure</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">data</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">is</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">put</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">at</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">start,</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">not</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">appended</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span>
-<span style="color: #dddddd;">diff</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">--git</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">a/stack/include/advertise_data_parser.h</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">b/stack/include/advertise_data_parser.h</span>
-<span style="color: #dddddd;">index</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">473b979..fb5f7f7</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">100644</span>
-<span style="color: #bc6ec5; background-color: #373040;">---</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">a/stack/include/advertise_data_parser.h</span>
-<span style="color: #bc6ec5; background-color: #373040;">+++</span><span style="color: #dc752f;"> </span><span style="color: #cbc1d5; background-color: #373040;">b/stack/include/advertise_data_parser.h</span>
-<span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">-57,12</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">+57,7</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">@@</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">class</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">AdvertiseDataParser</span><span style="color: #dc752f;"> </span><span style="color: #bc6ec5; background-color: #373040;">{</span>
-<span style="color: #dc752f;">    </span><span style="color: #dc752f;">   </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">end</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">of</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">packet.</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">Otherwise</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">i.e.</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">gluing</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">scan</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">response</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">to</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">advertise</span>
-<span style="color: #dc752f;">    </span><span style="color: #dc752f;">   </span><span style="color: #dddddd;">//</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">data</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">will</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">result</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">in</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">data</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">with</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">zero</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">padding</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">in</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">the</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">middle.</span>
-<span style="color: #dc752f;">    </span><span style="color: #dc752f;">   </span><span style="color: #dddddd;">if</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">(len</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">==</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">0)</span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">{</span>
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">        </span><span style="color: #f2241f;">size_t</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">zeros_start</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">=</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">position;</span>
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">        </span><span style="color: #f2241f;">for</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">(size_t</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">i</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">=</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">position</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">+</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">1;</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">i</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">&lt;</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">ad_len;</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">i++)</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">{</span>
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">          </span><span style="color: #f2241f;">if</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">(ad[i]</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">!=</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">0)</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">return;</span>
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">        </span><span style="color: #f2241f;">}</span>
-<span style="color: #f2241f;">-</span>
-<span style="color: #f2241f;">-</span><span style="color: #dc752f;">        </span><span style="color: #f2241f;">ad.erase(ad.begin()</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">+</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">zeros_start,</span><span style="color: #dc752f;"> </span><span style="color: #f2241f;">ad.end());</span>
-<span style="color: #67b11d;">+</span><span style="color: #dc752f;">        </span><span style="color: #67b11d;">ad.erase(ad.begin()</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">+</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">position,</span><span style="color: #dc752f;"> </span><span style="color: #67b11d;">ad.end());</span>
-<span style="color: #dc752f;">        </span><span style="color: #dc752f;"> </span><span style="color: #dddddd;">return;</span>
-<span style="color: #dc752f;">    </span><span style="color: #dc752f;">   </span>}
+-  if (is_start) AdvertiseDataParser::RemoveTrailingZeros(tmp);
++  if (ble_evt_type_is_legacy(evt_type))
++    AdvertiseDataParser::RemoveTrailingZeros(tmp);
+
+   // We might have send scan request to this device before, but didn't get the
+   // response. In such case make sure data is put at start, not appended to
+diff --git a/stack/include/advertise_data_parser.h b/stack/include/advertise_data_parser.h
+index 473b979..fb5f7f7 100644
+--- a/stack/include/advertise_data_parser.h
++++ b/stack/include/advertise_data_parser.h
+@@ -57,12 +57,7 @@ class AdvertiseDataParser {
+       // end of the packet. Otherwise i.e. gluing scan response to advertise
+       // data will result in data with zero padding in the middle.
+       if (len == 0) {
+-        size_t zeros_start = position;
+-        for (size_t i = position + 1; i &lt; ad_len; i++) {
+-          if (ad[i] != 0) return;
+-        }
+-
+-        ad.erase(ad.begin() + zeros_start, ad.end());
++        ad.erase(ad.begin() + position, ad.end());
+         return;
+       }
 </pre>
-</div></li>
+</div>
+</li>
 </ul>
 </div>
 </div>
@@ -752,21 +773,18 @@ check.
 
 
 
-<div id="outline-container-org21cb353" class="outline-3">
-<h3 id="org21cb353"><span class="section-number-3">4.2</span> 03565631</h3>
+<div id="outline-container-sec-4-2" class="outline-3">
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 03565631</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
-<li><p>
-Problem Description
-</p>
+<li>Problem Description
 
 <p>
 市场反馈：连接不上小米手环
-</p></li>
-
-<li><p>
-Facts
 </p>
+</li>
+
+<li>Facts
 
 <p>
 Compare the  normal logs and abnormmal logs, 
@@ -776,16 +794,16 @@ Encryption command, but failed.
 </p>
 
 <div class="org-src-container">
-<pre class="src src-sh"><span style="color: #a45bad;">369</span> Command <span style="color: #a45bad;">0x2019</span> Low Energy HCI_LE_Start_Encryption <span style="color: #a45bad;">2018/7/2</span> <span style="color: #a45bad;">11:59:49.298495</span> <span style="color: #a45bad;">28</span> <span style="color: #a45bad;">32</span> <span style="color: #a45bad;">00:00:00.007311</span>
-<span style="color: #a45bad;">370</span> Event <span style="color: #a45bad;">0x2019</span> Low Energy HCI_LE_Start_Encryption Command Status Success <span style="color: #a45bad;">2018/7/2</span> <span style="color: #a45bad;">11:59:49.304905</span> <span style="color: #a45bad;">4</span> <span style="color: #a45bad;">7</span> <span style="color: #a45bad;">00:00:00.006410</span>
-<span style="color: #a45bad;">384</span> Event Encryption Change Connection Timeout <span style="color: #a45bad;">2018/7/2</span> <span style="color: #a45bad;">11:59:54.599536</span> <span style="color: #a45bad;">0x0002</span> <span style="color: #a45bad;">4</span> <span style="color: #a45bad;">7</span> <span style="color: #a45bad;">00:00:00.002959</span>
-<span style="color: #a45bad;">385</span> Event Disconnection Complete Success <span style="color: #a45bad;">2018/7/2</span> <span style="color: #a45bad;">11:59:54.599963</span> <span style="color: #a45bad;">0x0002</span> <span style="color: #a45bad;">4</span> <span style="color: #a45bad;">7</span> <span style="color: #a45bad;">00:00:00.000427</span> 
-</pre>
-</div></li>
 
-<li><p>
-Problem Analysis
-</p>
+<pre class="src src-sh">369 Command 0x2019 Low Energy HCI_LE_Start_Encryption 2018/7/2 11:59:49.298495 28 32 00:00:00.007311
+370 Event 0x2019 Low Energy HCI_LE_Start_Encryption Command Status Success 2018/7/2 11:59:49.304905 4 7 00:00:00.006410
+384 Event Encryption Change Connection Timeout 2018/7/2 11:59:54.599536 0x0002 4 7 00:00:00.002959
+385 Event Disconnection Complete Success 2018/7/2 11:59:54.599963 0x0002 4 7 00:00:00.000427
+</pre>
+</div>
+</li>
+
+<li>Problem Analysis
 
 <p>
 The snoops having the extended logging shows the SLAVE device ( other side)
@@ -799,7 +817,7 @@ Expected Procedure as per spec:
 <p>
 Slave &#x2013;&gt; START_ENC_REQ
 Master&#x2013;&gt; START_ENC_RSP
-Slave -&gt;&gt;START_ENC_RSP --------&#x2013;&#x2014;&gt; Here the Encryption proceedure is
+Slave -&gt;&gt;START_ENC_RSP -&#x2014;&#x2014;&#x2014;&#x2014;&gt; Here the Encryption proceedure is
 complete. 
 </p>
 
@@ -830,42 +848,43 @@ The proof is from the snoop Extended logs.
 </p>
 
 <div class="org-src-container">
+
 <pre class="src src-sh">QCA Debug Logs:
 Log ID: OTA LE CTRL RX PDU
 Log Format: FMT_PACKET
 Log Level: LOG_HIGH
-TimeStamp: <span style="color: #a45bad;">0x0a142204</span>
-Length: <span style="color: #a45bad;">0x0005</span>
+TimeStamp: 0x0a142204
+Length: 0x0005
 LE Ctrl Rx PDU Info
-Handle: <span style="color: #a45bad;">3</span>
-TxACK Req: <span style="color: #a45bad;">0</span>
-PDU Length: <span style="color: #a45bad;">1</span>
+Handle: 3
+TxACK Req: 0
+PDU Length: 1
 LE LL:
 Control Pkt: LL_START_ENC_REQ
 QCA Debug Logs:
 Log ID: OTA LE CTRL TX PDU
 Log Format: FMT_PACKET
 Log Level: LOG_HIGH
-TimeStamp: <span style="color: #a45bad;">0x0a142216</span>
-Length: <span style="color: #a45bad;">0x0009</span>
+TimeStamp: 0x0a142216
+Length: 0x0009
 LE Ctrl Tx PDU Info
-Handle: <span style="color: #a45bad;">3</span>
-TxACK Req: <span style="color: #a45bad;">0</span>
-PDU Length: <span style="color: #a45bad;">1</span>
+Handle: 3
+TxACK Req: 0
+PDU Length: 1
 LE LL:
 Control Pkt: LL_START_ENC_RSP
-EnQ TimeStamp: <span style="color: #a45bad;">0x0a142213</span>
+EnQ TimeStamp: 0x0a142213
 QCA Debug Logs:
 Log ID: LOG_ID_LLM_LE_ENC_SM
 Log Format: FMT_PACKET
 Log Level: LOG_HIGH
-TimeStamp: <span style="color: #a45bad;">0x0a142269</span>
-Length: <span style="color: #a45bad;">0x0004</span>
+TimeStamp: 0x0a142269
+Length: 0x0004
 LE Encr SM
 NewState: CMs_LE_ENCR_W4_START_ENC_RSP_I
 Event: CMeLE_ENCR_EVENT_RX_START_ENC_REQ
-Handle: <span style="color: #a45bad;">3</span>
-CurrState: CMs_LE_ENCR_W4_START_ENC_REQ 
+Handle: 3
+CurrState: CMs_LE_ENCR_W4_START_ENC_REQ
 </pre>
 </div>
 
@@ -886,7 +905,8 @@ proceedure will be initiated by DUT not from remote side.
 
 <p>
 there is timing case, if we allow Peripheral to initiated Encryption.
-</p></li>
+</p>
+</li>
 </ul>
 </div>
 </div>
@@ -894,7 +914,8 @@ there is timing case, if we allow Peripheral to initiated Encryption.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-12 Sun 12:18</p>
+<p class="date">Created: 2018-08-15 Wed 18:46</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
 </body>

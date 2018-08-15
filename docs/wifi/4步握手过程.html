@@ -1,0 +1,600 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>4步握手过程研究</title>
+<!-- 2018-08-15 Wed 19:55 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Fu Yajun" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">4步握手过程研究</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. 基础理论</a>
+<ul>
+<li><a href="#sec-1-1">1.1. 概述</a></li>
+<li><a href="#sec-1-2">1.2. 术语</a></li>
+<li><a href="#sec-1-3">1.3. Key</a>
+<ul>
+<li><a href="#sec-1-3-1">1.3.1. Key Hierarchy</a></li>
+<li><a href="#sec-1-3-2">1.3.2. PMKSA（PMK Security Association）</a></li>
+<li><a href="#sec-1-3-3">1.3.3. 临时密钥计算</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. 4-Way HandShake</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 基本步骤</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. Group HandShake</a>
+<ul>
+<li><a href="#sec-3-1">3.1. 基本步骤</a></li>
+<li><a href="#sec-3-2">3.2. 如何产生GMK？</a></li>
+<li><a href="#sec-3-3">3.3. 如何产生临时Key？</a></li>
+<li><a href="#sec-3-4">3.4. Rekey</a>
+<ul>
+<li><a href="#sec-3-4-1">3.4.1. Rekey Intervals</a></li>
+<li><a href="#sec-3-4-2">3.4.2. Benefits of Rekeying</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> 基础理论</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 概述</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+Both WPA2-PSK and WPA2-EAP result in a Pairwise Master Key (PMK)
+known to both the supplicant (client) and the authenticator
+(AP). (In PSK the PMK is derived directly from the password,
+whereas in EAP it is a result of the authentication process.) The
+four-way WPA2 handshake essentially makes the supplicant and
+authenticator prove to each other that they both know the PMK, and
+creates the temporal keys used to actually secure network
+data. Capturing the four-way handshake will not divulge(泄露) the PMK or
+PSK (since capturing the handshake is trivial over wireless this
+would be a major vulnerability). The PMK isn't even sent during the
+handshake, instead it is used to calculate a Message Integrity
+Check (MIC). You basically need to perform a dictionary or
+bruteforce attack on the handshake until you find a password which
+results in the same MIC as in the packets.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 术语</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li><code>MSK-Master Session Key ( or AAA Key)</code>
+Key information that is jointly negotiated between the Supplicant
+&amp; Authentication Server. This key information is transported via
+a secure channel from Authenticating Server to Authenticator.
+</li>
+<li><code>PMK-Pairwise Master Key</code>
+PMK is derived from MSK seeding material. PMK is first 256bits
+(0-255) of MSK. It can be derived from an EAP method or directly
+from a PresharedKey(PSK).
+</li>
+<li><code>GMK-Group Master Key</code>
+GMK is randomly created on Authenticator &amp; refresh it in
+configured time interval to reduce the risk of GMK being
+compromised.
+</li>
+
+<li><code>PTK-Pairwise Transient Key</code>
+value derived from PMK,Authenicator nonce(Anonce),Supplicant
+nonce(Snonce), Authenticator Address, Supplicant Address. This is
+used to encrypt all unicast transmission between client &amp; an AP. 
+
+<p>
+Unicast data sent between two parties needs to be private to
+those two parties. This is best accomplished by using a specific
+key for each pair of devices communicating. we called this a
+pairwise key.
+</p>
+</li>
+
+<li><code>GTK-Group Temporal Key</code>
+GTK is used to encrypt all broadcast/multicast transmission
+between an AP &amp; multiple client statsions. GTK is derived on
+Authenticator &amp; sending to supplicant during 4-Way Handshake (M3)
+
+<p>
+broadcast (or multicast) data must be received by multiple
+parties who form a trusted group. Therefore, a key must be
+shared by all the members of that trusted group. This is called
+the group key.
+</p>
+</li>
+
+<li><code>Pre-shared keys</code>
+Preshared keys bypass the concept of upper-layer authentication
+completely; you are assumed to be authentic simply by proving
+possession of the key.
+</li>
+
+<li><code>server-based keys</code>
+requires an upper-layer authentication process that allows the
+mobile device and an authentication server to generate matching secret keys. 
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Key</h3>
+<div class="outline-text-3" id="text-1-3">
+</div><div id="outline-container-sec-1-3-1" class="outline-4">
+<h4 id="sec-1-3-1"><span class="section-number-4">1.3.1</span> Key Hierarchy</h4>
+<div class="outline-text-4" id="text-1-3-1">
+<p>
+RSN key hierarchy
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042505.png" alt="2016042505.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042504.png" alt="2016042504.png" />
+</p>
+</div>
+
+<p>
+对于PTK来说，每个STA与AP之间独立共享一个唯一的PTK，而对于GTK，所有
+STA与AP之间共享同一个GTK。
+</p>
+</div>
+
+<ol class="org-ol"><li><a id="sec-1-3-1-1" name="sec-1-3-1-1"></a>AES<br  /><div class="outline-text-5" id="text-1-3-1-1">
+<ul class="org-ul">
+<li>Pairwise Key Hierarchy
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042506.png" alt="2016042506.png" />
+</p>
+</div>
+</li>
+
+<li>Group Key Hierarchy
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042509.png" alt="2016042509.png" />
+</p>
+</div>
+</li>
+</ul>
+</div>
+</li>
+
+<li><a id="sec-1-3-1-2" name="sec-1-3-1-2"></a>TKIP<br  /><div class="outline-text-5" id="text-1-3-1-2">
+<ul class="org-ul">
+<li>Pairwise Key Hierarchy
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042507.png" alt="2016042507.png" />
+</p>
+</div>
+</li>
+
+<li>Group Key Hierarchy
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042508.png" alt="2016042508.png" />
+</p>
+</div>
+</li>
+</ul>
+</div>
+</li></ol>
+</div>
+
+<div id="outline-container-sec-1-3-2" class="outline-4">
+<h4 id="sec-1-3-2"><span class="section-number-4">1.3.2</span> PMKSA（PMK Security Association）</h4>
+<div class="outline-text-4" id="text-1-3-2">
+<p>
+认证者与申请者都有可能缓存PMKSA， 它包含了一些相关状态信息，如AP的
+MAC地址，PMK的生存期以及唯一的标识PMKID等。其他PMKID是根据如下公式
+计算出来的一个Hash值：
+</p>
+<pre class="example">
+PMKID = HMAC-SHA1-128(PMK, "PMK Name" | MAC_AP | MAC_STA)
+</pre>
+
+<p>
+When associating with an access point, the station determines if
+it has a valid PMK with the target access point by checking if it
+has a PMKSA that matches the target access point's MAC address. If
+such PMK does not exist, the station and the access point perform
+authentication using EAP. If the station determines that it shares
+a PMK with the target AP, then the station proposes the use of the
+PMK by including the PMKID in the RSN Information Element of the
+(Re)Association Request message. Upon reciept of a (Re)Assiciation
+Request with a PMKID, the access point checks whether is has a
+valid PMKSA with the same PMKID. If so, it begins the four way
+handshake exchange using the negotiated PMKSA.
+</p>
+
+<p>
+在与AP进行关联或重新关联时，会先检测是否有对应的PMKSA，如果存在，
+则在请求IE中包含PMKID信息，AP收到后，根据PMKID信息检测是否有对应的
+PMKSA，如果存在，则使用之前协商好的PMKSA直接进入4步握手阶段。
+</p>
+
+<p>
+PMKSA缓存节省的主要是4步握手之前的时间(如802.1X论证)，每次关联后，
+4步握手是必须要做的。  
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3-3" class="outline-4">
+<h4 id="sec-1-3-3"><span class="section-number-4">1.3.3</span> 临时密钥计算</h4>
+<div class="outline-text-4" id="text-1-3-3">
+<p>
+ PMK并不直接用于保密操作，它本身用来产生一组Key，这些Key用来保护设备
+间的通信链路。有4个单独Key来保护通信链路：
+</p>
+
+<ul class="org-ul">
+<li>Data Encryption key (128 bits)
+</li>
+<li>Data Integrity key (128 bits)
+</li>
+<li>EAPOL-Key Encryption key (128 bits)
+</li>
+<li>EAPOL-Key Integrity key (128 bits)
+</li>
+</ul>
+
+<p>
+这些Key称为临时Key，因为每次设备与AP关联时，都会重新产生。这些Key一
+起统称为PTK(pairwise transient key)。
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042502.png" alt="2016042502.png" />
+</p>
+</div>
+
+
+<p>
+PMK利用认证过程中产生的生成Key的原料来产生的。对于Pre-Shared Key，
+直接将其作为PMK来使用。
+认证结束后，即当收到认证方发送的EAP-Success消息，双方都应该获取到了
+PMK。
+</p>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> 4-Way HandShake</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 基本步骤</h3>
+<div class="outline-text-3" id="text-2-1">
+
+<div class="figure">
+<p><img src="../images/2015/2015121401.png" alt="2015121401.png" />
+</p>
+<p><span class="figure-number">Figure 8:</span> 802.11i四次握手过程</p>
+</div>
+
+<p>
+四次握手是802.11i标准中用来在AP和客户端之间生成并管理PTK临时密钥的
+交互过程，在整个过程中，AP和STA均确认对方是否持有与自己一致的PMK，
+如不一致，四次握手过程就失败。
+</p>
+
+<ol class="org-ol">
+<li>认证者向申请者发送消息M1, M1包含用于产生PTK的随机数Anonce，申
+请者利用事先共享的PMK,Snonce和Anonce计算PTK。
+</li>
+
+<li>申请者向认证者发送M2，M2中包含SNonce，并且用刚计算出的PTK中的
+KCK（EAPOL-Key完整性密钥）部分对M2进行MIC认证。
+</li>
+
+<li>认证者得到Snonce并利用事先共享的PMK计算出PTK，利用PTK中KCK部分
+对M2进行MIC校验。如果校验失败就丢弃该M2，正确则向申请者发送M3。
+M3中包含一个MIC校验，使申请者能够核实认证方拥有一个匹配的PMK。
+论证者也会产生GTK信息，并通过PTK进行加密，传送给申请者。
+</li>
+
+<li>申请者收到M3并校验正确后，即装入PTK，并发送M4给认证者，表示已经
+装入PTK。认证者在收到M4并校验正确后也装入PTK。至此四次握手过程
+完成，PTK产生并完成装载， 同时也会将收到的GTK装载。
+</li>
+</ol>
+
+<p>
+整个步骤用如下图表示所示：
+<img src="../images/2016/2016042501.png" alt="2016042501.png" />
+</p>
+
+<p>
+用简单的言语解释一下，基本意思就是：
+ PTK是两边都要对上的，而GTK是在PTK成功后，AP直接将加密过的GTK发给STA，
+ STA再把GTK解出来。抓包看到有四个EAPOL-KEY，后两个包含AP和STA安装
+ GTK。
+</p>
+
+<p>
+对于PTK，AP送Anouce给STA，STA收到后，自己产生一个SNounce然后结合
+ANounce PMK AA和SA得出PTK，进而有MIC key然后连同一个802.1X data通
+过HMAC_MD5算出MIC，STA把MIC和SNounce发给AP。AP收到Snouce后，自己
+也使用相同的算法，通过SA AA SNounce ANounce计算MIC，如果这个MIC和
+STA发过来的MIC是一样的，那么就说明两侧的PMK是一样的，不然过后AP就
+会发出deauth给STA
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Group HandShake</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+一般发生在AP要更新GTK的情况，通常由AP主导，当然STA也可以主动要求。
+</p>
+</div>
+<div id="outline-container-sec-3-1" class="outline-3">
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 基本步骤</h3>
+<div class="outline-text-3" id="text-3-1">
+<p>
+PTK成功后，两侧的PTK Key结构就确定下来了，随后AP会通过
+  <code>EAPOL-KEY</code> 把GTK发给STA，AP发一个MIC给STA，STA把KEY解出来，发一个确认信息给AP。
+</p>
+
+<p>
+这个Key通过加密通道进行传输，拥有Group Key的设备才能收到从AP发送
+过来的广播包。AP在发送Group Key的时候会执行如下操作：
+</p>
+
+<ol class="org-ol">
+<li>产生一个256-bit的GMK(Group Master Key)。
+</li>
+<li>得到256-bit的GTK(Group Transient Key)，临时Key从GTK中获取。
+</li>
+<li>当AP与移动设备间的单播安全链路建立后：
+a)发送GTK给移动设备
+b)检测接收到GTK的确认消息。
+</li>
+</ol>
+
+
+<div class="figure">
+<p><img src="../images/2016/2016042503.png" alt="2016042503.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3-2" class="outline-3">
+<h3 id="sec-3-2"><span class="section-number-3">3.2</span> 如何产生GMK？</h3>
+<div class="outline-text-3" id="text-3-2">
+<p>
+The access point allocates a GMK simply by choosing a 256-bit
+cryptographic-quality random number. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-3" class="outline-3">
+<h3 id="sec-3-3"><span class="section-number-3">3.3</span> 如何产生临时Key？</h3>
+<div class="outline-text-3" id="text-3-3">
+<p>
+需要两个Key：
+</p>
+<ol class="org-ol">
+<li>Group Encryption Key(128 bits)
+</li>
+<li>Group Integrity Key(128 bits)
+</li>
+</ol>
+
+<p>
+The combination of these two keys forms a 256-bit value, the
+GTK. AP将会把GTK发送到与之关联的设备上。GTK由GMK值再结合nonce值和
+AP的MAC地址来产生的。
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4" class="outline-3">
+<h3 id="sec-3-4"><span class="section-number-3">3.4</span> Rekey</h3>
+<div class="outline-text-3" id="text-3-4">
+</div><div id="outline-container-sec-3-4-1" class="outline-4">
+<h4 id="sec-3-4-1"><span class="section-number-4">3.4.1</span> Rekey Intervals</h4>
+<div class="outline-text-4" id="text-3-4-1">
+<p>
+WPA automatically changes secret keys after a certain period of
+time. The group rekey interval is the period of time in between
+automatic changes of the group key, which all devices on the
+network share. WPA changes the group key so quickly that you won't
+even notice the process.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-3-4-2" class="outline-4">
+<h4 id="sec-3-4-2"><span class="section-number-4">3.4.2</span> Benefits of Rekeying</h4>
+<div class="outline-text-4" id="text-3-4-2">
+<p>
+The WPA protocol uses rekeying to provide your network with
+increased security. Constantly rekeying the group key protects
+your network against intrusion, as the would-be intruder must cope
+with an ever-changing secret key. Older security standards like
+WEP do not possess this automatic rekey function, and are
+therefore less secure.
+</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Fu Yajun</p>
+<p class="date">Created: 2018-08-15 Wed 19:55</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>
