@@ -45,6 +45,13 @@
        ...
      }tBTM_CB;
    #+END_SRC
+
+   bta_sys_busy(BTA_ID_AG, p_scb->app_id, p_scb->peer_addr); //unsniff
+
+   bta_sys_idle(BTA_ID_AG, p_scb->app_id, p_scb->peer_addr);//sniff
+
+   bta_dm_pm_cback
+
    
 * Device control
 * BLE Device controllers

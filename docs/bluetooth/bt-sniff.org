@@ -659,11 +659,319 @@
 
 * Code Flow Analysis in Florida Stack
 
+** verview of the code flow
+
+   during bluetooth init, we'll initializes the BT low power manager.
+   
+   #+BEGIN_SRC plantuml :file ../images/2018/2018081805.png :cmdline -charset UTF-8
+     @startuml
+     (*) --> bta_dm_sys_hw_cback
+     bta_dm_sys_hw_cback --> bta_dm_init_pm
+     bta_dm_init_pm --> [bta_dm_pm_cback] bta_sys_pm_register
+     bta_dm_init_pm --> [bta_dm_pm_btm_cback] BTM_PmRegister
+     @enduml
+   #+END_SRC
+
+   #+RESULTS:
+   [[file:../images/2018/2018081805.png]]
+
+   of the two callbacks:
+
+   - bta_dm_pm_cback
+
+     is called when connection status changed for system connection.
+
+   - bta_dm_pm_btm_cback
+
+     called when power management status changed. it will call
+     *bta_dm_pm_btm_status* furhter to process the
+     BTA_DM_PM_BTM_STATUS_EVT. 
+
+   both the above functions may call call *bta_dm_pm_set_mode* to set the
+     power mode inclding sniff mode. 
+
+   Each profile will register with BT Power manager module during
+   profile connection(through *bta_dm_pm_cback*). Each profile has default set sniff idle time
+   out and other sniff parameters based on the *bta_dm_pm_cfg*.
+
+   here is the definition of it's structure:
+
+   #+BEGIN_SRC c
+     typedef struct {
+       uint8_t id;   /* profile role index in the BTA system.
+       uint8_t app_id;
+       uint8_t spec_idx; /* index of spec table to use */
+
+     } tBTA_DM_PM_CFG;   
+   #+END_SRC
+
+   [[../images/2018/2018081801.png]]
+
+   take the AG module configuration for example, for AG module, the
+   spec index is 0 in spec table *bta_dm_pm_spec*.
+
+   here is the definition of it's structure:
+
+   #+BEGIN_SRC c
+     typedef struct {
+       uint8_t allow_mask; /* mask of sniff/hold/park modes to allow */
+     #if (BTM_SSR_INCLUDED == TRUE)
+       uint8_t ssr; /* set SSR on conn open/unpark */
+     #endif
+       tBTA_DM_PM_ACTN actn_tbl[BTA_DM_PM_NUM_EVTS][2];
+
+     } tBTA_DM_PM_SPEC;
 
 
+     typedef struct {
+       tBTA_DM_PM_ACTION power_mode;
+       uint16_t timeout;
 
-  
-    
+     } tBTA_DM_PM_ACTN;
 
 
+     /* power mode actions  */
+     #define BTA_DM_PM_NO_ACTION 0x00 /* no change to the current pm setting */
+     #define BTA_DM_PM_PARK 0x10      /* prefers park mode */
+     #define BTA_DM_PM_SNIFF 0x20     /* prefers sniff mode */
+     #define BTA_DM_PM_SNIFF1 0x21    /* prefers sniff1 mode */
+     #define BTA_DM_PM_SNIFF2 0x22    /* prefers sniff2 mode */
+     #define BTA_DM_PM_SNIFF3 0x23    /* prefers sniff3 mode */
+     #define BTA_DM_PM_SNIFF4 0x24    /* prefers sniff4 mode */
+     #define BTA_DM_PM_SNIFF5 0x25    /* prefers sniff5 mode */
+     #define BTA_DM_PM_SNIFF6 0x26    /* prefers sniff6 mode */
+     #define BTA_DM_PM_SNIFF7 0x27    /* prefers sniff7 mode */
+     #define BTA_DM_PM_SNIFF_USER0 \
+       0x28 /* prefers user-defined sniff0 mode (testtool only) */
+     #define BTA_DM_PM_SNIFF_USER1 \
+       0x29 /* prefers user-defined sniff1 mode (testtool only) */
+     #define BTA_DM_PM_ACTIVE 0x40  /* prefers active mode */
+     #define BTA_DM_PM_RETRY 0x80   /* retry power mode based on current settings */
+     #define BTA_DM_PM_SUSPEND 0x04 /* prefers suspend mode */
+     #define BTA_DM_PM_NO_PREF                                                   \
+       0x01 /* service has no prefernce on power mode setting. eg. connection to \
+               service got closed */
 
+     typedef uint8_t tBTA_DM_PM_ACTION;
+   #+END_SRC
+
+   [[../images/2018/2018081803.png]]
+
+   If more than 1 profile connected on same ACL, then least time out
+   of all connected profiles will be effective.
+
+   Also, the SSR entry is *BTA_DM_PM_SSR2*, which means that the max
+   latency is 1200 slots.
+
+   [[../images/2018/2018081804.png]]
+
+   #+BEGIN_SRC c
+     typedef struct {
+       uint16_t max_lat;
+       uint16_t min_rmt_to;
+       uint16_t min_loc_to;
+     } tBTA_DM_SSR_SPEC;   
+   #+END_SRC
+   
+   These ssr parameters also depends on profile. Each profile set ssr
+   parameter based on config table(bta_dm_pm_spec) we referred earlier.
+
+   For most profile connection, when in SSR, the max latency is 1200 *
+   0.625 = 750ms. Only HID profile will use different ssr
+   parameter. When DUT  moves back to active mode from any other low
+   power mode, DUT update ssr parameters to SoC.
+
+   SoC will use these sniff sub rating parameters in sniff mode.
+
+** setting sniff parameters -- bta_dm_pm_sniff
+
+   this function is used to call *BTM_SetPowerMode* to enter sniff
+   mode or exit sniff mode. 
+
+   for different profiles, the sniff paramters are set differently. 
+
+   for example, for a2dp profile, the sniff paramter is index by
+   *BTA_DM_PM_SNIFF_A2DP_IDX* which is eaual to *BTA_DM_PM_SNIFF* . 
+
+   this is the sniff table :
+
+   #+BEGIN_SRC c
+     tBTA_DM_PM_TYPE_QUALIFIER tBTM_PM_PWR_MD bta_dm_pm_md[] = {
+         /*
+          ,* More sniff parameter entries can be added for
+          ,* BTA_DM_PM_SNIFF3 - BTA_DM_PM_SNIFF7, if needed. When entries are added or
+          ,* removed, BTA_DM_PM_PARK_IDX needs to be updated to reflect the actual
+          ,* index
+          ,* BTA_DM_PM_PARK_IDX is defined in bta_api.h and can be override by the
+          ,* bdroid_buildcfg.h settings.
+          ,* The SNIFF table entries must be in the order from highest latency
+          ,* (biggest
+          ,* interval) to lowest latency. If there's a conflict among the connected
+          ,* services, the setting with lowest latency wins.
+          ,*/
+         /* sniff modes: max interval, min interval, attempt, timeout */
+         {BTA_DM_PM_SNIFF_MAX, BTA_DM_PM_SNIFF_MIN, BTA_DM_PM_SNIFF_ATTEMPT,
+          BTA_DM_PM_SNIFF_TIMEOUT, BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF - A2DP */
+         {BTA_DM_PM_SNIFF1_MAX, BTA_DM_PM_SNIFF1_MIN, BTA_DM_PM_SNIFF1_ATTEMPT,
+          BTA_DM_PM_SNIFF1_TIMEOUT, BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF1 */
+         {BTA_DM_PM_SNIFF2_MAX, BTA_DM_PM_SNIFF2_MIN, BTA_DM_PM_SNIFF2_ATTEMPT,
+          BTA_DM_PM_SNIFF2_TIMEOUT,
+          BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF2- HD idle */
+         {BTA_DM_PM_SNIFF3_MAX, BTA_DM_PM_SNIFF3_MIN, BTA_DM_PM_SNIFF3_ATTEMPT,
+          BTA_DM_PM_SNIFF3_TIMEOUT,
+          BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF3- SCO open */
+         {BTA_DM_PM_SNIFF4_MAX, BTA_DM_PM_SNIFF4_MIN, BTA_DM_PM_SNIFF4_ATTEMPT,
+          BTA_DM_PM_SNIFF4_TIMEOUT,
+          BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF4- HD active */
+         {BTA_DM_PM_SNIFF5_MAX, BTA_DM_PM_SNIFF5_MIN, BTA_DM_PM_SNIFF5_ATTEMPT,
+          BTA_DM_PM_SNIFF5_TIMEOUT,
+          BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF5- HD active */
+         {BTA_DM_PM_SNIFF6_MAX, BTA_DM_PM_SNIFF6_MIN, BTA_DM_PM_SNIFF6_ATTEMPT,
+          BTA_DM_PM_SNIFF6_TIMEOUT,
+          BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF6- HH active */
+         {BTA_DM_PM_PARK_MAX, BTA_DM_PM_PARK_MIN, BTA_DM_PM_PARK_ATTEMPT,
+          BTA_DM_PM_PARK_TIMEOUT, BTM_PM_MD_PARK}
+
+     #ifdef BTE_SIM_APP /* For Insight builds only */
+         /* Entries at the end of the bta_dm_pm_md table are user-defined (runtime
+            configurable),
+            for power consumption experiments.
+            Insight finds the first user-defined entry by looking for the first
+            'max=0'.
+            The number of user_defined specs is defined by BTA_SWRAP_UD_PM_DM_COUNT
+            ,*/
+         ,
+         {0}, /* CONN_OPEN/SCO_CLOSE power mode settings for pm_spec USER_DEFINED_0
+                 ,*/
+         {0}, /* SCO_OPEN power mode settings for pm_spec USER_DEFINED_0 */
+
+         {0}, /* CONN_OPEN/SCO_CLOSE power mode settings for pm_spec USER_DEFINED_1
+                 ,*/
+         {0}  /* SCO_OPEN power mode settings for pm_spec USER_DEFINED_1 */
+     #endif   /* BTE_SIM_APP */
+     };   
+   #+END_SRC
+   
+   and we have different sniff paramter settings with them:
+
+   #+BEGIN_SRC c
+     #ifndef BTA_DM_PM_SNIFF_MAX
+     #define BTA_DM_PM_SNIFF_MAX 800
+     #define BTA_DM_PM_SNIFF_MIN 400
+     #define BTA_DM_PM_SNIFF_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF_TIMEOUT 1
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF1_MAX
+     #define BTA_DM_PM_SNIFF1_MAX 400
+     #define BTA_DM_PM_SNIFF1_MIN 200
+     #define BTA_DM_PM_SNIFF1_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF1_TIMEOUT 1
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF2_MAX
+     #define BTA_DM_PM_SNIFF2_MAX 54
+     #define BTA_DM_PM_SNIFF2_MIN 30
+     #define BTA_DM_PM_SNIFF2_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF2_TIMEOUT 1
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF3_MAX
+     #define BTA_DM_PM_SNIFF3_MAX 150
+     #define BTA_DM_PM_SNIFF3_MIN 50
+     #define BTA_DM_PM_SNIFF3_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF3_TIMEOUT 1
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF4_MAX
+     #define BTA_DM_PM_SNIFF4_MAX 18
+     #define BTA_DM_PM_SNIFF4_MIN 10
+     #define BTA_DM_PM_SNIFF4_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF4_TIMEOUT 1
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF5_MAX
+     #define BTA_DM_PM_SNIFF5_MAX 36
+     #define BTA_DM_PM_SNIFF5_MIN 30
+     #define BTA_DM_PM_SNIFF5_ATTEMPT 2
+     #define BTA_DM_PM_SNIFF5_TIMEOUT 0
+     #endif
+
+     #ifndef BTA_DM_PM_SNIFF6_MAX
+     #define BTA_DM_PM_SNIFF6_MAX 30
+     #define BTA_DM_PM_SNIFF6_MIN 10
+     #define BTA_DM_PM_SNIFF6_ATTEMPT 4
+     #define BTA_DM_PM_SNIFF6_TIMEOUT 1
+     #endif   
+   #+END_SRC
+     
+
+   this is the power action defined for the profiles. 
+
+   #+BEGIN_SRC c
+     /* power mode actions  */
+     #define BTA_DM_PM_NO_ACTION 0x00 /* no change to the current pm setting */
+     #define BTA_DM_PM_PARK 0x10      /* prefers park mode */
+     #define BTA_DM_PM_SNIFF 0x20     /* prefers sniff mode */
+     #define BTA_DM_PM_SNIFF1 0x21    /* prefers sniff1 mode */
+     #define BTA_DM_PM_SNIFF2 0x22    /* prefers sniff2 mode */
+     #define BTA_DM_PM_SNIFF3 0x23    /* prefers sniff3 mode */
+     #define BTA_DM_PM_SNIFF4 0x24    /* prefers sniff4 mode */
+     #define BTA_DM_PM_SNIFF5 0x25    /* prefers sniff5 mode */
+     #define BTA_DM_PM_SNIFF6 0x26    /* prefers sniff6 mode */
+     #define BTA_DM_PM_SNIFF7 0x27    /* prefers sniff7 mode */
+     #define BTA_DM_PM_SNIFF_USER0 \
+       0x28 /* prefers user-defined sniff0 mode (testtool only) */
+     #define BTA_DM_PM_SNIFF_USER1 \
+       0x29 /* prefers user-defined sniff1 mode (testtool only) */
+     #define BTA_DM_PM_ACTIVE 0x40  /* prefers active mode */
+     #define BTA_DM_PM_RETRY 0x80   /* retry power mode based on current settings */
+     #define BTA_DM_PM_SUSPEND 0x04 /* prefers suspend mode */
+     #define BTA_DM_PM_NO_PREF                                                   \
+       0x01 /* service has no prefernce on power mode setting. eg. connection to \
+               service got closed */   
+   #+END_SRC
+
+   to index a specific sniff parameter settings for a power action in
+   the array *bta_dm_pm_md* ,  use 
+   : (pm_action & 0x0F)
+
+* FAQ
+
+  1. What conditions may trigger host send sniff sub-rating command?
+     How does the host set parameters? Is the 1200 latency the default
+     value and not change?
+
+     The short answer is host only set sniff subrate parameters, and
+     it’s SoC which will negotiate with the remote device to go to
+     sniff subrate mode further.  When sniff mode is initiated by our
+     DUT,  this latency is by default 1200 slots for most of
+     profiles.
+
+  2. How to tell if link is in sniff subrating mode?
+     
+     When host send sniff subrate mode, the link doesn’t enter sniff
+     subrating. Only when controller send sniff subrating mode event,
+     it means the link enters sniff subrating mode. Here is the event:
+
+     [[../images/2018/2018081806.png]]
+
+  3. The conditions of enter sniff subrating mode, assuming
+     initiated by DUT:
+
+     1) Host sent sniff subrating command to set SSR parameters
+
+        If the sniff subrating max latency is not bigger than 2 times
+        of sniff interval, link will not enter sniff subrating mode.
+
+     2) Link is in sniff mode;
+
+     3) Link has no data for some time (sniff interval)
+
+     4) DUT and remote device both agree to enter sniff subrating
+        mode, which means *LMP_Sniff_Sub-rate_Req* and
+        *LMP_Sniff_Sub-rate_Res* transactions are successful.
+
+     5) Sniff parameter
+
+        If sniff is initiated by remote, controller just accept it.

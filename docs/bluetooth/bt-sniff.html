@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Deep into bluetooth sniff mode</title>
-<!-- 2018-08-17 Fri 19:12 -->
+<!-- 2018-08-18 Sat 19:35 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fu Yajun" />
@@ -169,7 +169,13 @@ for the JavaScript code in this tag.
 </li>
 </ul>
 </li>
-<li><a href="#sec-2">2. Code Flow Analysis in Florida Stack</a></li>
+<li><a href="#sec-2">2. Code Flow Analysis in Florida Stack</a>
+<ul>
+<li><a href="#sec-2-1">2.1. verview of the code flow</a></li>
+<li><a href="#sec-2-2">2.2. setting sniff parameters &#x2013; bta_dm_pm_sniff</a></li>
+</ul>
+</li>
+<li><a href="#sec-3">3. FAQ</a></li>
 </ul>
 </div>
 </div>
@@ -1137,11 +1143,427 @@ devices to reconnect.
 
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><span class="section-number-2">2</span> Code Flow Analysis in Florida Stack</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> verview of the code flow</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+during bluetooth init, we'll initializes the BT low power manager.
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081805.png" alt="2018081805.png" />
+</p>
+</div>
+
+<p>
+of the two callbacks:
+</p>
+
+<ul class="org-ul">
+<li>bta_dm_pm_cback
+
+<p>
+is called when connection status changed for system connection.
+</p>
+</li>
+
+<li>bta_dm_pm_btm_cback
+
+<p>
+called when power management status changed. it will call
+<b>bta_dm_pm_btm_status</b> furhter to process the
+BTA_DM_PM_BTM_STATUS_EVT. 
+</p>
+</li>
+</ul>
+
+<p>
+both the above functions may call call <b>bta_dm_pm_set_mode</b> to set the
+  power mode inclding sniff mode. 
+</p>
+
+<p>
+Each profile will register with BT Power manager module during
+profile connection(through <b>bta_dm_pm_cback</b>). Each profile has default set sniff idle time
+out and other sniff parameters based on the <b>bta_dm_pm_cfg</b>.
+</p>
+
+<p>
+here is the definition of it's structure:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c">typedef struct {
+  uint8_t id;   /* profile role index in the BTA system.
+  uint8_t app_id;
+  uint8_t spec_idx; /* index of spec table to use */
+
+} tBTA_DM_PM_CFG;
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081801.png" alt="2018081801.png" />
+</p>
+</div>
+
+<p>
+take the AG module configuration for example, for AG module, the
+spec index is 0 in spec table <b>bta_dm_pm_spec</b>.
+</p>
+
+<p>
+here is the definition of it's structure:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c">typedef struct {
+  uint8_t allow_mask; /* mask of sniff/hold/park modes to allow */
+#if (BTM_SSR_INCLUDED == TRUE)
+  uint8_t ssr; /* set SSR on conn open/unpark */
+#endif
+  tBTA_DM_PM_ACTN actn_tbl[BTA_DM_PM_NUM_EVTS][2];
+
+} tBTA_DM_PM_SPEC;
+
+
+typedef struct {
+  tBTA_DM_PM_ACTION power_mode;
+  uint16_t timeout;
+
+} tBTA_DM_PM_ACTN;
+
+
+/* power mode actions  */
+#define BTA_DM_PM_NO_ACTION 0x00 /* no change to the current pm setting */
+#define BTA_DM_PM_PARK 0x10      /* prefers park mode */
+#define BTA_DM_PM_SNIFF 0x20     /* prefers sniff mode */
+#define BTA_DM_PM_SNIFF1 0x21    /* prefers sniff1 mode */
+#define BTA_DM_PM_SNIFF2 0x22    /* prefers sniff2 mode */
+#define BTA_DM_PM_SNIFF3 0x23    /* prefers sniff3 mode */
+#define BTA_DM_PM_SNIFF4 0x24    /* prefers sniff4 mode */
+#define BTA_DM_PM_SNIFF5 0x25    /* prefers sniff5 mode */
+#define BTA_DM_PM_SNIFF6 0x26    /* prefers sniff6 mode */
+#define BTA_DM_PM_SNIFF7 0x27    /* prefers sniff7 mode */
+#define BTA_DM_PM_SNIFF_USER0 \
+  0x28 /* prefers user-defined sniff0 mode (testtool only) */
+#define BTA_DM_PM_SNIFF_USER1 \
+  0x29 /* prefers user-defined sniff1 mode (testtool only) */
+#define BTA_DM_PM_ACTIVE 0x40  /* prefers active mode */
+#define BTA_DM_PM_RETRY 0x80   /* retry power mode based on current settings */
+#define BTA_DM_PM_SUSPEND 0x04 /* prefers suspend mode */
+#define BTA_DM_PM_NO_PREF                                                   \
+  0x01 /* service has no prefernce on power mode setting. eg. connection to \
+          service got closed */
+
+typedef uint8_t tBTA_DM_PM_ACTION;
+</pre>
+</div>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081803.png" alt="2018081803.png" />
+</p>
+</div>
+
+<p>
+If more than 1 profile connected on same ACL, then least time out
+of all connected profiles will be effective.
+</p>
+
+<p>
+Also, the SSR entry is <b>BTA_DM_PM_SSR2</b>, which means that the max
+latency is 1200 slots.
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081804.png" alt="2018081804.png" />
+</p>
+</div>
+
+<div class="org-src-container">
+
+<pre class="src src-c">typedef struct {
+  uint16_t max_lat;
+  uint16_t min_rmt_to;
+  uint16_t min_loc_to;
+} tBTA_DM_SSR_SPEC;
+</pre>
+</div>
+
+<p>
+These ssr parameters also depends on profile. Each profile set ssr
+parameter based on config table(bta_dm_pm_spec) we referred earlier.
+</p>
+
+<p>
+For most profile connection, when in SSR, the max latency is 1200 *
+0.625 = 750ms. Only HID profile will use different ssr
+parameter. When DUT  moves back to active mode from any other low
+power mode, DUT update ssr parameters to SoC.
+</p>
+
+<p>
+SoC will use these sniff sub rating parameters in sniff mode.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> setting sniff parameters &#x2013; bta_dm_pm_sniff</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+this function is used to call <b>BTM_SetPowerMode</b> to enter sniff
+mode or exit sniff mode. 
+</p>
+
+<p>
+for different profiles, the sniff paramters are set differently. 
+</p>
+
+<p>
+for example, for a2dp profile, the sniff paramter is index by
+<b>BTA_DM_PM_SNIFF_A2DP_IDX</b> which is eaual to <b>BTA_DM_PM_SNIFF</b> . 
+</p>
+
+<p>
+this is the sniff table :
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c">tBTA_DM_PM_TYPE_QUALIFIER tBTM_PM_PWR_MD bta_dm_pm_md[] = {
+    /*
+     * More sniff parameter entries can be added for
+     * BTA_DM_PM_SNIFF3 - BTA_DM_PM_SNIFF7, if needed. When entries are added or
+     * removed, BTA_DM_PM_PARK_IDX needs to be updated to reflect the actual
+     * index
+     * BTA_DM_PM_PARK_IDX is defined in bta_api.h and can be override by the
+     * bdroid_buildcfg.h settings.
+     * The SNIFF table entries must be in the order from highest latency
+     * (biggest
+     * interval) to lowest latency. If there's a conflict among the connected
+     * services, the setting with lowest latency wins.
+     */
+    /* sniff modes: max interval, min interval, attempt, timeout */
+    {BTA_DM_PM_SNIFF_MAX, BTA_DM_PM_SNIFF_MIN, BTA_DM_PM_SNIFF_ATTEMPT,
+     BTA_DM_PM_SNIFF_TIMEOUT, BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF - A2DP */
+    {BTA_DM_PM_SNIFF1_MAX, BTA_DM_PM_SNIFF1_MIN, BTA_DM_PM_SNIFF1_ATTEMPT,
+     BTA_DM_PM_SNIFF1_TIMEOUT, BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF1 */
+    {BTA_DM_PM_SNIFF2_MAX, BTA_DM_PM_SNIFF2_MIN, BTA_DM_PM_SNIFF2_ATTEMPT,
+     BTA_DM_PM_SNIFF2_TIMEOUT,
+     BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF2- HD idle */
+    {BTA_DM_PM_SNIFF3_MAX, BTA_DM_PM_SNIFF3_MIN, BTA_DM_PM_SNIFF3_ATTEMPT,
+     BTA_DM_PM_SNIFF3_TIMEOUT,
+     BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF3- SCO open */
+    {BTA_DM_PM_SNIFF4_MAX, BTA_DM_PM_SNIFF4_MIN, BTA_DM_PM_SNIFF4_ATTEMPT,
+     BTA_DM_PM_SNIFF4_TIMEOUT,
+     BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF4- HD active */
+    {BTA_DM_PM_SNIFF5_MAX, BTA_DM_PM_SNIFF5_MIN, BTA_DM_PM_SNIFF5_ATTEMPT,
+     BTA_DM_PM_SNIFF5_TIMEOUT,
+     BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF5- HD active */
+    {BTA_DM_PM_SNIFF6_MAX, BTA_DM_PM_SNIFF6_MIN, BTA_DM_PM_SNIFF6_ATTEMPT,
+     BTA_DM_PM_SNIFF6_TIMEOUT,
+     BTM_PM_MD_SNIFF}, /* for BTA_DM_PM_SNIFF6- HH active */
+    {BTA_DM_PM_PARK_MAX, BTA_DM_PM_PARK_MIN, BTA_DM_PM_PARK_ATTEMPT,
+     BTA_DM_PM_PARK_TIMEOUT, BTM_PM_MD_PARK}
+
+#ifdef BTE_SIM_APP /* For Insight builds only */
+    /* Entries at the end of the bta_dm_pm_md table are user-defined (runtime
+       configurable),
+       for power consumption experiments.
+       Insight finds the first user-defined entry by looking for the first
+       'max=0'.
+       The number of user_defined specs is defined by BTA_SWRAP_UD_PM_DM_COUNT
+       */
+    ,
+    {0}, /* CONN_OPEN/SCO_CLOSE power mode settings for pm_spec USER_DEFINED_0
+            */
+    {0}, /* SCO_OPEN power mode settings for pm_spec USER_DEFINED_0 */
+
+    {0}, /* CONN_OPEN/SCO_CLOSE power mode settings for pm_spec USER_DEFINED_1
+            */
+    {0}  /* SCO_OPEN power mode settings for pm_spec USER_DEFINED_1 */
+#endif   /* BTE_SIM_APP */
+};
+</pre>
+</div>
+
+<p>
+and we have different sniff paramter settings with them:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c">#ifndef BTA_DM_PM_SNIFF_MAX
+#define BTA_DM_PM_SNIFF_MAX 800
+#define BTA_DM_PM_SNIFF_MIN 400
+#define BTA_DM_PM_SNIFF_ATTEMPT 4
+#define BTA_DM_PM_SNIFF_TIMEOUT 1
+#endif
+
+#ifndef BTA_DM_PM_SNIFF1_MAX
+#define BTA_DM_PM_SNIFF1_MAX 400
+#define BTA_DM_PM_SNIFF1_MIN 200
+#define BTA_DM_PM_SNIFF1_ATTEMPT 4
+#define BTA_DM_PM_SNIFF1_TIMEOUT 1
+#endif
+
+#ifndef BTA_DM_PM_SNIFF2_MAX
+#define BTA_DM_PM_SNIFF2_MAX 54
+#define BTA_DM_PM_SNIFF2_MIN 30
+#define BTA_DM_PM_SNIFF2_ATTEMPT 4
+#define BTA_DM_PM_SNIFF2_TIMEOUT 1
+#endif
+
+#ifndef BTA_DM_PM_SNIFF3_MAX
+#define BTA_DM_PM_SNIFF3_MAX 150
+#define BTA_DM_PM_SNIFF3_MIN 50
+#define BTA_DM_PM_SNIFF3_ATTEMPT 4
+#define BTA_DM_PM_SNIFF3_TIMEOUT 1
+#endif
+
+#ifndef BTA_DM_PM_SNIFF4_MAX
+#define BTA_DM_PM_SNIFF4_MAX 18
+#define BTA_DM_PM_SNIFF4_MIN 10
+#define BTA_DM_PM_SNIFF4_ATTEMPT 4
+#define BTA_DM_PM_SNIFF4_TIMEOUT 1
+#endif
+
+#ifndef BTA_DM_PM_SNIFF5_MAX
+#define BTA_DM_PM_SNIFF5_MAX 36
+#define BTA_DM_PM_SNIFF5_MIN 30
+#define BTA_DM_PM_SNIFF5_ATTEMPT 2
+#define BTA_DM_PM_SNIFF5_TIMEOUT 0
+#endif
+
+#ifndef BTA_DM_PM_SNIFF6_MAX
+#define BTA_DM_PM_SNIFF6_MAX 30
+#define BTA_DM_PM_SNIFF6_MIN 10
+#define BTA_DM_PM_SNIFF6_ATTEMPT 4
+#define BTA_DM_PM_SNIFF6_TIMEOUT 1
+#endif
+</pre>
+</div>
+
+
+<p>
+this is the power action defined for the profiles. 
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-c">/* power mode actions  */
+#define BTA_DM_PM_NO_ACTION 0x00 /* no change to the current pm setting */
+#define BTA_DM_PM_PARK 0x10      /* prefers park mode */
+#define BTA_DM_PM_SNIFF 0x20     /* prefers sniff mode */
+#define BTA_DM_PM_SNIFF1 0x21    /* prefers sniff1 mode */
+#define BTA_DM_PM_SNIFF2 0x22    /* prefers sniff2 mode */
+#define BTA_DM_PM_SNIFF3 0x23    /* prefers sniff3 mode */
+#define BTA_DM_PM_SNIFF4 0x24    /* prefers sniff4 mode */
+#define BTA_DM_PM_SNIFF5 0x25    /* prefers sniff5 mode */
+#define BTA_DM_PM_SNIFF6 0x26    /* prefers sniff6 mode */
+#define BTA_DM_PM_SNIFF7 0x27    /* prefers sniff7 mode */
+#define BTA_DM_PM_SNIFF_USER0 \
+  0x28 /* prefers user-defined sniff0 mode (testtool only) */
+#define BTA_DM_PM_SNIFF_USER1 \
+  0x29 /* prefers user-defined sniff1 mode (testtool only) */
+#define BTA_DM_PM_ACTIVE 0x40  /* prefers active mode */
+#define BTA_DM_PM_RETRY 0x80   /* retry power mode based on current settings */
+#define BTA_DM_PM_SUSPEND 0x04 /* prefers suspend mode */
+#define BTA_DM_PM_NO_PREF                                                   \
+  0x01 /* service has no prefernce on power mode setting. eg. connection to \
+          service got closed */
+</pre>
+</div>
+
+<p>
+to index a specific sniff parameter settings for a power action in
+the array <b>bta_dm_pm_md</b> ,  use 
+</p>
+<pre class="example">
+(pm_action &amp; 0x0F)
+</pre>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> FAQ</h2>
+<div class="outline-text-2" id="text-3">
+<ol class="org-ol">
+<li>What conditions may trigger host send sniff sub-rating command?
+How does the host set parameters? Is the 1200 latency the default
+value and not change?
+
+<p>
+The short answer is host only set sniff subrate parameters, and
+it’s SoC which will negotiate with the remote device to go to
+sniff subrate mode further.  When sniff mode is initiated by our
+DUT,  this latency is by default 1200 slots for most of
+profiles.
+</p>
+</li>
+
+<li>How to tell if link is in sniff subrating mode?
+
+<p>
+When host send sniff subrate mode, the link doesn’t enter sniff
+subrating. Only when controller send sniff subrating mode event,
+it means the link enters sniff subrating mode. Here is the event:
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018081806.png" alt="2018081806.png" />
+</p>
+</div>
+</li>
+
+<li>The conditions of enter sniff subrating mode, assuming
+initiated by DUT:
+
+<ol class="org-ol">
+<li>Host sent sniff subrating command to set SSR parameters
+
+<p>
+If the sniff subrating max latency is not bigger than 2 times
+of sniff interval, link will not enter sniff subrating mode.
+</p>
+</li>
+
+<li>Link is in sniff mode;
+</li>
+
+<li>Link has no data for some time (sniff interval)
+</li>
+
+<li>DUT and remote device both agree to enter sniff subrating
+mode, which means <b>LMP_Sniff_Sub-rate_Req</b> and
+<b>LMP_Sniff_Sub-rate_Res</b> transactions are successful.
+</li>
+
+<li>Sniff parameter
+
+<p>
+If sniff is initiated by remote, controller just accept it.
+</p>
+</li>
+</ol>
+</li>
+</ol>
+</div>
 </div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-17 Fri 19:12</p>
+<p class="date">Created: 2018-08-18 Sat 19:35</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
