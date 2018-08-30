@@ -4,7 +4,7 @@
 
 * A2DP
 
-** 03587152 
+** 001 
    
    - Problem Description
 
@@ -43,7 +43,7 @@
    
      [[../images/2018/2018080601.png]]
 
-** 03609416 
+** 002 
 
    - Problem Description
 
@@ -193,7 +193,114 @@
        incorrectly. So that this 2.358s sink latency send to audio HAL, the real
        sink latency value should be 0.2358s.
 
-** 03553837 
+** 003 
+
+   - Problem Description
+
+     丰田汉兰达，a2dp连接不上，100%
+
+   - Problem Analysis
+
+     the min bitbool is not less than 2. In this case, the remote min
+     bitpool is 0. DUT suspect the remote sink codec configure is
+     invalid. DUT will think get capability failure.
+
+     #+BEGIN_SRC sh
+       06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_codec_selected: peer sink for codec SBC not found
+       06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_set_codec: cannot use codec SBC
+       06-29 17:22:25.109 13813 13853 D bt_btif : btif_dispatch_sm_event: event: 36, len: 6
+       06-29 17:22:25.109 13813 13853 D bt_btif : btif_transfer_context event 36, len 6
+       06-29 17:22:25.109 13813 13853 D bt_btif : btif_dispatch_sm_event: event 36 sent
+       06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_set_codec BDA:00:0d:18:a1:5f:0e
+       06-29 17:22:25.109 13813 13853 E bt_btif : bta_av_co_audio_getconfig: cannot set up codec for the peer SINK
+       06-29 17:22:25.109 13813 13853 E bt_btif : bta_av_next_getcap: BTA_AV_STR_GETCAP_FAIL_EVT: peer_addr=00:0d:18:a1:5f:0e
+       06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_ssm_execute(): AV Sevent(0x41)=0x1219(STR_GETCAP_FAIL) state=2(OPENING)     
+     #+END_SRC
+
+     Solution:
+
+     #+BEGIN_SRC diff
+       diff --git a/bta/av/bta_av_aact.cc b/bta/av/bta_av_aact.cc
+       index 12de7f4..2a3e4c1 100644
+       --- a/bta/av/bta_av_aact.cc
+       +++ b/bta/av/bta_av_aact.cc
+       @@ -2021,7 +2021,7 @@ void bta_av_getcap_results(tBTA_AV_SCB* p_scb, tBTA_AV_DATA* p_data) {
+       uint8_t media_type;
+       tAVDT_SEP_INFO* p_info = &p_scb->sep_info[p_scb->sep_info_idx];
+       uint16_t uuid_int; /* UUID for which connection was initiatied */
+       -
+       + tA2DP_CODEC_TYPE codec_type;
+       if (p_scb == NULL)
+       {
+       APPL_TRACE_ERROR("%s: no scb found for handle", __func__);
+       @@ -2034,7 +2034,11 @@ void bta_av_getcap_results(tBTA_AV_SCB* p_scb, tBTA_AV_DATA* p_data) {
+       bta_av_ssm_execute(p_scb, BTA_AV_STR_GETCAP_FAIL_EVT, p_data);
+       return;
+       }
+       -
+       + codec_type = A2DP_GetCodecType(p_scb->p_cap->codec_info);
+       + if(codec_type ==A2DP_MEDIA_CT_SBC ){
+       + if(p_scb->p_cap->codec_info[5]) < A2DP_SBC_IE_MIN_BITPOOL
+       + p_scb->p_cap->codec_info[5] = A2DP_SBC_IE_MIN_BITPOOL;
+       + }
+       memcpy(&cfg, &p_scb->cfg, sizeof(tAVDT_CFG));
+       cfg.num_codec = 1;
+       cfg.num_protect = p_scb->p_cap->num_protect;     
+     #+END_SRC
+
+   - *Notes*
+
+     sometimes, we need to check the a2dp config value, invalid config
+     value may trigger Problem.
+
+** 004
+
+   - Problem Description
+
+     播放音乐无声. 在连接车载之前，手机有跟苹果电脑连接过。
+
+     1. Pair and connect carkit with DUT.
+     2. Be in a call.
+     3. Switch call audio between DUT and carkit.
+     4. Terminate call and send AVRCP commands to start music on carkit.
+
+   - Problem Analysis
+
+     Problem: Connection State Chnage callback is not sent
+     to AVRCP. This causes app level AVRCP to maintain
+     wrong connection state causing various issues.
+
+     Cause: The remote device did not send any attributes
+     while SDP, so peer_features was not updated. Since it
+     is used as a condition before sending callback to app
+     layer, the connection state change callback was not
+     sent.
+
+     Fix: Made changes to always send the callback for
+     connection state change
+
+     #+BEGIN_SRC diff
+       diff --git a/btif/src/btif_rc.c b/btif/src/btif_rc.c
+       index c3ca306..9c3ece8 100644
+       --- a/btif/src/btif_rc.c
+       +++ b/btif/src/btif_rc.c
+       @@ -980,7 +980,7 @@ void handle_rc_disconnect (tBTA_AV_RC_CLOSE *p_rc_close)
+       HAL_CBACK(bt_rc_ctrl_callbacks, connection_state_cb, FALSE, &rc_addr);
+       }
+       #endif
+       - if (features & BTA_AV_FEAT_RCCT)
+       + if (bt_rc_callbacks)
+       {
+       HAL_CBACK(bt_rc_callbacks, connection_state_cb, FALSE, &rc_addr);
+       }
+       ======         
+     #+END_SRC
+
+    
+  
+* HFP
+
+** 001
 
    - Problem Description
 
@@ -210,7 +317,7 @@
    - Facts
 
      this device seems want to connect to us proactively, I see
-     connect confilction happened during connection, and we re-try
+     connect confliction happened during connection, and we re-try
      connection several times. 
 
      as for disconnection, I seems the carkit didn't poll us as
@@ -226,8 +333,8 @@
 
      there are three errors in current logs:
      1) after dut starts to connect rfcomm for hfp, remote will
-        disconnect it immediately. this should be remote issue. please
-        let vivo try to add this device to the
+        disconnect it immediately. this should be remote issue. add
+        this Device to the Blacklist.
         =BlacklistDeviceAddrForNotRetrying= blacklist
         
         : 271 Not Extended remote disconnect rfcomm Initiator Started C/R Sequence Master 2 0x06 3 DM 1 13 00:00:00.007939 7/1/2018 12:14:02.474383 PM
@@ -269,12 +376,99 @@
         Default version of DUT = v1.4 + BR
         Saved entry of remote in conf file = minimum of DUT’s default (v1.4) and remote’s version.
         DUT’s SDP record shown to remote = 1.3 if no conf entry OR conf file entry value.
+
+** 002
+
+   - Problem Description
+
+     手机端点击微信语音时，蓝牙会自动断开[问题复现
+
+   - Problem Analysis
+
+     微信语音时，对方请求clcc时，我们回复没有携带号码信息车载端无法显
+     示号码就给断掉了.
+
+     Use Case:
+     1. Carkits query call information via AT+CLCC while setup SCO for VOIP call.
+     2. DUT return subscriber number to carkit as CLCC response in VOIP call scenario,
+        need use sim card which support phone to get subscriber number.
+     3. Special carkits no voice for VOIP call if receive subscriber number in CLCC
+        response.
+
+     
+     Root Cause:
+     Some special carkits no voice in VOIP call if it received subscriber number of sim
+     card as CLCC response.
+
+     #+BEGIN_SRC diff
+       src/com/android/bluetooth/hfp/HeadsetStateMachine.java | 12 +++---------
+        1 file changed, 3 insertions(+), 9 deletions(-)
+
+       diff --git a/src/com/android/bluetooth/hfp/HeadsetStateMachine.java b/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
+       index 7763541..a2b64ce 100644
+       --- a/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
+       +++ b/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
+       @@ -178,6 +178,8 @@ final class HeadsetStateMachine extends StateMachine {
+            private static final int NBS_CODEC = 1;
+            private static final int WBS_CODEC = 2;
         
-* HFP
+       +    private static final String VOIP_CALL_NUMBER = "10000000";
+       +
+            // Keys are AT commands, and values are the company IDs.
+            private static final Map<String, Integer> VENDOR_SPECIFIC_AT_COMMAND_COMPANY_ID;
+            // Hash for storing the Audio Parameters like NREC for connected headsets
+       @@ -4179,16 +4181,8 @@ final class HeadsetStateMachine extends StateMachine {
+                if (mPhoneProxy != null) {
+                    try {
+                        if (isVirtualCallInProgress()) {
+       -                    String phoneNumber = "";
+       +                    String phoneNumber = VOIP_CALL_NUMBER;
+                            int type = PhoneNumberUtils.TOA_Unknown;
+       -                    try {
+       -                        phoneNumber = mPhoneProxy.getSubscriberNumber();
+       -                        type = PhoneNumberUtils.toaFromString(phoneNumber);
+       -                    } catch (RemoteException ee) {
+       -                        Log.e(TAG, "Unable to retrieve phone number"
+       -                                        + "using IBluetoothHeadsetPhone proxy");
+       -                        phoneNumber = "";
+       -                    }
+                            Log.d(TAG, "AtClcc response phone number: " + phoneNumber +
+                                            " type: " + type);
+                            // call still in dialling or alerting state
+       --      
+     #+END_SRC
+
+** 003 
+
+   - Problem Description
+
+     PD1805 手机音频连接慢
+
+   - Problem Analysis
+
+     From logcat and snoop log, connection collision happened while
+     remote make connection to us, then DUT accept ACL connection from
+     remote, and trigger an HFP AG connect collision timer with
+     BTA_AG_COLLISION_TIMEOUT_MS (2000ms). Then DUT will wait 2000ms
+     for remote device open HFP connection. 
+
+     But in this case, peer device not setup HFP connection until
+     BTA_AG_COLLISION_TIMEOUT_MS timeout. As a result, DUT resume to
+     open AG connection and try to setup rfcomm channel for HFP, but
+     remote response with DM always. That's why HFP connection setup
+     slow.
+
+   - *Note*
+
+     When DUT and remoote device send connection reqeust
+     simultaneously, a connection conflict will happpen, DUT will
+     start a  timer BTA_AG_COLLISION_TIMEOUT_MS(2500ms) and wait for
+     remote device to set up hfp connection, if timeout happened,
+     the DUT will set up hfp connection proactively again.  
 
 * PBAP
 
-** 03590231
+** 001
 
    - Problem Description
 
@@ -336,7 +530,7 @@
 
 * BLE
 
-** 03451122 
+** 001
 
    - Problem Description
 
@@ -410,7 +604,7 @@
 
      
    
-** 03565631 
+** 002
 
    - Problem Description
 

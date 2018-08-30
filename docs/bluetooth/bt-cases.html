@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Bluetooth Cases</title>
-<!-- 2018-08-15 Wed 18:46 -->
+<!-- 2018-08-28 Tue 11:56 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fu Yajun" />
@@ -150,21 +150,28 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-1">1. A2DP</a>
 <ul>
-<li><a href="#sec-1-1">1.1. 03587152</a></li>
-<li><a href="#sec-1-2">1.2. 03609416</a></li>
-<li><a href="#sec-1-3">1.3. 03553837</a></li>
+<li><a href="#sec-1-1">1.1. 001</a></li>
+<li><a href="#sec-1-2">1.2. 002</a></li>
+<li><a href="#sec-1-3">1.3. 003</a></li>
+<li><a href="#sec-1-4">1.4. 004</a></li>
 </ul>
 </li>
-<li><a href="#sec-2">2. HFP</a></li>
+<li><a href="#sec-2">2. HFP</a>
+<ul>
+<li><a href="#sec-2-1">2.1. 001</a></li>
+<li><a href="#sec-2-2">2.2. 002</a></li>
+<li><a href="#sec-2-3">2.3. 003</a></li>
+</ul>
+</li>
 <li><a href="#sec-3">3. PBAP</a>
 <ul>
-<li><a href="#sec-3-1">3.1. 03590231</a></li>
+<li><a href="#sec-3-1">3.1. 001</a></li>
 </ul>
 </li>
 <li><a href="#sec-4">4. BLE</a>
 <ul>
-<li><a href="#sec-4-1">4.1. 03451122</a></li>
-<li><a href="#sec-4-2">4.2. 03565631</a></li>
+<li><a href="#sec-4-1">4.1. 001</a></li>
+<li><a href="#sec-4-2">4.2. 002</a></li>
 </ul>
 </li>
 </ul>
@@ -175,7 +182,7 @@ for the JavaScript code in this tag.
 <h2 id="sec-1"><span class="section-number-2">1</span> A2DP</h2>
 <div class="outline-text-2" id="text-1">
 </div><div id="outline-container-sec-1-1" class="outline-3">
-<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 03587152</h3>
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> 001</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Problem Description
@@ -240,7 +247,7 @@ explanation in <code>ActiveDeviceManager.java</code>.
 </div>
 
 <div id="outline-container-sec-1-2" class="outline-3">
-<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 03609416</h3>
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> 002</h3>
 <div class="outline-text-3" id="text-1-2">
 <ul class="org-ul">
 <li>Problem Description
@@ -424,8 +431,160 @@ sink latency value should be 0.2358s.
 </div>
 
 <div id="outline-container-sec-1-3" class="outline-3">
-<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 03553837</h3>
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> 003</h3>
 <div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Problem Description
+
+<p>
+丰田汉兰达，a2dp连接不上，100%
+</p>
+</li>
+
+<li>Problem Analysis
+
+<p>
+the min bitbool is not less than 2. In this case, the remote min
+bitpool is 0. DUT suspect the remote sink codec configure is
+invalid. DUT will think get capability failure.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-sh">06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_codec_selected: peer sink for codec SBC not found
+06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_set_codec: cannot use codec SBC
+06-29 17:22:25.109 13813 13853 D bt_btif : btif_dispatch_sm_event: event: 36, len: 6
+06-29 17:22:25.109 13813 13853 D bt_btif : btif_transfer_context event 36, len 6
+06-29 17:22:25.109 13813 13853 D bt_btif : btif_dispatch_sm_event: event 36 sent
+06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_co_audio_set_codec BDA:00:0d:18:a1:5f:0e
+06-29 17:22:25.109 13813 13853 E bt_btif : bta_av_co_audio_getconfig: cannot set up codec for the peer SINK
+06-29 17:22:25.109 13813 13853 E bt_btif : bta_av_next_getcap: BTA_AV_STR_GETCAP_FAIL_EVT: peer_addr=00:0d:18:a1:5f:0e
+06-29 17:22:25.109 13813 13853 D bt_btif : bta_av_ssm_execute(): AV Sevent(0x41)=0x1219(STR_GETCAP_FAIL) state=2(OPENING)
+</pre>
+</div>
+
+<p>
+Solution:
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-diff">diff --git a/bta/av/bta_av_aact.cc b/bta/av/bta_av_aact.cc
+index 12de7f4..2a3e4c1 100644
+--- a/bta/av/bta_av_aact.cc
++++ b/bta/av/bta_av_aact.cc
+@@ -2021,7 +2021,7 @@ void bta_av_getcap_results(tBTA_AV_SCB* p_scb, tBTA_AV_DATA* p_data) {
+uint8_t media_type;
+tAVDT_SEP_INFO* p_info = &amp;p_scb-&gt;sep_info[p_scb-&gt;sep_info_idx];
+uint16_t uuid_int; /* UUID for which connection was initiatied */
+-
++ tA2DP_CODEC_TYPE codec_type;
+if (p_scb == NULL)
+{
+APPL_TRACE_ERROR("%s: no scb found for handle", __func__);
+@@ -2034,7 +2034,11 @@ void bta_av_getcap_results(tBTA_AV_SCB* p_scb, tBTA_AV_DATA* p_data) {
+bta_av_ssm_execute(p_scb, BTA_AV_STR_GETCAP_FAIL_EVT, p_data);
+return;
+}
+-
++ codec_type = A2DP_GetCodecType(p_scb-&gt;p_cap-&gt;codec_info);
++ if(codec_type ==A2DP_MEDIA_CT_SBC ){
++ if(p_scb-&gt;p_cap-&gt;codec_info[5]) &lt; A2DP_SBC_IE_MIN_BITPOOL
++ p_scb-&gt;p_cap-&gt;codec_info[5] = A2DP_SBC_IE_MIN_BITPOOL;
++ }
+memcpy(&amp;cfg, &amp;p_scb-&gt;cfg, sizeof(tAVDT_CFG));
+cfg.num_codec = 1;
+cfg.num_protect = p_scb-&gt;p_cap-&gt;num_protect;
+</pre>
+</div>
+</li>
+
+<li><b>Notes</b>
+
+<p>
+sometimes, we need to check the a2dp config value, invalid config
+value may trigger Problem.
+</p>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> 004</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Problem Description
+
+<p>
+播放音乐无声. 在连接车载之前，手机有跟苹果电脑连接过。
+</p>
+
+<ol class="org-ol">
+<li>Pair and connect carkit with DUT.
+</li>
+<li>Be in a call.
+</li>
+<li>Switch call audio between DUT and carkit.
+</li>
+<li>Terminate call and send AVRCP commands to start music on carkit.
+</li>
+</ol>
+</li>
+
+<li>Problem Analysis
+
+<p>
+Problem: Connection State Chnage callback is not sent
+to AVRCP. This causes app level AVRCP to maintain
+wrong connection state causing various issues.
+</p>
+
+<p>
+Cause: The remote device did not send any attributes
+while SDP, so peer_features was not updated. Since it
+is used as a condition before sending callback to app
+layer, the connection state change callback was not
+sent.
+</p>
+
+<p>
+Fix: Made changes to always send the callback for
+connection state change
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-diff">diff --git a/btif/src/btif_rc.c b/btif/src/btif_rc.c
+index c3ca306..9c3ece8 100644
+--- a/btif/src/btif_rc.c
++++ b/btif/src/btif_rc.c
+@@ -980,7 +980,7 @@ void handle_rc_disconnect (tBTA_AV_RC_CLOSE *p_rc_close)
+HAL_CBACK(bt_rc_ctrl_callbacks, connection_state_cb, FALSE, &amp;rc_addr);
+}
+#endif
+- if (features &amp; BTA_AV_FEAT_RCCT)
++ if (bt_rc_callbacks)
+{
+HAL_CBACK(bt_rc_callbacks, connection_state_cb, FALSE, &amp;rc_addr);
+}
+======
+</pre>
+</div>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> HFP</h2>
+<div class="outline-text-2" id="text-2">
+</div><div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> 001</h3>
+<div class="outline-text-3" id="text-2-1">
 <ul class="org-ul">
 <li>Problem Description
 
@@ -453,7 +612,7 @@ steps:
 
 <p>
 this device seems want to connect to us proactively, I see
-connect confilction happened during connection, and we re-try
+connect confliction happened during connection, and we re-try
 connection several times. 
 </p>
 
@@ -478,8 +637,8 @@ there are three errors in current logs:
 </p>
 <ol class="org-ol">
 <li>after dut starts to connect rfcomm for hfp, remote will
-disconnect it immediately. this should be remote issue. please
-let vivo try to add this device to the
+disconnect it immediately. this should be remote issue. add
+this Device to the Blacklist.
 <code>BlacklistDeviceAddrForNotRetrying</code> blacklist
 
 <pre class="example">
@@ -546,17 +705,140 @@ DUT’s SDP record shown to remote = 1.3 if no conf entry OR conf file entry val
 </ul>
 </div>
 </div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> 002</h3>
+<div class="outline-text-3" id="text-2-2">
+<ul class="org-ul">
+<li>Problem Description
+
+<p>
+手机端点击微信语音时，蓝牙会自动断开[问题复现
+</p>
+</li>
+
+<li>Problem Analysis
+
+<p>
+微信语音时，对方请求clcc时，我们回复没有携带号码信息车载端无法显
+示号码就给断掉了.
+</p>
+
+<p>
+Use Case:
+</p>
+<ol class="org-ol">
+<li>Carkits query call information via AT+CLCC while setup SCO for VOIP call.
+</li>
+<li>DUT return subscriber number to carkit as CLCC response in VOIP call scenario,
+need use sim card which support phone to get subscriber number.
+</li>
+<li>Special carkits no voice for VOIP call if receive subscriber number in CLCC
+response.
+</li>
+</ol>
+</li>
+</ul>
+
+
+<p>
+Root Cause:
+Some special carkits no voice in VOIP call if it received subscriber number of sim
+card as CLCC response.
+</p>
+
+<div class="org-src-container">
+
+<pre class="src src-diff">src/com/android/bluetooth/hfp/HeadsetStateMachine.java | 12 +++---------
+ 1 file changed, 3 insertions(+), 9 deletions(-)
+
+diff --git a/src/com/android/bluetooth/hfp/HeadsetStateMachine.java b/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
+index 7763541..a2b64ce 100644
+--- a/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
++++ b/src/com/android/bluetooth/hfp/HeadsetStateMachine.java
+@@ -178,6 +178,8 @@ final class HeadsetStateMachine extends StateMachine {
+     private static final int NBS_CODEC = 1;
+     private static final int WBS_CODEC = 2;
+
++    private static final String VOIP_CALL_NUMBER = "10000000";
++
+     // Keys are AT commands, and values are the company IDs.
+     private static final Map&lt;String, Integer&gt; VENDOR_SPECIFIC_AT_COMMAND_COMPANY_ID;
+     // Hash for storing the Audio Parameters like NREC for connected headsets
+@@ -4179,16 +4181,8 @@ final class HeadsetStateMachine extends StateMachine {
+         if (mPhoneProxy != null) {
+             try {
+                 if (isVirtualCallInProgress()) {
+-                    String phoneNumber = "";
++                    String phoneNumber = VOIP_CALL_NUMBER;
+                     int type = PhoneNumberUtils.TOA_Unknown;
+-                    try {
+-                        phoneNumber = mPhoneProxy.getSubscriberNumber();
+-                        type = PhoneNumberUtils.toaFromString(phoneNumber);
+-                    } catch (RemoteException ee) {
+-                        Log.e(TAG, "Unable to retrieve phone number"
+-                                        + "using IBluetoothHeadsetPhone proxy");
+-                        phoneNumber = "";
+-                    }
+                     Log.d(TAG, "AtClcc response phone number: " + phoneNumber +
+                                     " type: " + type);
+                     // call still in dialling or alerting state
+--
+</pre>
+</div>
+</div>
 </div>
 
-<div id="outline-container-sec-2" class="outline-2">
-<h2 id="sec-2"><span class="section-number-2">2</span> HFP</h2>
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> 003</h3>
+<div class="outline-text-3" id="text-2-3">
+<ul class="org-ul">
+<li>Problem Description
+
+<p>
+PD1805 手机音频连接慢
+</p>
+</li>
+
+<li>Problem Analysis
+
+<p>
+From logcat and snoop log, connection collision happened while
+remote make connection to us, then DUT accept ACL connection from
+remote, and trigger an HFP AG connect collision timer with
+BTA_AG_COLLISION_TIMEOUT_MS (2000ms). Then DUT will wait 2000ms
+for remote device open HFP connection. 
+</p>
+
+<p>
+But in this case, peer device not setup HFP connection until
+BTA_AG_COLLISION_TIMEOUT_MS timeout. As a result, DUT resume to
+open AG connection and try to setup rfcomm channel for HFP, but
+remote response with DM always. That's why HFP connection setup
+slow.
+</p>
+</li>
+
+<li><b>Note</b>
+
+<p>
+When DUT and remoote device send connection reqeust
+simultaneously, a connection conflict will happpen, DUT will
+start a  timer BTA_AG_COLLISION_TIMEOUT_MS(2500ms) and wait for
+remote device to set up hfp connection, if timeout happened,
+the DUT will set up hfp connection proactively again.  
+</p>
+</li>
+</ul>
+</div>
+</div>
 </div>
 
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> PBAP</h2>
 <div class="outline-text-2" id="text-3">
 </div><div id="outline-container-sec-3-1" class="outline-3">
-<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 03590231</h3>
+<h3 id="sec-3-1"><span class="section-number-3">3.1</span> 001</h3>
 <div class="outline-text-3" id="text-3-1">
 <ul class="org-ul">
 <li>Problem Description
@@ -678,7 +960,7 @@ Phonebook</b></b> is supported or not.
 <h2 id="sec-4"><span class="section-number-2">4</span> BLE</h2>
 <div class="outline-text-2" id="text-4">
 </div><div id="outline-container-sec-4-1" class="outline-3">
-<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 03451122</h3>
+<h3 id="sec-4-1"><span class="section-number-3">4.1</span> 001</h3>
 <div class="outline-text-3" id="text-4-1">
 <ul class="org-ul">
 <li>Problem Description
@@ -774,7 +1056,7 @@ index 473b979..fb5f7f7 100644
 
 
 <div id="outline-container-sec-4-2" class="outline-3">
-<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 03565631</h3>
+<h3 id="sec-4-2"><span class="section-number-3">4.2</span> 002</h3>
 <div class="outline-text-3" id="text-4-2">
 <ul class="org-ul">
 <li>Problem Description
@@ -914,7 +1196,7 @@ there is timing case, if we allow Peripheral to initiated Encryption.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-15 Wed 18:46</p>
+<p class="date">Created: 2018-08-28 Tue 11:56</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

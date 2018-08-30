@@ -9,12 +9,13 @@
   },
   "scripts": {
     "start": "node server.js",
-    "postinstall": "ln -s ${PWD}/images ${PWD}/node_modules/raneto/public/images"
+    "postinstall": "rm -rvf ${PWD}/node_modules/raneto/themes/default/public/images && ln -s ${PWD}/images ${PWD}/node_modules/raneto/themes/default/public/images"
   },
   "author": "Yajun Fu <fuyajun1983cn@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "raneto": "0.7.1",
-    "debug" : "2.2.0"
+    "debug": "^3.1.0",
+    "gulp": "^3.9.1",
+    "raneto": "0.16.0"
   }
 }

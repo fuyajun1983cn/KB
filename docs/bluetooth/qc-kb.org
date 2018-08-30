@@ -346,6 +346,18 @@
    #+END_SRC
 
    for Cheroke, we should change the value in the crnv21.bin file. 
+
+** change the BT MAC address
+
+   1. Please use following ADB command to set the BD address. 
+
+      : setprop persist.service.bdroid.bdaddr <BD address>.
+
+   2. Make sure the changes take effect
+
+      : getprop persist.service.bdroid.bdaddr
+
+   3. Turn OFF and Turn ON BT 
    
 * Pronto(WCN36XX)
 

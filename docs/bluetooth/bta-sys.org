@@ -1,0 +1,117 @@
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: BTA Syystem  Management in Florida Stack 
+#+OPTIONS: ^:{} 
+
+
+* Data structure
+
+** tBTA_SYS_CB
+
+   #+BEGIN_SRC c
+     /* system manager control block */
+     typedef struct {
+       tBTA_SYS_REG* reg[BTA_ID_MAX]; /* registration structures */
+       bool is_reg[BTA_ID_MAX];       /* registration structures */
+       tBTA_SYS_HW_STATE state;
+       tBTA_SYS_HW_CBACK* sys_hw_cback[BTA_SYS_MAX_HW_MODULES]; /* enable callback
+                                                                   for each HW
+                                                                   modules */
+       uint32_t sys_hw_module_active; /* bitmask of all active modules */
+       uint16_t sys_features;         /* Bitmask of sys features */
+
+       tBTA_SYS_CONN_CBACK* prm_cb; /* role management callback registered by DM */
+       tBTA_SYS_CONN_CBACK*
+           ppm_cb; /* low power management callback registered by DM */
+       tBTA_SYS_CONN_CBACK*
+           p_policy_cb; /* link policy change callback registered by DM */
+       tBTA_SYS_CONN_CBACK*
+           p_sco_cb; /* SCO connection change callback registered by AV */
+       tBTA_SYS_CONN_CBACK* p_role_cb; /* role change callback registered by AV */
+       tBTA_SYS_COLLISION colli_reg;   /* collision handling module */
+     #if (BTA_EIR_CANNED_UUID_LIST != TRUE)
+       tBTA_SYS_EIR_CBACK* eir_cb; /* add/remove UUID into EIR */
+     #endif
+     #if (BTM_SSR_INCLUDED == TRUE)
+       tBTA_SYS_SSR_CFG_CBACK* p_ssr_cb;
+     #endif
+       /* VS event handler */
+       tBTA_SYS_VS_EVT_HDLR* p_vs_evt_hdlr;
+
+     } tBTA_SYS_CB;   
+   #+END_SRC
+
+* Modules
+
+** collision handling
+
+*** bta_sys_collision_register
+
+    register for collision event. currently, there are two collision
+    event registered. 
+
+    #+BEGIN_SRC c++
+      bta_sys_collision_register(BTA_ID_AG, bta_ag_collision_cback);
+      bta_sys_collision_register(BTA_ID_HS, bta_hf_client_collision_cback);
+    #+END_SRC
+
+*** bta_sys_notify_collision
+
+    Called by BTA DM to notify collision event.
+
+*** Code flow for hfp connection collision
+
+    1) ACL connection collision while DUT connect request and remote
+       attempt to connect simultaneously. And DUT accept connect
+       request from remote.
+
+       #+BEGIN_SRC sh
+         170 Command 0x0405 Create_Connection 13 17 00:00:00.000313 6/7/2018 7:41:28.731444 PM
+         177 Event Connection Complete Controller Busy 0x0002 11 14 00:00:00.000209 6/7/2018 7:41:28.984712 PM
+         180 Event Connection Request 10 13 00:00:00.016553 6/7/2018 7:41:29.002469 PM
+         181 Command 0x0409 Accept_Connection_Request 7 11 00:00:00.001738 6/7/2018 7:41:29.004207 PM        
+       #+END_SRC
+
+    2) DUT trigger an HFP AG connect collision timer with
+       BTA_AG_COLLISION_TIMEOUT_MS (2000ms). DUT will wait 2000ms for
+       remote device open HFP connection.
+
+       #+BEGIN_SRC c
+         alarm_set_on_mloop(p_scb->collision_timer, BTA_AG_COLLISION_TIMEOUT_MS,
+         bta_ag_collision_timer_cback, p_scb);       
+       #+END_SRC
+
+    3) After 2000ms, peer device not setup HFP connection until
+       BTA_AG_COLLISION_TIMEOUT_MS timeout.
+
+       #+BEGIN_SRC sh
+         06-07 19:41:30.985 11294 11334 D bt_btif : bta_ag_collision_timer_cback
+         06-07 19:41:30.986 11294 11334 D bt_btif : bta_ag_do_disc:        
+       #+END_SRC
+
+    4) DUT resume to open AG connection and try to setup rfcomm
+       channel for HFP, but remote response with DM always.
+
+       #+BEGIN_SRC sh
+         342 Slave 1 0x04 2 SABM 1 13 00:00:00.000436 6/7/2018 7:41:31.218667 PM
+         344 Master 1 0x04 2 DM 1 13 00:00:00.030061 6/7/2018 7:41:31.248728 PM
+         423 Slave 1 0x04 2 SABM 1 13 00:00:00.001225 6/7/2018 7:41:34.061084 PM
+         425 Master 1 0x04 2 DM 1 13 00:00:00.027592 6/7/2018 7:41:34.088676 PM
+         507 Slave 1 0x04 2 SABM 1 13 00:00:00.000578 6/7/2018 7:41:37.823988 PM
+         509 Master 1 0x04 2 DM 1 13 00:00:00.018054 6/7/2018 7:41:37.842042 PM
+         581 Slave 1 0x04 2 SABM 1 13 00:00:00.000853 6/7/2018 7:41:41.046489 PM
+         583 Master 1 0x04 2 DM 1 13 00:00:00.024511 6/7/2018 7:41:41.071000 PM        
+       #+END_SRC
+
+    5) Remote initiate to setup rfcomm channel for HFP connection
+       successfully. HFP get connected at this time.
+
+       #+BEGIN_SRC sh
+         665 Master 1 0x00 0 SABM 1 13 00:00:02.861594 6/7/2018 7:41:43.963469 PM
+         666 Slave 1 0x00 0 UA 1 13 00:00:00.000664 6/7/2018 7:41:43.964133 PM
+         668 Master 1 0x00 0 UIH 0 Command Param. Neg. Initial 7 (S) 23 00:00:00.028332 6/7/2018 7:41:43.992465 PM
+         669 Slave 1 0x00 0 UIH 0 Response Param. Neg. Initial 7 (M) 23 00:00:00.000468 6/7/2018 7:41:43.992933 PM
+         671 Master 1 0x06 3 SABM 1 13 00:00:00.029149 6/7/2018 7:41:44.022082 PM
+         672 Slave 1 0x06 3 UA 1 13 00:00:00.000607 6/7/2018 7:41:44.022689 PM        
+       #+END_SRC
+
+
