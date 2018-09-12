@@ -5084,29 +5084,3 @@ Vmalloc映射分三步：
     
     一般需要配置的设备是一些固定的设备，不能自动枚举的设备。
     
-* RCU
-  rcu_dereference
-  struct rcu_head
-  rcu_dereference_protected
-  
-* iov_iter interface──新的异步IO接口
-* iov_iter interface──新的异步IO接口
-  AIO changed to read/write-iter
-  https://lwn.net/Articles/625077/  The iov_iter interface
-  
-* 内核调试
-  
-  http://opensourceforu.com/2011/01/understanding-a-kernel-oops/
-  
-  http://www.kerneloops.org/
-  
-  https://www.freebsd.org/doc/en/books/developers-handbook/kerneldebug.html
-  
-  https://wiki.ubuntu.com/Kernel/KernelDebuggingTricks
-  
-  
-  
-  
-  
-  
-  https://kernelnewbies.org/KernelMemoryAllocation

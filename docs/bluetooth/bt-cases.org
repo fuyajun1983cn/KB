@@ -296,6 +296,26 @@
        ======         
      #+END_SRC
 
+** 005
+
+   - Problem Description
+
+     车载蓝牙播放音乐不显示媒体存储设备
+
+     用户描述使用手机蓝牙连接车载设备成功后，播放音乐会显示没有媒体存
+     储的设备的，无法播放音乐 ，蓝牙中的媒体音频等开关都有开启，汽车型
+     号是：jeep自由光2.4领先版
+
+   - Problem Analysis
+
+     there is no apparent errors in bt host side, add it to the
+     avrcp1.3 blacklist to disable browse feature. 
+
+     #+BEGIN_SRC sh
+       [INTEROP_ADV_AVRCP_VER_1_3]
+       00:54:AF = Address_Based
+       Uconnect LWVCAF759GA042338 = Name_Based      
+     #+END_SRC
     
   
 * HFP

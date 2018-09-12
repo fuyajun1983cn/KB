@@ -1,27 +1,35 @@
 #+TITLE: 文档索引
 #+OPTIONS: toc:nil
-#+OPTIONS: ^:nil
+#+OPTIONS: ^:nil  num:nil
 
 #+BEGIN_EXAMPLE
  不积跬步,无以至千里;不积小流,无以成江海
                                                       —— 荀子《劝学篇》.
 #+END_EXAMPLE
-* 2018
-** ☛ TODO [[./bluetooth/bt-cases.html][蓝牙问题集锦]]                                     :Bluetooth:
+
+#+BEGIN_EXAMPLE
+feel free to send feedbacks to my personal email address: fuyajun1983cn@163.com
+#+END_EXAMPLE
+
+* 2018[3/13]
+** ☛ TODO [[./bluetooth/bt-cases.html][蓝牙问题集锦]]                                             :Bluetooth:
 
 ** ☛ TODO [[./bluetooth/qc-kb.html][常用信息备忘]]                                         :Bluetooth:
 
 ** ☛ TODO [[./software/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Android学习笔记]]                                            :Android:
+** ☛ TODO [[./software/android-articles.html][我的Android技术文章]]                                        :Android:
 ** ☛ TODO [[http://bt.ifjy.me/][Bluetooth Learning Notes]]                                :Bluetooth:
-** ☛ TODO [[./software/linux%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0.html][linux内核编程笔记]]                                :Programming:Linux:
+** ✔ DONE [[./software/linux%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0.html][linux内核编程笔记]]                                :Programming:Linux:
+   CLOSED: [2018-09-12 Wed 17:45]
+** ☛ TODO [[./software/linux%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B02.html][linux内核编程笔记(续)]]                            :Programming:Linux:
 ** ☛ TODO [[./bluetooth/btm.html][Deep into Bluetooth Manager in Florida]]                :Bluetooth:
-** ☛ TODO [[./bluetooth/bta-sys.html][BTA Syystem  Management in Florida Stack]]                 :Bluetooth:
+** ☛ TODO [[./bluetooth/bta-sys.html][BTA System  Management in Florida Stack]]                 :Bluetooth:
+** ☛ TODO [[./software/selinux.html][SELINUX学习笔记]]                                      :Linux:Android:
 ** ✔ DONE [[./bluetooth/bluetooth-audio.html][Bluetooth Audio]]                                          :Bluetooth:
    CLOSED: [2018-08-21 Tue 14:35]
-** ✔ DONE [[./bluetooth/bt-sniff.html][Deep into bluetooth sniff mode]]                           :Bluetooth:
-   CLOSED: [2018-08-18 Sat 19:35]
-* 2017
+** ☛ TODO [[./bluetooth/bt-sniff.html][Deep into bluetooth sniff mode]]                           :Bluetooth:
 ** ✔ DONE [[./wifi/%E6%97%A0%E7%BA%BF%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.html][无线权威指南]]                                                  :WIFI:
+* 2017[28/28]
 ** ✔ DONE [[./wifi/wpa_supplicant%E5%AD%A6%E4%B9%A0%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95.html][wpa_supplicant学习笔记]]
 ** ✔ DONE [[./wifi/11n%20Block%20Acknowledgement.html][802.11n BA机制研究]]                                            :WIFI:
 ** ✔ DONE [[./wifi/4%E6%AD%A5%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.html][4步握手过程研究]]                                               :WIFI:

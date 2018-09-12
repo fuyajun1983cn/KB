@@ -66,6 +66,23 @@
      universal. Manageable transfer rates (192-320 kbps) are delivered
      at the expense of significant data loss.
 
+     [[../images/2018/2018083001.png]]
+
+     Number of  PCM Samples in  one SBC frame per chhannel(N) =
+     Num. of Subbands * Block Length.
+
+     Sampling Freq(fs) = samples/sec.
+
+     One sample is sampled in 1/fs secs.
+
+     Per channel, 'N' samples are sampled in (T) = N/fs secs = 1000 *
+     1000 x N/fs usecs 
+
+     Since for stereo, 2 samples (L + R) are sampled in one sample clock only.
+     So one sample is sampled 1/(fs*2) secs.
+     For Stereo, 'N' samples (both L and R) are sampled in (T) =
+     (2*N)/(fs*2) = N/fs sec = N*1000000/fs usecs
+
    - apt-X/apt-X HD
 
      The simpler apt-X codec supports 48 kHz / 16 bit LCPM audio data
@@ -74,6 +91,8 @@
      ahead of SBC. Plus, they support a fine enough bit-rate to keep
      everything running smoothly and sounding phenomenal.
 
+     
+
    - Advanced audio coding (AAC)
      
      This is the audio standard for lossy digital audio
@@ -81,6 +100,8 @@
      YouTube, Sony’s PlayStation 3, and is preferred by Apple. It has
      a transfer rate cap of 250 kbps, creating a file similar to that
      of a mid-quality MP3.
+
+     [[../images/2018/2018083002.png]]
 
    - LDAC
 

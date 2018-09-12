@@ -1,0 +1,4 @@
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: SELINUX学习笔记
+#+OPTIONS: ^:{} 
+
