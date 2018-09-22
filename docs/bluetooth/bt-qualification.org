@@ -1,0 +1,193 @@
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: BluetoothQualification
+#+OPTIONS: ^:{} 
+
+* Bluetooth Qualification Process
+
+** General Description
+
+   [[../images/2018/2018092001.png]]
+
+   All Bluetooth products must be qualified, in order to
+
+   - Verify conformance
+
+   - Grant IP license
+
+   - Logo and word mark usage rights
+
+   - Promote interoperability
+
+
+   Consists of three steps
+
+   - Radio qualification
+     + Controller Subsystem
+   - Software qualification
+     + Host Subsystem
+   - End product listing
+     + Controller Subsystem combined with Host Subsystem
+
+** Radio Qualification
+
+   - Verify the radio’s conformance to the Bluetoothspecification
+
+   - Radio testing at Bluetooth Qualified Test Facility
+
+     + AT4 wireless
+
+     + SGS
+
+     + UL
+
+     + etc.
+
+   - Obtaining QDID from Bluetooth SIG
+
+   - Component or subsystem listing
+
+** Software Qualification
+
+   - Verify the Bluetooth stack’s conformance to Bluetooth
+     specification
+
+   - Protocol testing at a Bluetooth Qualified Test Facility (or
+     Profile Tuning Suite, PTS)
+
+     + RFCOMM
+
+     + L2CAP
+
+     + ATT
+
+     + etc.
+
+   - Profile testing at a Bluetooth Qualified Test Facility (or PTS)
+
+     + SPP
+
+     + A2DP
+
+     + Proximity
+
+     + etc.
+
+   - Obtaining QDID from Bluetooth SIG
+
+   - Component or Subsystem listing
+
+** End Product Listing
+
+   - Combining the Subsystems to an end product
+
+   - End products can be sold as is without limitations of the
+     Bluetooth license
+
+   - End products represent a complete Bluetooth wireless solution
+
+   - Typically a combination of two (or three) Subsystems:
+
+     + A Bluetooth Controller Subsystem (radio and HCI)
+
+     + A Bluetooth Host Subsystem (protocols and profiles)
+
+     + Profile Subsystem (profiles)
+
+   - End Product Listing process changed 1st of February 2014:
+
+     + Qualification of Bluetooth products is still necessary –just
+       like before
+
+   - Multiple EPLs can however be made with a single fee as long as
+     the Bluetooth components (hardware and software) remain the
+     same.
+
+* Bluetooth qualified designs
+
+  There are three main categories in the Bluetooth qualification: End
+  Products, Subsystems and Components. Subsystems and Components
+  categories can be divided into subcategories.
+
+  The picture below demonstrates different types of Bluetooth
+  qualified design.
+
+  [[../images/2018/2018092002.png]]
+
+** End Product
+
+   Every product sold in the market which has a functional
+   implementation of the Bluetooth technology must be qualified as an
+   End Product and listed in a directory of commercially available
+   products maintained by the SIG. End Products may be independently
+   functional Bluetooth devices, and for example Silicon Labs BGM111
+   is qualified as an End Product. End Products are as such when they
+   are based on pre-qualified Host and a Controller Subsystems at a
+   minimum (in addition they may also include Subsystems related to
+   Protocols/Services/Profiles) or when they are based on
+   pre-qualified tested Components which are combined to cover the
+   required layers for the independently functional Bluetooth device. 
+
+** Subsystems
+
+   There are three subcategories for Subsystems: Controller Subsystem,
+   Host Subsystem and Profile Subsystem. 
+
+   A Controller Subsystem must be eventually combined with a complementary Host Subsystem to
+   create a complete Bluetooth core architecture required for
+   operation. A Controller Subsystem may be for example an USB
+   commercial Bluetooth Dongle containing the RF-PHY and Link layer
+   implementations, normally below the standardized HCI software and
+   hardware interface of the Bluetooth stack. 
+
+   A Host Subsystem must be eventually combined with a complementary
+   Controller Subsystem. A Host Subsystem may be for example the
+   Bluetooth stack and application software running in an Operating
+   System, provided by the OS itself or by a third-party. Profile
+   Subsystem must eventually be combined with a complementary End
+   Product or Host Subsystem and may be for example a product
+   enhancement application implementing one or more of the adopted
+   Bluetooth profiles.  
+
+   A Profile Subsystem is not mandatory for obtaining an End Product 
+   Listing, but might be used to ensure and demonstrate the
+   compatibility to an adopted profile.
+
+** Components
+
+   Qualified Component designs do not have minimum layer support. They
+   can be made of any layer or combination of layers. Component(s)
+   combined together or with Subsystem(s) are the necessary parts to
+   create a new End Product or Subsystem qualified design. Qualified
+   Components are usually specific layers for example Silicon Labs
+   RF-PHY layer. These qualified layers can be used in a design and
+   re-performing tests are not needed.
+
+* Related Websites
+
+  - Android QDID list
+
+    + Stack and Profile:
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21772
+
+  - MSM™ chipset:
+
+    + Controller:
+ 
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=20783
+
+    + RF(for WCN3620)
+
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=21332
+
+    + (for WCN3660, WCN3680)
+
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=18867
+
+  - QCA chipset:
+
+    + Controller:
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22591
+
+    + RF:
+
+      https://www.bluetooth.org/tpg/QLI_viewQDL.cfm?qid=22590

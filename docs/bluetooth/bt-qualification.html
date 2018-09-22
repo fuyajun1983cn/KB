@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
+<head>
+<title>BluetoothQualification</title>
+<!-- 2018-09-20 Thu 12:55 -->
+<meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
+<meta  name="generator" content="Org-mode" />
+<meta  name="author" content="Fu Yajun" />
+<style type="text/css">
+ <!--/*--><![CDATA[/*><!--*/
+  .title  { text-align: center; }
+  .todo   { font-family: monospace; color: red; }
+  .done   { color: green; }
+  .tag    { background-color: #eee; font-family: monospace;
+            padding: 2px; font-size: 80%; font-weight: normal; }
+  .timestamp { color: #bebebe; }
+  .timestamp-kwd { color: #5f9ea0; }
+  .right  { margin-left: auto; margin-right: 0px;  text-align: right; }
+  .left   { margin-left: 0px;  margin-right: auto; text-align: left; }
+  .center { margin-left: auto; margin-right: auto; text-align: center; }
+  .underline { text-decoration: underline; }
+  #postamble p, #preamble p { font-size: 90%; margin: .2em; }
+  p.verse { margin-left: 3%; }
+  pre {
+    border: 1px solid #ccc;
+    box-shadow: 3px 3px 3px #eee;
+    padding: 8pt;
+    font-family: monospace;
+    overflow: auto;
+    margin: 1.2em;
+  }
+  pre.src {
+    position: relative;
+    overflow: visible;
+    padding-top: 1.2em;
+  }
+  pre.src:before {
+    display: none;
+    position: absolute;
+    background-color: white;
+    top: -10px;
+    right: 10px;
+    padding: 3px;
+    border: 1px solid black;
+  }
+  pre.src:hover:before { display: inline;}
+  pre.src-sh:before    { content: 'sh'; }
+  pre.src-bash:before  { content: 'sh'; }
+  pre.src-emacs-lisp:before { content: 'Emacs Lisp'; }
+  pre.src-R:before     { content: 'R'; }
+  pre.src-perl:before  { content: 'Perl'; }
+  pre.src-java:before  { content: 'Java'; }
+  pre.src-sql:before   { content: 'SQL'; }
+
+  table { border-collapse:collapse; }
+  caption.t-above { caption-side: top; }
+  caption.t-bottom { caption-side: bottom; }
+  td, th { vertical-align:top;  }
+  th.right  { text-align: center;  }
+  th.left   { text-align: center;   }
+  th.center { text-align: center; }
+  td.right  { text-align: right;  }
+  td.left   { text-align: left;   }
+  td.center { text-align: center; }
+  dt { font-weight: bold; }
+  .footpara:nth-child(2) { display: inline; }
+  .footpara { display: block; }
+  .footdef  { margin-bottom: 1em; }
+  .figure { padding: 1em; }
+  .figure p { text-align: center; }
+  .inlinetask {
+    padding: 10px;
+    border: 2px solid gray;
+    margin: 10px;
+    background: #ffffcc;
+  }
+  #org-div-home-and-up
+   { text-align: right; font-size: 70%; white-space: nowrap; }
+  textarea { overflow-x: auto; }
+  .linenr { font-size: smaller }
+  .code-highlighted { background-color: #ffff00; }
+  .org-info-js_info-navigation { border-style: none; }
+  #org-info-js_console-label
+    { font-size: 10px; font-weight: bold; white-space: nowrap; }
+  .org-info-js_search-highlight
+    { background-color: #ffff00; color: #000000; font-weight: bold; }
+  /*]]>*/-->
+</style>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/htmlize.css"/>
+<link rel="stylesheet" type="text/css" href="https://www.pirilampo.org/styles/readtheorg/css/readtheorg.css"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/lib/js/jquery.stickytableheaders.min.js"></script>
+<script type="text/javascript" src="https://www.pirilampo.org/styles/readtheorg/js/readtheorg.js"></script>
+<script type="text/javascript">
+/*
+@licstart  The following is the entire license notice for the
+JavaScript code in this tag.
+
+Copyright (C) 2012-2013 Free Software Foundation, Inc.
+
+The JavaScript code in this tag is free software: you can
+redistribute it and/or modify it under the terms of the GNU
+General Public License (GNU GPL) as published by the Free Software
+Foundation, either version 3 of the License, or (at your option)
+any later version.  The code is distributed WITHOUT ANY WARRANTY;
+without even the implied warranty of MERCHANTABILITY or FITNESS
+FOR A PARTICULAR PURPOSE.  See the GNU GPL for more details.
+
+As additional permission under GNU GPL version 3 section 7, you
+may distribute non-source (e.g., minimized or compacted) forms of
+that code without the copy of the GNU GPL normally required by
+section 4, provided you include this license notice and a URL
+through which recipients can access the Corresponding Source.
+
+
+@licend  The above is the entire license notice
+for the JavaScript code in this tag.
+*/
+<!--/*--><![CDATA[/*><!--*/
+ function CodeHighlightOn(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(null != target) {
+     elem.cacheClassElem = elem.className;
+     elem.cacheClassTarget = target.className;
+     target.className = "code-highlighted";
+     elem.className   = "code-highlighted";
+   }
+ }
+ function CodeHighlightOff(elem, id)
+ {
+   var target = document.getElementById(id);
+   if(elem.cacheClassElem)
+     elem.className = elem.cacheClassElem;
+   if(elem.cacheClassTarget)
+     target.className = elem.cacheClassTarget;
+ }
+/*]]>*///-->
+</script>
+</head>
+<body>
+<div id="content">
+<h1 class="title">BluetoothQualification</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. Bluetooth Qualification Process</a>
+<ul>
+<li><a href="#sec-1-1">1.1. General Description</a></li>
+<li><a href="#sec-1-2">1.2. Radio Qualification</a></li>
+<li><a href="#sec-1-3">1.3. Software Qualification</a></li>
+<li><a href="#sec-1-4">1.4. End Product Listing</a></li>
+</ul>
+</li>
+<li><a href="#sec-2">2. Bluetooth qualified designs</a>
+<ul>
+<li><a href="#sec-2-1">2.1. End Product</a></li>
+<li><a href="#sec-2-2">2.2. Subsystems</a></li>
+<li><a href="#sec-2-3">2.3. Components</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> Bluetooth Qualification Process</h2>
+<div class="outline-text-2" id="text-1">
+</div><div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> General Description</h3>
+<div class="outline-text-3" id="text-1-1">
+
+<div class="figure">
+<p><img src="../images/2018/2018092001.png" alt="2018092001.png" />
+</p>
+</div>
+
+<p>
+All Bluetooth products must be qualified, in order to
+</p>
+
+<ul class="org-ul">
+<li>Verify conformance
+</li>
+
+<li>Grant IP license
+</li>
+
+<li>Logo and word mark usage rights
+</li>
+
+<li>Promote interoperability
+</li>
+</ul>
+
+
+<p>
+Consists of three steps
+</p>
+
+<ul class="org-ul">
+<li>Radio qualification
+<ul class="org-ul">
+<li>Controller Subsystem
+</li>
+</ul>
+</li>
+<li>Software qualification
+<ul class="org-ul">
+<li>Host Subsystem
+</li>
+</ul>
+</li>
+<li>End product listing
+<ul class="org-ul">
+<li>Controller Subsystem combined with Host Subsystem
+</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Radio Qualification</h3>
+<div class="outline-text-3" id="text-1-2">
+<ul class="org-ul">
+<li>Verify the radio’s conformance to the Bluetoothspecification
+</li>
+
+<li>Radio testing at Bluetooth Qualified Test Facility
+
+<ul class="org-ul">
+<li>AT4 wireless
+</li>
+
+<li>SGS
+</li>
+
+<li>UL
+</li>
+
+<li>etc.
+</li>
+</ul>
+</li>
+
+<li>Obtaining QDID from Bluetooth SIG
+</li>
+
+<li>Component or subsystem listing
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Software Qualification</h3>
+<div class="outline-text-3" id="text-1-3">
+<ul class="org-ul">
+<li>Verify the Bluetooth stack’s conformance to Bluetooth
+specification
+</li>
+
+<li>Protocol testing at a Bluetooth Qualified Test Facility (or
+Profile Tuning Suite, PTS)
+
+<ul class="org-ul">
+<li>RFCOMM
+</li>
+
+<li>L2CAP
+</li>
+
+<li>ATT
+</li>
+
+<li>etc.
+</li>
+</ul>
+</li>
+
+<li>Profile testing at a Bluetooth Qualified Test Facility (or PTS)
+
+<ul class="org-ul">
+<li>SPP
+</li>
+
+<li>A2DP
+</li>
+
+<li>Proximity
+</li>
+
+<li>etc.
+</li>
+</ul>
+</li>
+
+<li>Obtaining QDID from Bluetooth SIG
+</li>
+
+<li>Component or Subsystem listing
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> End Product Listing</h3>
+<div class="outline-text-3" id="text-1-4">
+<ul class="org-ul">
+<li>Combining the Subsystems to an end product
+</li>
+
+<li>End products can be sold as is without limitations of the
+Bluetooth license
+</li>
+
+<li>End products represent a complete Bluetooth wireless solution
+</li>
+
+<li>Typically a combination of two (or three) Subsystems:
+
+<ul class="org-ul">
+<li>A Bluetooth Controller Subsystem (radio and HCI)
+</li>
+
+<li>A Bluetooth Host Subsystem (protocols and profiles)
+</li>
+
+<li>Profile Subsystem (profiles)
+</li>
+</ul>
+</li>
+
+<li>End Product Listing process changed 1st of February 2014:
+
+<ul class="org-ul">
+<li>Qualification of Bluetooth products is still necessary –just
+like before
+</li>
+</ul>
+</li>
+
+<li>Multiple EPLs can however be made with a single fee as long as
+the Bluetooth components (hardware and software) remain the
+same.
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> Bluetooth qualified designs</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+There are three main categories in the Bluetooth qualification: End
+Products, Subsystems and Components. Subsystems and Components
+categories can be divided into subcategories.
+</p>
+
+<p>
+The picture below demonstrates different types of Bluetooth
+qualified design.
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018092002.png" alt="2018092002.png" />
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-1" class="outline-3">
+<h3 id="sec-2-1"><span class="section-number-3">2.1</span> End Product</h3>
+<div class="outline-text-3" id="text-2-1">
+<p>
+Every product sold in the market which has a functional
+implementation of the Bluetooth technology must be qualified as an
+End Product and listed in a directory of commercially available
+products maintained by the SIG. End Products may be independently
+functional Bluetooth devices, and for example Silicon Labs BGM111
+is qualified as an End Product. End Products are as such when they
+are based on pre-qualified Host and a Controller Subsystems at a
+minimum (in addition they may also include Subsystems related to
+Protocols/Services/Profiles) or when they are based on
+pre-qualified tested Components which are combined to cover the
+required layers for the independently functional Bluetooth device. 
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-2" class="outline-3">
+<h3 id="sec-2-2"><span class="section-number-3">2.2</span> Subsystems</h3>
+<div class="outline-text-3" id="text-2-2">
+<p>
+There are three subcategories for Subsystems: Controller Subsystem,
+Host Subsystem and Profile Subsystem. 
+</p>
+
+<p>
+A Controller Subsystem must be eventually combined with a complementary Host Subsystem to
+create a complete Bluetooth core architecture required for
+operation. A Controller Subsystem may be for example an USB
+commercial Bluetooth Dongle containing the RF-PHY and Link layer
+implementations, normally below the standardized HCI software and
+hardware interface of the Bluetooth stack. 
+</p>
+
+<p>
+A Host Subsystem must be eventually combined with a complementary
+Controller Subsystem. A Host Subsystem may be for example the
+Bluetooth stack and application software running in an Operating
+System, provided by the OS itself or by a third-party. Profile
+Subsystem must eventually be combined with a complementary End
+Product or Host Subsystem and may be for example a product
+enhancement application implementing one or more of the adopted
+Bluetooth profiles.  
+</p>
+
+<p>
+A Profile Subsystem is not mandatory for obtaining an End Product 
+Listing, but might be used to ensure and demonstrate the
+compatibility to an adopted profile.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Components</h3>
+<div class="outline-text-3" id="text-2-3">
+<p>
+Qualified Component designs do not have minimum layer support. They
+can be made of any layer or combination of layers. Component(s)
+combined together or with Subsystem(s) are the necessary parts to
+create a new End Product or Subsystem qualified design. Qualified
+Components are usually specific layers for example Silicon Labs
+RF-PHY layer. These qualified layers can be used in a design and
+re-performing tests are not needed.
+</p>
+</div>
+</div>
+</div>
+</div>
+<div id="postamble" class="status">
+<p class="author">Author: Fu Yajun</p>
+<p class="date">Created: 2018-09-20 Thu 12:55</p>
+<p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
+<p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
+</div>
+</body>
+</html>

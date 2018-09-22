@@ -1460,18 +1460,43 @@
                              
     #+END_SRC
 
+* Android 8.0 architecture
 
+  An Android device includes the following partitions:
 
+  #+CAPTION: Android partitions.
+  [[../images/2018/2018091601.png]]
 
+  - system.img
 
-         
+    Contains mainly Android framework.
 
+  - boot.img
 
+    (kernel/ramdisk) Contains Linux kernel + Android patches.
 
+  - vendor.img
 
+    Contains SoC-specific code and configurations.
 
+  - odm.img
 
+    Contains device-specific code and configurations.
 
+  - oem.img
 
+    Contains OEM/carrier-related configurations and customizations.
 
-    
+  - bootloader
+
+    Brings up the kernel (vendor-proprietary).
+
+  - radio
+
+    Modem (proprietary).
+
+  Prior to Android 8.0, the vendor , odm , and oem images were optional ; files belonging to
+  these images were placed in boot.img or system.img with symlinks (such as /vendor >
+  /system/vendor ) when absent. Android 8.0 makes the vendor partition
+  mandatory .
+

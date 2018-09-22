@@ -11,7 +11,7 @@
 feel free to send feedbacks to my personal email address: fuyajun1983cn@163.com
 #+END_EXAMPLE
 
-* 2018[3/13]
+* 2018[4/14]
 ** ☛ TODO [[./bluetooth/bt-cases.html][蓝牙问题集锦]]                                             :Bluetooth:
 
 ** ☛ TODO [[./bluetooth/qc-kb.html][常用信息备忘]]                                         :Bluetooth:
@@ -29,6 +29,8 @@ feel free to send feedbacks to my personal email address: fuyajun1983cn@163.com
    CLOSED: [2018-08-21 Tue 14:35]
 ** ☛ TODO [[./bluetooth/bt-sniff.html][Deep into bluetooth sniff mode]]                           :Bluetooth:
 ** ✔ DONE [[./wifi/%E6%97%A0%E7%BA%BF%E6%9D%83%E5%A8%81%E6%8C%87%E5%8D%97.html][无线权威指南]]                                                  :WIFI:
+** ✔ DONE [[./bluetooth/bt-qualification.html][Bluetooth Qualification Process]]                          :Bluetooth:
+   CLOSED: [2018-09-20 Thu 18:30]
 * 2017[28/28]
 ** ✔ DONE [[./wifi/wpa_supplicant%E5%AD%A6%E4%B9%A0%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95.html][wpa_supplicant学习笔记]]
 ** ✔ DONE [[./wifi/11n%20Block%20Acknowledgement.html][802.11n BA机制研究]]                                            :WIFI:

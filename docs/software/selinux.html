@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>SELINUX学习笔记</title>
-<!-- 2018-09-12 Wed 14:45 -->
+<!-- 2018-09-22 Sat 20:51 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fu Yajun" />
@@ -144,11 +144,342 @@ for the JavaScript code in this tag.
 <body>
 <div id="content">
 <h1 class="title">SELINUX学习笔记</h1>
+<div id="table-of-contents">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents">
+<ul>
+<li><a href="#sec-1">1. General Introduction</a>
+<ul>
+<li><a href="#sec-1-1">1.1. SELinux Permissive and Enforcing Modes</a></li>
+<li><a href="#sec-1-2">1.2. Security Contexts</a></li>
+<li><a href="#sec-1-3">1.3. Subjects</a></li>
+<li><a href="#sec-1-4">1.4. Objects</a>
+<ul>
+<li><a href="#sec-1-4-1">1.4.1. Object Classes and Permissions</a></li>
+<li><a href="#sec-1-4-2">1.4.2. Allowing a Process Access to Resources</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#sec-2">2. AVC Audit Events</a></li>
+<li><a href="#sec-3">3. Example</a></li>
+</ul>
+</div>
+</div>
 
+<div id="outline-container-sec-1" class="outline-2">
+<h2 id="sec-1"><span class="section-number-2">1</span> General Introduction</h2>
+<div class="outline-text-2" id="text-1">
+<p>
+SELinux is a labeling system that controls the permissions (read/write, etc.) a subject
+context has over a target object such as directory/device/file /
+process / socket / .
+</p>
+
+<p>
+Android uses Security-Enhanced Linux (SELinux) to enforce mandatory
+access control (MAC) over all processes, even processes running with
+root/superuser privileges. SELinux operates on the principle of
+default denial: Anything not explicitly allowed is denied. 
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018091603.png" alt="2018091603.png" />
+</p>
+</div>
+
+<p>
+Each process and object has an associated label, which is also called a <b>context</b>. Contexts
+are comprised of a user, a role, a type and an multi-level-security
+(MLS) portion:
+</p>
+
+<ul class="org-ul">
+<li>The <code>type</code> of a process is often referred to as a <code>domain</code> and is
+defined in SELinux policy.
+</li>
+
+<li>The label of an <code>object</code> is usually decided by the corresponding
+security-contexts files.
+</li>
+</ul>
+
+
+<p>
+SELinux policy also contains the rules that state how each domain
+may access each object.
+</p>
+
+<p>
+In Android 4.4 → Android 7.0, SELinux policy files ( sepolicy , file_contexts.bin ,
+property_contexts etc ) are included the rootfs image as follows:
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018091602.png" alt="2018091602.png" />
+</p>
+</div>
+
+<p>
+These files contain SELinux policy rules and labels from all development participants,
+including ODM, SoC, and AOSP. In Android 8.0, these files are
+modular.
+</p>
+</div>
+
+<div id="outline-container-sec-1-1" class="outline-3">
+<h3 id="sec-1-1"><span class="section-number-3">1.1</span> SELinux Permissive and Enforcing Modes</h3>
+<div class="outline-text-3" id="text-1-1">
+<p>
+SELinux has three major modes of operation:
+</p>
+
+<ul class="org-ul">
+<li><b>Enforcing</b> - SELinux is enforcing the loaded policy.
+</li>
+
+<li><b>Permissive</b> - SELinux has loaded the policy, however it is not
+enforcing the policy rules. This is generally used for testing as
+the audit log will contain the AVC denied messages as defined in
+the Auditing SELinux Events section. The SELinux utilities such
+as audit2allow(1) and audit2why(8) can then be used to determine
+the cause and possible resolution by generating the appropriate
+allow rules.
+</li>
+
+<li><b>Disabled</b> - The SELinux infrastructure is not enabled, therefore
+no policy can be loaded.
+</li>
+</ul>
+</div>
+</div>
+
+<div id="outline-container-sec-1-2" class="outline-3">
+<h3 id="sec-1-2"><span class="section-number-3">1.2</span> Security Contexts</h3>
+<div class="outline-text-3" id="text-1-2">
+<p>
+SELinux requires a security context to be associated with every process (or subject)
+and object that are used by the security server to decide whether access is allowed or
+not as defined by the policy.
+</p>
+
+<p>
+Within SELinux, a security context is represented as variable-length strings that
+define the SELinux user, their role, a type identifier and an optional MCS / MLS
+security range or level as follows:
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018091604.png" alt="2018091604.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-3" class="outline-3">
+<h3 id="sec-1-3"><span class="section-number-3">1.3</span> Subjects</h3>
+<div class="outline-text-3" id="text-1-3">
+<p>
+A subject is an active entity generally in the form of a person, process, or device that
+causes information to flow among objects or changes the system
+state.
+</p>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4" class="outline-3">
+<h3 id="sec-1-4"><span class="section-number-3">1.4</span> Objects</h3>
+<div class="outline-text-3" id="text-1-4">
+<p>
+Within SELinux an object is a resource such as files, sockets, pipes or network
+interfaces that are accessed via processes (also known as subjects). These objects are
+classified according to the resource they provide with access permissions relevant to
+their purpose (e.g. read, receive and write), and assigned a
+security context.
+</p>
+</div>
+
+
+<div id="outline-container-sec-1-4-1" class="outline-4">
+<h4 id="sec-1-4-1"><span class="section-number-4">1.4.1</span> Object Classes and Permissions</h4>
+<div class="outline-text-4" id="text-1-4-1">
+<p>
+Each object consists of a class identifier that defines its purpose (e.g. file, socket)
+along with a set of permissions5 that describe what services the object can handle
+(read, write, send etc.).
+</p>
+
+<p>
+When an object is instantiated it will be allocated a name
+(e.g. a file could be called config or a socket my_connection) and a security
+context (e.g. system_u:object_r:selinux_config_t)
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018092201.png" alt="2018092201.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-1-4-2" class="outline-4">
+<h4 id="sec-1-4-2"><span class="section-number-4">1.4.2</span> Allowing a Process Access to Resources</h4>
+<div class="outline-text-4" id="text-1-4-2">
+<p>
+This is a simple example that attempts to explain two points:
+</p>
+
+<ul class="org-ul">
+<li>How a process is given permission to use an objects resource.
+</li>
+
+<li>By using the 'process' object class, show that a process can be
+described as a process or object. 
+</li>
+</ul>
+
+
+<p>
+An SELinux policy contains many rules and statements, the majority of which are
+<code>allow</code> rules that (simply) allows processes to be given access permissions to an
+objects resources.
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018092202.png" alt="2018092202.png" />
+</p>
+</div>
+
+<ul class="org-ul">
+<li><code>allow</code>
+
+<p>
+The SELinux language allow rule.
+</p>
+</li>
+
+<li><code>unconfined_t</code>
+
+<p>
+The source domain (or subject) identifier - in this case the
+shell that wants to exec the gateway application.
+</p>
+</li>
+
+<li><code>ext_gateway_t</code>
+
+<p>
+The target object identifier - the object instance of the
+gateway application process.
+</p>
+</li>
+
+<li><code>process</code>
+
+<p>
+The target object class - the 'process' object class.
+</p>
+</li>
+
+<li><code>transition</code>
+
+<p>
+The permission granted to the source domain on the targets
+object - in this case the unconfined_t domain has transition
+permission on the ext_gateway_t 'process' object.
+</p>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-2" class="outline-2">
+<h2 id="sec-2"><span class="section-number-2">2</span> AVC Audit Events</h2>
+<div class="outline-text-2" id="text-2">
+<p>
+For SELinux there are two main types of audit event:
+</p>
+
+<ol class="org-ol">
+<li>AVC Audit Events - These are generated by the AVC subsystem as a
+result of access denials, or where specific events have requested
+an audit message (i.e. where an auditallow rule has been used in
+the policy).
+</li>
+
+<li>SELinux-aware Application Events - These are generated by the
+SELinux kernel services and SELinux-aware applications for events
+such as system errors, initialisation, policy load, changing
+boolean states, setting of enforcing / permissive mode,
+relabeling etc. 
+</li>
+</ol>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018091605.png" alt="2018091605.png" />
+</p>
+</div>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018091606.png" alt="2018091606.png" />
+</p>
+</div>
+</div>
+</div>
+
+<div id="outline-container-sec-3" class="outline-2">
+<h2 id="sec-3"><span class="section-number-2">3</span> Example</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+A process hal_bluetooth_qti  wants to read  ramdump_vendor_data_file
+(dir).
+</p>
+
+<ol class="org-ol">
+<li>type definition
+
+<div class="org-src-container">
+
+<pre class="src src-sh">#define a type
+type ramdump_vendor_data_file, file_type, data_file_type, mlstrustedobject;
+</pre>
+</div>
+</li>
+
+<li>directory
+
+<div class="org-src-container">
+
+<pre class="src src-sh">/data/vendor/ramdump(/.*)?             u:object_r:ramdump_vendor_data_file:s0
+</pre>
+</div>
+</li>
+
+<li>define access rules
+
+<div class="org-src-container">
+
+<pre class="src src-sh">allow hal_bluetooth_qti ramdump_vendor_data_file:file create_file_perms;
+allow hal_bluetooth_qti ramdump_vendor_data_file:dir rw_dir_perms;
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-09-12 Wed 14:45</p>
+<p class="date">Created: 2018-09-22 Sat 20:51</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>
