@@ -316,7 +316,111 @@
        00:54:AF = Address_Based
        Uconnect LWVCAF759GA042338 = Name_Based      
      #+END_SRC
-    
+
+** COMMENT 006
+
+   - Problem Description
+
+     when listening a2dp music, sometimes, a2dp start failed.
+
+   - Problem Analysis
+
+     1. start stream failed. 
+
+        #+BEGIN_SRC sh
+          10-08 08:10:42.381523 751 12822 W bthost_ipc: done waiting in pending status = A2DP_CTRL_ACK_UNKNOWN
+          10-08 08:10:42.381662 751 12822 W bthost_ipc: a2dp stream start failed: status = A2DP_CTRL_ACK_UNKNOWN
+          10-08 08:10:42.381680 751 12822 E bthost_ipc: audio_start_stream: Failed to start a2dp stream
+          10-08 08:10:42.381703 751 12822 E split_a2dp: BT controller start return = 8
+          10-08 08:10:42.381729 751 12822 E split_a2dp: BT controller start failed
+          10-08 08:10:42.381748 751 12822 D split_a2dp: start A2DP playback total active sessions :0        
+        #+END_SRC
+
+     2. a2dp start timeout.
+
+        A2dp disconnected seems caused by Avdtp start command timeout.
+
+        #+BEGIN_SRC sh
+          ========================================================================================
+          10-08 08:10:27.378999 751 1346 W bthost_ipc: bt_stack_on_check_a2dp_ready
+          10-08 08:10:27.379045 751 12822 W bthost_ipc: audio_check_a2dp_ready : A2DP_CTRL_ACK_SUCCESS
+
+          10-08 08:10:32.380646 751 12822 W bthost_ipc: entering coditional wait: retry = 1, ack_recvd = 0
+          10-08 08:10:37.381023 751 12822 W bthost_ipc: entering coditional wait: retry = 2, ack_recvd = 0
+          // bthost ipc request A2dp start, no response and waiting
+
+          10-08 08:10:42.381523 751 12822 W bthost_ipc: done waiting in pending status = A2DP_CTRL_ACK_UNKNOWN
+          10-08 08:10:42.381662 751 12822 W bthost_ipc: a2dp stream start failed: status = A2DP_CTRL_ACK_UNKNOWN
+          10-08 08:10:42.381680 751 12822 E bthost_ipc: audio_start_stream: Failed to start a2dp stream
+          10-08 08:10:42.381703 751 12822 E split_a2dp: BT controller start return = 8
+          10-08 08:10:42.381729 751 12822 E split_a2dp: BT controller start failed
+
+          10-08 08:10:42.383723 2681 3607 D bt_avp : avdt_ccb_event: event=RET_TOUT_EVT state=CCB_OPEN_ST action=23
+          10-08 08:10:42.383786 2681 3607 D bt_avp : avdt_ccb_event: event=MSG_START_RSP_EVT state=CCB_OPEN_ST action=8
+          10-08 08:10:42.383802 2681 3607 D bt_avp : avdt_ccb_hdl_start_rsp event = 40
+          10-08 08:10:42.383820 2681 3607 D bt_btif : bta_av_stream0_cback: avdt_handle: 1 event=0x5
+          10-08 08:10:42.383845 2681 3607 D bt_btif : bta_av_proc_stream_evt(): on the index : 0
+          10-08 08:10:42.383877 2681 3607 D bt_avp : avdt_ccb_event: event=MSG_START_RSP_EVT state=CCB_OPEN_ST action=36
+          10-08 08:10:42.383927 2681 3607 D bt_avp : avdt_ad_close_req state: 6
+          10-08 08:10:42.383949 2681 3607 W bt_l2cap: L2CA_DisconnectReq() CID: 0x0049
+          10-08 08:10:42.384086 2681 3607 D bt_avp : avdt_ad_close_req state: 6
+          10-08 08:10:42.384107 2681 3607 W bt_l2cap: L2CA_DisconnectReq() CID: 0x0045
+          // avdtp stack send avdtp start command timeout, then trigger disconnect avdtp connection
+
+          10-08 08:10:42.384332 2681 3607 D bt_btif : bta_av_hdl_event: AV ssm event=0x121d(STR_START_FAIL) on handle = 0x41
+          10-08 08:10:42.384349 2681 3607 D bt_btif : bta_av_ssm_execute(): AV Sevent(0x41)=0x121d(STR_START_FAIL) state=3(OPEN)
+          ========================================================================================
+                  
+        #+END_SRC
+
+     3. hci exit sniff failed. 
+
+        In the first AVDTP start/suspend, HCI exit sniff mode
+        normally, so AVDTP start/suspend send immediately
+
+        #+BEGIN_SRC sh
+          ==============================================================================================
+          // ACL connection in Active Mode
+          1,264 Command 0x0804 Exit_Sniff_Mode 0x0003 2 6 00:00:14.054979 10/8/2018 8:09:11.158789 AM 
+          1,265 Event 0x0804 Exit_Sniff_Mode Command Status Success 4 7 00:00:00.008292 10/8/2018 8:09:11.167081 AM 
+          1,273 Event Mode Change Active Mode Success 0x0003 6 9 00:00:00.000396 10/8/2018 8:09:11.401364 AM 
+
+          // AVDTP send start/suspend command normally
+          1,274 1 3 Single Packet Master START 1 12 00:00:17.737312 10/8/2018 8:09:11.401769 AM 
+          1,284 3 Single Packet Slave START 1 11 00:00:00.115472 10/8/2018 8:09:11.517241 AM 
+          1,400 1 3 Single Packet Master SUSPEND 2 12 00:00:20.819563 10/8/2018 8:09:32.336804 AM 
+          1,405 3 Single Packet Slave SUSPEND 2 11 00:00:00.024100 10/8/2018 8:09:32.360904 AM 
+          ==============================================================================================
+                  
+        #+END_SRC
+
+        But in the second time host attemt to send AVDTP start, HCI
+        not exit sniff mode successfully, host not received Mode
+        change to active event, so that the following AVDTP start
+        pending to start and timeout occur.
+
+        #+BEGIN_SRC sh
+          ==============================================================================================
+          // ACL connection in Sniff Mode
+          1,413 Event Mode Change Sniff Mode Success 0x0003 6 9 00:00:05.004943 10/8/2018 8:09:37.434643 AM
+
+          // Host request exit sniff mode, but not receive "Mode Change event" to active mode. After that, no see ACL packet been send.
+          1,415 Command 0x0804 Exit_Sniff_Mode 0x0003 2 6 00:00:00.000362 10/8/2018 8:09:37.435701 AM 
+          1,417 Event 0x0804 Exit_Sniff_Mode Command Status Success 4 7 00:00:00.005466 10/8/2018 8:09:37.441424 AM 
+
+          // avdtp stack send avdtp start command timeout, then trigger disconnect avdtp connection
+          10-08 08:10:42.383723 2681 3607 D bt_avp : avdt_ccb_event: event=RET_TOUT_EVT state=CCB_OPEN_ST action=23
+          10-08 08:10:42.383786 2681 3607 D bt_avp : avdt_ccb_event: event=MSG_START_RSP_EVT state=CCB_OPEN_ST action=8
+          10-08 08:10:42.383802 2681 3607 D bt_avp : avdt_ccb_hdl_start_rsp event = 40
+          10-08 08:10:42.383820 2681 3607 D bt_btif : bta_av_stream0_cback: avdt_handle: 1 event=0x5
+          10-08 08:10:42.383845 2681 3607 D bt_btif : bta_av_proc_stream_evt(): on the index : 0
+          10-08 08:10:42.383877 2681 3607 D bt_avp : avdt_ccb_event: event=MSG_START_RSP_EVT state=CCB_OPEN_ST action=36
+          10-08 08:10:42.383927 2681 3607 D bt_avp : avdt_ad_close_req state: 6
+          10-08 08:10:42.383949 2681 3607 W bt_l2cap: L2CA_DisconnectReq() CID: 0x0049
+          10-08 08:10:42.384086 2681 3607 D bt_avp : avdt_ad_close_req state: 6
+          10-08 08:10:42.384107 2681 3607 W bt_l2cap: L2CA_DisconnectReq() CID: 0x0045
+          ==============================================================================================        
+        #+END_SRC
   
 * HFP
 

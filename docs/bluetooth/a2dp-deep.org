@@ -1,0 +1,14 @@
+#+SETUPFILE: ../theme-readtheorg.setup
+#+TITLE: Deep Into A2dp Profile Code
+#+OPTIONS: ^:{} 
+
+
+
+* a2dp IPC 
+
+  #+CAPTION:A2dp IPC Code Overview
+  [[../images/2018/a2dp_IPC.svg]]
+
+  
+  #+CAPTION:Code Flow Example for a2dp stream start
+  [[../images/2018/2018102001.png]]
