@@ -29,7 +29,7 @@
      data transferred per second over Bluetooth. For uncompressed
      files, this is calculated by multiplying the sample rate by the
      bit-depth.
-
+     
 ** Audio Type
 
    There are three main types of audio compression formats,
@@ -109,6 +109,61 @@
      the defining feature, which transfers up to 3x the data compared
      to SBC. It’s able to maintain a sample rate and bit depth at 96
      kHz / 24 bit (maxed at 990 kbps).
+
+     You may select 3 kinds of transmission rates; Quality priority
+     mode, Normal mode and Connection priority mode.
+
+     1. 990kbps: (Quality priority mode)
+
+        3x the data transmitted compared to existing wireless
+        technology
+
+        *Bluetooth A2DP - SBC (328kbps, 44.1kHz)*
+
+     2. 660kbps: (Normal mode）
+
+        Initial setting mode of Walkman
+
+     3. 330kbps: (Connection priority mode)
+
+        Almost same as existing codec.
+
+        *It achieves the higher sound quality than conventional codec,
+        even in a bad connection environment.*
+
+   - LHDC
+
+     LHDC™ stands for low latency and high-definition audio codec and
+     is announced by Savitech. Comparing to the Bluetooth SBC audio
+     format, LHDC™ allows more than 3 times the data
+     transmitted. LHDC™ provides the most realistic and high
+     definition wireless audio. There will be no more audio quality
+     disparity between wireless and wired audio devices. Enjoy both
+     the convenience and high quality that wireless audio via
+     Bluetooth brings.
+
+     SBC：
+
+     1. SBC codec transmits less volume of data
+
+     2. SBC codec provides less sound quality
+
+     LHDC :
+
+     1. LHDC™ codec transmits more than 3 times the volume of data
+        compared to other technologies
+
+     2. Excellent sound quality that LHDC™ codec can provide
+
+     3. The increase of data transmitted enables users to experience
+        more details and a better sound field, and immerse in the
+        emotion of the music  
+
+     Comparisons Between LHDC  & SBC 
+
+     [[../images/2018/2018120401.png]]
+     
+     
 
 * Bluetooth audio streaming
 

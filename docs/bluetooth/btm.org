@@ -3,6 +3,30 @@
 #+OPTIONS: ^:{} 
 
 * Device configuration
+
+* Bluetooth Interface
+
+  1. btif_dm_execute_service_request
+
+     btif_enable_service/btif_disable_service will call this function
+     to enable a service(profile). 
+
+     then it will  call back jni function *adapter_properties_cb* . 
+
+     #+BEGIN_SRC plantuml :exports results :file ../images/2018/2018102201.png :cmdline -charset UTF-8
+       @startuml
+       [--> btif_core.c: btif_enable_service
+       btif_core.c -> btif_dm.c: btif_dm_execute_service_request
+       btif_dm.c -> btif_dm.c:  btif_in_execute_service_request
+       btif_dm.c -->]: btif_xx_execute_service
+       btif_dm.c -->]: adapter_properties_cb
+       @enduml
+     #+END_SRC
+
+     #+RESULTS:
+     [[file:../images/2018/2018102201.png]]
+
+
 * ACL Management
 ** data structure
 
@@ -25,6 +49,8 @@
        ...
      }tBTM_CB;
    #+END_SRC
+
+   
    
 * Power Management
 ** data structure
@@ -46,12 +72,22 @@
      }tBTM_CB;
    #+END_SRC
 
+   //trigger to exit sniff mode
    bta_sys_busy(BTA_ID_AG, p_scb->app_id, p_scb->peer_addr); //unsniff
 
+   //trigger to enter sniff mode
    bta_sys_idle(BTA_ID_AG, p_scb->app_id, p_scb->peer_addr);//sniff
+
+   //set enable or disable sniff mode
+   bta_sys_set_policy
+   bta_sys_clear_policy
+
+   //set power mode
+   BTM_SetPowerMode
 
    bta_dm_pm_cback
 
+   @btm_pm.cc
    
 * Device control
 * BLE Device controllers

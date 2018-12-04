@@ -4,6 +4,87 @@
 
 
 
+
+* enable a2dp Profile
+  
+  
+  #+BEGIN_SRC plantuml :exports results :file ../images/2018/2018102202.png :cmdline -charset UTF-8
+    @startuml
+    btif_av.cc -> btif_av.cc:  btif_av_init
+    btif_av.cc-> btif_core.cc: btif_enable_service
+    btif_core.cc -> btif_dm.cc: btif_dm_execute_service_request
+    btif_dm.cc -> btif_dm.cc:  btif_in_execute_service_request
+    btif_dm.cc -->btif_av.cc: btif_xx_execute_service
+    btif_dm.cc -->]: adapter_properties_cb
+    @enduml
+  #+END_SRC
+
+  #+RESULTS:
+  [[file:../images/2018/2018102202.png]]
+
+* a2dp source init
+
+
+
+  #+BEGIN_SRC plantuml :exports results :file ../images/2018/2018103101.png :cmdline -charset UTF-8
+    @startuml
+    btif_av_init --> btif_a2dp_source_startup
+
+    @enduml
+  #+END_SRC
+
+** data structure 
+
+   #+BEGIN_SRC c++
+     typedef struct {
+       thread_t* worker_thread;
+       fixed_queue_t* cmd_msg_queue;
+       fixed_queue_t* tx_audio_queue;
+       bool tx_flush; /* Discards any outgoing data when true */
+       alarm_t* unblock_audio_start_alarm;
+       alarm_t* media_alarm;
+       alarm_t *remote_start_alarm;
+       const tA2DP_ENCODER_INTERFACE* encoder_interface;
+       period_ms_t encoder_interval_ms; /* Local copy of the encoder interval */
+       btif_media_stats_t stats;
+       btif_media_stats_t accumulated_stats;
+     } tBTIF_A2DP_SOURCE_CB;   
+   #+END_SRC
+
+** code logic 
+
+   only one work thread called "media_worker", cmd_msg_queue queue is
+   registed to this thread. and it's corresponding hanlder is
+   btif_a2dp_source_command_ready. 
+
+   in other code places, you can use the following method to send
+   command to this thread. 
+
+   #+BEGIN_SRC c++
+     BT_HDR* p_buf = (BT_HDR*)osi_malloc(sizeof(BT_HDR));
+
+     p_buf->event = BTIF_MEDIA_AUDIO_TX_START; //event
+     fixed_queue_enqueue(btif_a2dp_source_cb.cmd_msg_queue, p_buf);   
+   #+END_SRC
+   
+   codec_config_src
+
+
+* a2dp control module
+
+  - control path
+
+    #+BEGIN_SRC c++
+      #define A2DP_CTRL_PATH "/data/misc/bluedroid/.a2dp_ctrl"    
+    #+END_SRC
+
+    in btif_a2dp_control_init, we will open control path to accept
+    control command from other code places or modules. 
+
+    main process function is *btif_a2dp_recv_ctrl_data*. 
+
+    
+  
 * a2dp IPC 
 
   #+CAPTION:A2dp IPC Code Overview

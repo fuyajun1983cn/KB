@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Bluetooth Audio</title>
-<!-- 2018-08-21 Tue 14:35 -->
+<!-- 2018-12-04 Tue 12:49 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fu Yajun" />
@@ -265,6 +265,37 @@ mandatory among all A2DP-enabled devices, making it virtually
 universal. Manageable transfer rates (192-320 kbps) are delivered
 at the expense of significant data loss.
 </p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018083001.png" alt="2018083001.png" />
+</p>
+</div>
+
+<p>
+Number of  PCM Samples in  one SBC frame per chhannel(N) =
+Num. of Subbands * Block Length.
+</p>
+
+<p>
+Sampling Freq(fs) = samples/sec.
+</p>
+
+<p>
+One sample is sampled in 1/fs secs.
+</p>
+
+<p>
+Per channel, 'N' samples are sampled in (T) = N/fs secs = 1000 *
+1000 x N/fs usecs 
+</p>
+
+<p>
+Since for stereo, 2 samples (L + R) are sampled in one sample clock only.
+So one sample is sampled 1/(fs*2) secs.
+For Stereo, 'N' samples (both L and R) are sampled in (T) =
+(2*N)/(fs*2) = N/fs sec = N*1000000/fs usecs
+</p>
 </li>
 
 <li>apt-X/apt-X HD
@@ -277,7 +308,11 @@ ahead of SBC. Plus, they support a fine enough bit-rate to keep
 everything running smoothly and sounding phenomenal.
 </p>
 </li>
+</ul>
 
+
+
+<ul class="org-ul">
 <li>Advanced audio coding (AAC)
 
 <p>
@@ -287,6 +322,12 @@ YouTube, Sony’s PlayStation 3, and is preferred by Apple. It has
 a transfer rate cap of 250 kbps, creating a file similar to that
 of a mid-quality MP3.
 </p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018083002.png" alt="2018083002.png" />
+</p>
+</div>
 </li>
 
 <li>LDAC
@@ -297,11 +338,103 @@ the defining feature, which transfers up to 3x the data compared
 to SBC. It’s able to maintain a sample rate and bit depth at 96
 kHz / 24 bit (maxed at 990 kbps).
 </p>
+
+<p>
+You may select 3 kinds of transmission rates; Quality priority
+mode, Normal mode and Connection priority mode.
+</p>
+
+<ol class="org-ol">
+<li>990kbps: (Quality priority mode)
+
+<p>
+3x the data transmitted compared to existing wireless
+technology
+</p>
+
+<p>
+<b>Bluetooth A2DP - SBC (328kbps, 44.1kHz)</b>
+</p>
+</li>
+
+<li>660kbps: (Normal mode）
+
+<p>
+Initial setting mode of Walkman
+</p>
+</li>
+
+<li>330kbps: (Connection priority mode)
+
+<p>
+Almost same as existing codec.
+</p>
+
+<p>
+<b>It achieves the higher sound quality than conventional codec,
+even in a bad connection environment.</b>
+</p>
+</li>
+</ol>
+</li>
+
+<li>LHDC
+
+<p>
+LHDC™ stands for low latency and high-definition audio codec and
+is announced by Savitech. Comparing to the Bluetooth SBC audio
+format, LHDC™ allows more than 3 times the data
+transmitted. LHDC™ provides the most realistic and high
+definition wireless audio. There will be no more audio quality
+disparity between wireless and wired audio devices. Enjoy both
+the convenience and high quality that wireless audio via
+Bluetooth brings.
+</p>
+
+<p>
+SBC：
+</p>
+
+<ol class="org-ol">
+<li>SBC codec transmits less volume of data
+</li>
+
+<li>SBC codec provides less sound quality
+</li>
+</ol>
+<p>
+LHDC :
+</p>
+
+<ol class="org-ol">
+<li>LHDC™ codec transmits more than 3 times the volume of data
+compared to other technologies
+</li>
+
+<li>Excellent sound quality that LHDC™ codec can provide
+</li>
+
+<li>The increase of data transmitted enables users to experience
+more details and a better sound field, and immerse in the
+emotion of the music  
+</li>
+</ol>
+<p>
+Comparisons Between LHDC  &amp; SBC 
+</p>
+
+
+<div class="figure">
+<p><img src="../images/2018/2018120401.png" alt="2018120401.png" />
+</p>
+</div>
 </li>
 </ul>
 </div>
 </div>
 </div>
+
+
 
 <div id="outline-container-sec-2" class="outline-2">
 <h2 id="sec-2"><span class="section-number-2">2</span> Bluetooth audio streaming</h2>
@@ -382,7 +515,7 @@ audio itself.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-21 Tue 14:35</p>
+<p class="date">Created: 2018-12-04 Tue 12:49</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

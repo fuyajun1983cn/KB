@@ -827,3 +827,32 @@
      proceedure will be initiated by DUT not from remote side. 
 
      there is timing case, if we allow Peripheral to initiated Encryption.
+
+   - 003
+
+     - Problem Description
+
+       更换蓝牙地址导致ble应用失败
+
+     - Problem Analysis
+
+       对比正常日志，BLE连接成功后，host端会发出一个connection update
+       parameter切换到快速扫描模式。 而异常日志则没有看到发出此命令，
+       导致扫描服务超时失败。
+
+       for normal logs, we see the following logs printed out after LE connection established.
+
+       : 11-12 17:29:07.947 10434 17273 D bt_l2cap: l2cble_scanner_conn_comp: HANDLE=2 addr_type=0 conn_interval=39 slave_latency=0 supervision_tout=2000
+
+       but for abnormal logs, we see the following logs printed out after L# connection established.
+
+       : 11-12 17:33:32.565 18261 18547 I bt_btm : btm_ble_resolve_random_addr_on_conn_cmpl
+       : 11-12 17:33:32.565 18261 18547 I bt_btm_ble: btm_ble_resolve_random_addr_on_conn_cmpl unable to match and resolve random address
+       : 11-12 17:33:32.565 18261 18547 D bt_l2cap: l2cble_scanner_conn_comp: HANDLE=2 addr_type=0 conn_interval=0 slave_latency=0 supervision_tout=0
+
+      conn_interval is 0. The root cause is
+       btm_ble_resolve_random_addr_on_conn_cmpl didn`t consider the
+       situation of enhanced connection, if it`s a enhanced
+       connection, the parameters in p_data is different, that leading
+       to conn_interval to be set to 0.  
+
