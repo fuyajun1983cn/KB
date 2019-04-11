@@ -982,7 +982,6 @@
          }      
       #+END_SRC
 
-
 * FAQ
 
   1. What conditions may trigger host send sniff sub-rating command?

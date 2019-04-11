@@ -103,7 +103,8 @@
     An HT STA shall support HT-immediate Block Ack in the role of *recipient*.
 
 *** HT-immediate Block Ack architecture
-    #+CAPTION HT-immediate Block Ack architecture
+
+    #+CAPTION: HT-immediate Block Ack architecture
     [[../images/2016/2016070401.png]]
 
     originator包含一个传输Buffer控制，它使用一个传输窗口，
