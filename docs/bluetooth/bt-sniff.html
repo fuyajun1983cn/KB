@@ -4,7 +4,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
 <title>Deep into bluetooth sniff mode</title>
-<!-- 2018-08-18 Sat 19:35 -->
+<!-- 2019-04-10 Wed 15:04 -->
 <meta  http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta  name="generator" content="Org-mode" />
 <meta  name="author" content="Fu Yajun" />
@@ -173,6 +173,7 @@ for the JavaScript code in this tag.
 <ul>
 <li><a href="#sec-2-1">2.1. verview of the code flow</a></li>
 <li><a href="#sec-2-2">2.2. setting sniff parameters &#x2013; bta_dm_pm_sniff</a></li>
+<li><a href="#sec-2-3">2.3. Sniff Mode常见的一些修改</a></li>
 </ul>
 </li>
 <li><a href="#sec-3">3. FAQ</a></li>
@@ -1492,7 +1493,65 @@ the array <b>bta_dm_pm_md</b> ,  use
 </pre>
 </div>
 </div>
+
+<div id="outline-container-sec-2-3" class="outline-3">
+<h3 id="sec-2-3"><span class="section-number-3">2.3</span> Sniff Mode常见的一些修改</h3>
+<div class="outline-text-3" id="text-2-3">
+<ol class="org-ol">
+<li>建立Sco的时候本退出sniff mode
+
+<div class="org-src-container">
+
+<pre class="src src-diff">diff --git a/bta/dm/bta_dm_pm.cc b/bta/dm/bta_dm_pm.cc
+index 92a233e..926acf8 100644
+--- a/bta/dm/bta_dm_pm.cc
++++ b/bta/dm/bta_dm_pm.cc
+@@ -483,7 +483,14 @@ static void bta_dm_pm_cback(tBTA_SYS_CONN_STATUS status, uint8_t id,
+}
+}
+}
+-
++ if ((status == BTA_SYS_SCO_OPEN || status == BTA_SYS_SCO_CLOSE)&amp;&amp;(id == BTA_ID_AG)) {
++ tBTA_DM_PEER_DEVICE *p_rem_dev = NULL;
++ p_rem_dev = bta_dm_find_peer_device(peer_addr);
++ const bool bScoActive = (status == BTA_SYS_SCO_OPEN);
++ APPL_TRACE_DEBUG("%s: BTA_ID_AG with bScoActive = %d", __func__, bScoActive);
++ if(p_rem_dev)
++ bta_dm_pm_set_sniff_policy(p_rem_dev, bScoActive);
++ }
+/* If HID connection open is received and SCO is already active.
+disable snii link policy for some devices */
+if ((status == BTA_SYS_CONN_OPEN) &amp;&amp; (id == BTA_ID_HH) &amp;&amp;
+</pre>
 </div>
+</li>
+
+<li>切换到新的HFP设备时，退出sniff mode
+
+<div class="org-src-container">
+
+<pre class="src src-diff">diff --git a/bta/ag/bta_ag_sco.cc b/bta/ag/bta_ag_sco.cc
+index c8e67f4..22b7767 100644
+--- a/bta/ag/bta_ag_sco.cc
++++ b/bta/ag/bta_ag_sco.cc
+@@ -2115,7 +2115,11 @@ void bta_ag_api_set_active_device(tBTA_AG_DATA* p_data) {
+     APPL_TRACE_ERROR("%s: empty device", __func__);
+     return;
+   }
++  //When HFP active device is changes, exit sniff for the new active device,
+   active_device_addr = p_data-&gt;api_set_active_device.active_device_addr;
++  tBTA_AG_SCB* p_scb = bta_ag_scb_by_idx(bta_ag_idx_by_bdaddr(&amp;(active_device_addr)));
++  bta_sys_busy(BTA_ID_AG, p_scb-&gt;app_id, active_device_addr);
++  bta_sys_idle(BTA_ID_AG, p_scb-&gt;app_id, active_device_addr);
+ }
+</pre>
+</div>
+</li>
+</ol>
+</div>
+</div>
+</div>
+
 
 <div id="outline-container-sec-3" class="outline-2">
 <h2 id="sec-3"><span class="section-number-2">3</span> FAQ</h2>
@@ -1563,7 +1622,7 @@ If sniff is initiated by remote, controller just accept it.
 </div>
 <div id="postamble" class="status">
 <p class="author">Author: Fu Yajun</p>
-<p class="date">Created: 2018-08-18 Sat 19:35</p>
+<p class="date">Created: 2019-04-10 Wed 15:04</p>
 <p class="creator"><a href="http://www.gnu.org/software/emacs/">Emacs</a> 25.0.50.1 (<a href="http://orgmode.org">Org</a> mode 8.2.10)</p>
 <p class="validation"><a href="http://validator.w3.org/check?uri=referer">Validate</a></p>
 </div>

@@ -936,6 +936,53 @@
    the array *bta_dm_pm_md* ,  use 
    : (pm_action & 0x0F)
 
+** Sniff Mode常见的一些修改
+
+   1. 建立Sco的时候本退出sniff mode
+
+      #+BEGIN_SRC diff
+        diff --git a/bta/dm/bta_dm_pm.cc b/bta/dm/bta_dm_pm.cc
+        index 92a233e..926acf8 100644
+        --- a/bta/dm/bta_dm_pm.cc
+        +++ b/bta/dm/bta_dm_pm.cc
+        @@ -483,7 +483,14 @@ static void bta_dm_pm_cback(tBTA_SYS_CONN_STATUS status, uint8_t id,
+        }
+        }
+        }
+        -
+        + if ((status == BTA_SYS_SCO_OPEN || status == BTA_SYS_SCO_CLOSE)&&(id == BTA_ID_AG)) {
+        + tBTA_DM_PEER_DEVICE *p_rem_dev = NULL;
+        + p_rem_dev = bta_dm_find_peer_device(peer_addr);
+        + const bool bScoActive = (status == BTA_SYS_SCO_OPEN);
+        + APPL_TRACE_DEBUG("%s: BTA_ID_AG with bScoActive = %d", __func__, bScoActive);
+        + if(p_rem_dev)
+        + bta_dm_pm_set_sniff_policy(p_rem_dev, bScoActive);
+        + }
+        /* If HID connection open is received and SCO is already active.
+        disable snii link policy for some devices */
+        if ((status == BTA_SYS_CONN_OPEN) && (id == BTA_ID_HH) &&      
+      #+END_SRC
+
+   2. 切换到新的HFP设备时，退出sniff mode
+
+      #+BEGIN_SRC diff
+        diff --git a/bta/ag/bta_ag_sco.cc b/bta/ag/bta_ag_sco.cc
+        index c8e67f4..22b7767 100644
+        --- a/bta/ag/bta_ag_sco.cc
+        +++ b/bta/ag/bta_ag_sco.cc
+        @@ -2115,7 +2115,11 @@ void bta_ag_api_set_active_device(tBTA_AG_DATA* p_data) {
+             APPL_TRACE_ERROR("%s: empty device", __func__);
+             return;
+           }
+        +  //When HFP active device is changes, exit sniff for the new active device,
+           active_device_addr = p_data->api_set_active_device.active_device_addr;
+        +  tBTA_AG_SCB* p_scb = bta_ag_scb_by_idx(bta_ag_idx_by_bdaddr(&(active_device_addr)));
+        +  bta_sys_busy(BTA_ID_AG, p_scb->app_id, active_device_addr);
+        +  bta_sys_idle(BTA_ID_AG, p_scb->app_id, active_device_addr);
+         }      
+      #+END_SRC
+
+
 * FAQ
 
   1. What conditions may trigger host send sniff sub-rating command?

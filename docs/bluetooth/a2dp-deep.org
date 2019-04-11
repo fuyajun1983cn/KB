@@ -2,9 +2,6 @@
 #+TITLE: Deep Into A2dp Profile Code
 #+OPTIONS: ^:{} 
 
-
-
-
 * enable a2dp Profile
   
   

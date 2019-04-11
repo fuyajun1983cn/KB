@@ -11,19 +11,24 @@
 feel free to send feedbacks to my personal email address: fuyajun1983cn@163.com
 #+END_EXAMPLE
 
-* 2018[5/15]
+
+* 2019 [0/7]
 ** ☛ TODO [[./bluetooth/bt-cases.html][蓝牙问题集锦]]                                             :Bluetooth:
 
 ** ☛ TODO [[./bluetooth/qc-kb.html][常用信息备忘]]                                         :Bluetooth:
 
 ** ☛ TODO [[./software/android%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Android学习笔记]]                                            :Android:
-** ☛ TODO [[./software/android-articles.html][我的Android技术文章]]                                        :Android:
-** ☛ TODO [[http://bt.ifjy.me/][Bluetooth Learning Notes]]                                :Bluetooth:
 ** ☛ TODO [[./software/linux%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B02.html][linux内核编程笔记(续)]]                            :Programming:Linux:
 ** ☛ TODO [[./bluetooth/btm.html][Deep into Bluetooth Manager in Florida]]                :Bluetooth:
 ** ☛ TODO [[./bluetooth/bta-sys.html][BTA System  Management in Florida Stack]]                 :Bluetooth:
-** ☛ TODO [[./bluetooth/bt-sniff.html][Deep into bluetooth sniff mode]]                           :Bluetooth:
 ** ☛ TODO [[./bluetooth/a2dp-deep.html][Deep Into A2dp Profile Code in Florida]]                   :Bluetooth:
+* 2018[8/8]
+** ✔ DONE [[./software/android-articles.html][我的Android技术文章]]                                        :Android:
+   CLOSED: [2019-04-10 Wed 15:05]
+** ✔ DONE [[http://bt.ifjy.me/][Bluetooth Learning Notes]]                                 :Bluetooth:
+   CLOSED: [2019-04-10 Wed 15:00]
+** ✔ DONE [[./bluetooth/bt-sniff.html][Deep into bluetooth sniff mode]]                           :Bluetooth:
+   CLOSED: [2019-04-10 Wed 15:05]
 ** ✔ DONE [[./software/selinux.html][SELINUX学习笔记]]                                      :Linux:Android:
    CLOSED: [2018-10-20 Sat 12:40]
 ** ✔ DONE [[./software/linux%E5%86%85%E6%A0%B8%E7%BC%96%E7%A8%8B%E7%AC%94%E8%AE%B0.html][linux内核编程笔记]]                                :Programming:Linux:
