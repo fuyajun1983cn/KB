@@ -3,8 +3,12 @@
 import os
 import inspect
 import time
+from optparse import OptionParser
 
 cur_dir = os.path.dirname(inspect.getfile(inspect.currentframe()))
+
+branch_name = "master"
+remote_name = "origin"
 
 
 def git_clone(url, dest_dir):
@@ -41,10 +45,23 @@ def git_push():
     '''
     git push command
     '''
-    os.system("git push -u origin master")
+    os.system("git push {0} {1}".format(remote_name, branch_name))
+
+def git_pull():
+    '''
+    sync with latest file
+    '''
+    os.system("git pull {0} {1}".format(remote_name, branch_name))
     
 if __name__ == "__main__":
 
-    git_add()
-    git_commit()
-    git_push()
+    parser = OptionParser()
+    parser.add_option("-p", "--pull", action="store_true", dest="sync", help="Sync code from github", default=False)
+    parser.add_option("-s", "--submit", action="store_false", dest="sync", help="submit code to github", default=True)
+    (options, args) = parser.parse_args()
+    if options.sync == True:
+        git_pull()
+    else:
+        git_add()
+        git_commit()
+        git_push()

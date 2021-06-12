@@ -42,28 +42,28 @@ feel free to send feedbacks to my personal email address: fuyajun1983cn@163.com
 ** ✔ DONE [[./wifi/wpa_supplicant%E5%AD%A6%E4%B9%A0%E8%A6%81%E7%82%B9%E8%AE%B0%E5%BD%95.html][wpa_supplicant学习笔记]]
 ** ✔ DONE [[./wifi/11n%20Block%20Acknowledgement.html][802.11n BA机制研究]]                                            :WIFI:
 ** ✔ DONE [[./wifi/4%E6%AD%A5%E6%8F%A1%E6%89%8B%E8%BF%87%E7%A8%8B.html][4步握手过程研究]]                                               :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/001/802.11e.html][802.11e 学习笔记]]                                              :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/003/bluetooth.html][蓝牙学习总结]]                                             :Bluetooth:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/004/802.1X.html][802.1X协议学习笔记]]
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/005/802.11ac.html][802.11ac学习笔记]]                                              :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/006/802.11i%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][802.11i学习笔记]]                                               :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/007/802.11n.html][802.11n学习笔记]]                                               :WIFI:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/001/802.11e.html][802.11e 学习笔记]]                                              :WIFI:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/003/bluetooth.html][蓝牙学习总结]]                                             :Bluetooth:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/004/802.1X.html][802.1X协议学习笔记]]
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/005/802.11ac.html][802.11ac学习笔记]]                                              :WIFI:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/006/802.11i%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][802.11i学习笔记]]                                               :WIFI:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/007/802.11n.html][802.11n学习笔记]]                                               :WIFI:
 ** ✔ DONE [[./wifi/CWAP%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][CWAP学习笔记]]                                                  :WIFI:
 ** ✔ DONE [[./wifi/CWNA%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][CWNA学习笔记]]                                                  :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/020/WPS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][WPS学习笔记]]                                                   :WIFI:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/022/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E6%A6%82%E8%BF%B0.html][通信原理概述]]                                                  :基础理论:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/023/README.html][BLE链接管理]]                                              :Bluetooth:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/035/README.html][Masters and Slaves: Roles in a Bluetooth Piconet]]         :Bluetooth:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/025/README.html][L2CAP学习笔记]]                                            :Bluetooth:
-** ✔ DONE [[http://docs.ifjy.me/contents/wireless/030/README.html][BLE Protocol Basics]]                                      :Bluetooth:
-** ✔ DONE [[http://docs.ifjy.me/contents/network/002/linux-network-rx-path-overview.html][Overview of Linux RX Path]]                                  :network:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/001/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][C++学习笔记]]                                            :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/003/Javascript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Javascript学习笔记]]                                     :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/005/libpcap%E7%BC%96%E7%A8%8B%E5%B0%8F%E7%BB%93.html][libpcap编程小结]]                                        :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/009/css3.html][CSS3快速参考]]                                           :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/011/c%2B%2B11_new.html][C++ New Features]]                                       :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/012/README.html][Python数据库操作]]                                       :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/programming/007/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html][设计模式快速参考]]                                       :Programming:
-** ✔ DONE [[http://docs.ifjy.me/contents/linux/003/linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90.html][Linux网络子系统学习笔记]]                                      :Linux:
-** ✔ DONE [[http://docs.ifjy.me/contents/linux/004/netlinkk%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95.html][netlink学习记录]]                                  :Programming:Linux:
-** ✔ DONE [[http://docs.ifjy.me/contents/linux/006/sk_buffer.html][SK_Buffer研究笔记]]                                :Programming:Linux:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/020/WPS%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][WPS学习笔记]]                                                   :WIFI:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/022/%E9%80%9A%E4%BF%A1%E5%8E%9F%E7%90%86%E6%A6%82%E8%BF%B0.html][通信原理概述]]                                                  :基础理论:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/023/README.html][BLE链接管理]]                                              :Bluetooth:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/035/README.html][Masters and Slaves: Roles in a Bluetooth Piconet]]         :Bluetooth:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/025/README.html][L2CAP学习笔记]]                                            :Bluetooth:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/wireless/030/README.html][BLE Protocol Basics]]                                      :Bluetooth:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/network/002/linux-network-rx-path-overview.html][Overview of Linux RX Path]]                                  :network:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/001/C%2B%2B%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][C++学习笔记]]                                            :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/003/Javascript%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0.html][Javascript学习笔记]]                                     :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/005/libpcap%E7%BC%96%E7%A8%8B%E5%B0%8F%E7%BB%93.html][libpcap编程小结]]                                        :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/009/css3.html][CSS3快速参考]]                                           :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/011/c%2B%2B11_new.html][C++ New Features]]                                       :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/012/README.html][Python数据库操作]]                                       :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/programming/007/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F.html][设计模式快速参考]]                                       :Programming:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/linux/003/linux%E5%86%85%E6%A0%B8%E7%BD%91%E7%BB%9C%E5%AD%90%E7%B3%BB%E7%BB%9F%E5%88%86%E6%9E%90.html][Linux网络子系统学习笔记]]                                      :Linux:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/linux/004/netlinkk%E5%AD%A6%E4%B9%A0%E8%AE%B0%E5%BD%95.html][netlink学习记录]]                                  :Programming:Linux:
+** ✔ DONE [[https://fuyajun1983cn.github.io/docs/contents/linux/006/sk_buffer.html][SK_Buffer研究笔记]]                                :Programming:Linux:
